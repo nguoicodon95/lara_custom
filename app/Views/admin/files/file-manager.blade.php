@@ -60,7 +60,8 @@
                             $target.find('.img-responsive').attr('src', URL);
                         }
 
-                        $target.find('.input-file').val(URL);
+                        $target.find('.input-file').val(file.name);
+                        $target.find('.thumbnail-path').val(URL);
                         $modal.find('iframe').remove();
                         $modal.modal('hide');
                     }

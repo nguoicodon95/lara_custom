@@ -422,6 +422,8 @@
                                                                 <input type="hidden" name="thumbnail"
                                                                        value="{{ $object->thumbnail or '' }}"
                                                                        class="input-file hidden">
+                                                                <input type="hidden" name="thumbnail_path"
+                                                                       class="thumbnail-path hidden">
                                                                 <a title="" class="remove-image"><span>&nbsp;</span></a>
                                                             </div>
                                                         </div>

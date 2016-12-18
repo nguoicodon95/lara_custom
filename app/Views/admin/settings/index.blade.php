@@ -6,9 +6,94 @@
 
 @section('css')
     <link rel="stylesheet" href="/admin/core/third_party/bootstrap-tagsinput/bootstrap-tagsinput.css">
+    <style>
+        .panel-actions .icon-trash {
+            cursor: pointer;
+        }
+
+        .panel-actions .icon-trash:hover {
+            color: #e94542;
+        }
+
+        .panel hr {
+            margin-bottom: 10px;
+        }
+
+        .panel {
+            padding-bottom: 15px;
+        }
+
+        .sort-icons {
+            font-size: 21px;
+            color: #ccc;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .sort-icons:hover {
+            color: #37474F;
+        }
+
+        .icon-arrow-up, .icon-arrow-down {
+            margin-right: 10px;
+        }
+
+        .icon-arrow-down {
+            top: 10px;
+        }
+
+        .page-title {
+            margin-bottom: 0;
+        }
+
+        .new-setting {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .new-setting .panel-title {
+            margin: 0 auto;
+            display: inline-block;
+            color: #999fac;
+            font-weight: lighter;
+            font-size: 13px;
+            background: #fff;
+            width: auto;
+            height: auto;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        #toggle_options {
+            clear: both;
+            float: right;
+            font-size: 12px;
+            position: relative;
+            margin-top: 15px;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            z-index: 9;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+        select.form-control {
+            display: block;
+        }
+    </style>
 @endsection
 
 @section('js')
+    <script src="/admin/js/jsonarea.min.js"></script>
     <script type="text/javascript" src="/admin/core/third_party/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 @endsection
 
@@ -47,169 +132,197 @@
             });
         });
     </script>
+    <script>
+        var myJSONArea = JSONArea(document.getElementById('options_textarea'), {
+            sourceObjects: []
+        });
+
+        valid_json = false;
+
+        myJSONArea.getElement().addEventListener('update', function (e) {
+            if (e.target.value != "") {
+                valid_json = e.detail.isJSON;
+                console.log(valid_json)
+            }
+        });
+
+        myJSONArea.getElement().addEventListener('focusout', function (e) {
+            if (valid_json) {
+                $('#valid_options').show();
+                $('#invalid_options').hide();
+                var ugly = e.target.value;
+                var obj = JSON.parse(ugly);
+                var pretty = JSON.stringify(obj, undefined, 4);
+                document.getElementById('options_textarea').value = pretty;
+            } else {
+                $('#valid_options').hide();
+                $('#invalid_options').show();
+            }
+        });
+    </script>
+    <script>
+        $('document').ready(function () {
+            $('#toggle_options').click(function () {
+                $('.new-settings-options').toggle();
+                if ($('#toggle_options .voyager-double-down').length) {
+                    $('#toggle_options .voyager-double-down').removeClass('voyager-double-down').addClass('voyager-double-up');
+                } else {
+                    $('#toggle_options .voyager-double-up').removeClass('voyager-double-up').addClass('voyager-double-down');
+                }
+            });
+        });
+    </script>
+    <script>
+        $('document').ready(function () {
+            $('.icon-trash').click(function () {
+                var action = '{{ route('web.settings') }}/' + $(this).data('id'),
+                    display = $(this).data('display-name') + '/' + $(this).data('display-key');
+
+                $('#delete_setting_title').text(display);
+                $('#delete_form')[0].action = action;
+                $('#delete_modal').modal('show');
+            });
+
+        });
+    </script>
 @endsection
 
 @section('content')
-    <form accept-charset="utf-8" novalidate action="" method="POST" class="js-validate-form">
-        {!! csrf_field() !!}
+    <form action="{{ route('web.settings') }}" novalidate method="POST" enctype="multipart/form-data" class="js-validate-form">
+        {{ csrf_field() }}
         <div class="portlet light form-fit bordered">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-pin"></i>
                     <span class="caption-subject sbold uppercase">{{ $pageTitle}}</span>
                 </div>
-                <div class="actions">
-                    <!--div class="btn-group btn-group-devided">
-                        <button type="submit" class="btn btn-circle green font-white btn-default btn-sm">
-                            <i class="fa fa-check"></i> Update
-                        </button>
-                    </div-->
-                </div>
             </div>
             <div class="portlet-body form">
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal form-bordered">
                     <div class="form-body">
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Homepage</label>
-                            <div class="col-md-7">
-                                <select name="default_homepage" class="form-control">
-                                    @foreach($pages as $key => $row)
-                                        <option value="{{ $row->id }}" {{ (isset($settings['default_homepage']) && (int)$settings['default_homepage'] == $row->id) ? 'selected' : '' }}>{{ $row->global_title }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="help-block">Homepage of this website</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Site title</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['site_title'] or '' }}" name="site_title"/>
-                                <span class="help-block">Title of website.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Site logo</label>
-                            <div class="col-md-7">
-                                <div class="select-media-box">
-                                    <button type="button" class="btn blue show-add-media-popup">Choose image</button>
-                                    <div class="clearfix"></div>
-                                    <a title="" class="show-add-media-popup"><img src="{{ (isset($settings['site_logo']) && trim($settings['site_logo'] != '')) ? $settings['site_logo'] : '/admin/images/no-image.png' }}" alt="Thumbnail" class="img-responsive"></a>
-                                    <input type="hidden" name="site_logo" value="{{ $settings['site_logo'] or '' }}" class="input-file">
-                                    <a title="" class="remove-image"><span>&nbsp;</span></a>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Homepage</label>
+                                <div class="col-md-7">
+                                    <select name="default_homepage" class="form-control">
+                                        @foreach($pages as $key => $row)
+                                            <option value="{{ $row->id }}" {{ (isset($settings['default_homepage']) && (int)$settings['default_homepage'] == $row->id) ? 'selected' : '' }}>{{ $row->global_title }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="help-block">Homepage of this website</span>
                                 </div>
-                                <span class="help-block">Select logo for this site.</span>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Site keywords</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control js-tags-editor" value="{{ $settings['site_keywords'] or '' }}" name="site_keywords"/>
-                                <span class="help-block">Use for SEO.</span>
+                        
+                        @foreach($settings as $setting)
+                            @if ($setting->type == "text")
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    {{ $setting->display_name }}
+                                </label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <i class="icon-trash"
+                                        data-id="{{ $setting->id }}"
+                                        data-display-key="{{ $setting->option_key }}"
+                                        data-display-name="{{ $setting->display_name }}"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Site description</label>
-                            <div class="col-md-7">
-                                <textarea name="site_description" class="form-control" rows="5">{{ $settings['site_description'] or '' }}</textarea>
-                                <span class="help-block">Use for SEO.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Email receives feedback from clients</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['email_receives_feedback'] or '' }}" name="email_receives_feedback"/>
-                                <span class="help-block">Email receives feedback from clients</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Default language</label>
-                            <div class="col-md-7">
-                                <select name="default_language" class="form-control">
-                                    @foreach($activatedLanguages as $key => $row)
-                                        <option {{ (isset($settings['default_language']) && $row->id == (int)$settings['default_language']) ? 'selected' : '' }} value="{{ $row->id }}">{{ $row->language_name }}</option>
-                                    @endforeach
+                            @elseif($setting->type == "text_area")
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">
+                                        {{ $setting->display_name }}
+                                    </label>
+                                    <div class="col-md-6">
+                                        <textarea class="form-control" name="{{ $setting->option_key }}">@if(isset($setting->option_value)){{ $setting->option_value }}@endif</textarea>
+                                    </div>
+                                </div>
+                            @elseif($setting->type == "rich_text_box")
+                                <textarea class="form-control richTextBox" name="{{ $setting->option_key }}">
+                                    @if(isset($setting->option_value)){{ $setting->option_value }}@endif
+                                </textarea>
+                            @elseif($setting->type == "image" || $setting->type == "file")
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">{{ $setting->display_name }}</label>
+                                    <div class="col-md-7">
+                                        <div class="select-media-box">
+                                            <button type="button" class="btn blue show-add-media-popup">Choose image</button>
+                                            <div class="clearfix"></div>
+                                            <a title="" class="show-add-media-popup">
+                                                <img src="{{ (isset($setting->option_value) && trim($setting->option_value != '')) ? $setting->option_value : '/admin/images/no-image.png' }}" alt="Thumbnail" class="img-responsive">
+                                            </a>
+                                            <input type="hidden" name="{{ $setting->option_key }}" value="{{ $setting->option_value or '' }}" class="input-file">
+                                            <a title="" class="remove-image"><span>&nbsp;</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @elseif($setting->type == "select_dropdown")
+                                <?php $options = json_decode($setting->details); ?>
+                                <?php $selected_value = (isset($setting->option_value) && !empty($setting->option_value)) ? $setting->option_value : NULL; ?>
+                                <select class="form-control" name="{{ $setting->option_key }}">
+                                    <?php $default = (isset($options->default)) ? $options->default : NULL; ?>
+                                    @if(isset($options->options))
+                                        @foreach($options->options as $index => $option)
+                                            <option value="{{ $index }}" @if($default == $index && $selected_value === NULL){{ 'selected="selected"' }}@endif @if($selected_value == $index){{ 'selected="selected"' }}@endif>{{ $option }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
-                                <span class="help-block">CMS default language</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Dashboard language</label>
-                            <div class="col-md-7">
-                                <select name="dashboard_language" class="form-control">
-                                    @foreach($activatedLanguages as $key => $row)
-                                        <option {{ (isset($settings['dashboard_language']) && $row->id == (int)$settings['dashboard_language']) ? 'selected' : '' }} value="{{ $row->id }}">{{ $row->language_name }}</option>
+
+                            @elseif($setting->type == "radio_btn")
+                                <?php $options = json_decode($setting->details); ?>
+                                <?php $selected_value = (isset($setting->option_value) && !empty($setting->option_value)) ? $setting->option_value : NULL; ?>
+                                <?php $default = (isset($options->default)) ? $options->default : NULL; ?>
+                                <ul class="radio">
+                                    @foreach($options as $index => $option)
+                                        <li>
+                                            <input type="radio" id="option-{{ $index }}" name="{{ $setting->option_key }}"
+                                                    value="{{ $index }}" @if($default == $index && $selected_value === NULL){{ 'checked' }}@endif @if($selected_value == $index){{ 'checked' }}@endif>
+                                            <label for="option-{{ $index }}">{{ $option }}</label>
+                                            <div class="check"></div>
+                                        </li>
                                     @endforeach
-                                </select>
-                                <span class="help-block">CMS default language in dashboard</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Google analytics code</label>
-                            <div class="col-md-7">
-                                <textarea name="google_analytics" class="form-control" rows="5">{{ $settings['google_analytics'] or '' }}</textarea>
-                                <span class="help-block">Add google analytics for site</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Hot line</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['hot_line'] or '' }}" name="hot_line"/>
-                                <span class="help-block">Hot line.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Facebook</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['facebook'] or '' }}" name="facebook"/>
-                                <span class="help-block">Facebook fanpage.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Twitter</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['twitter'] or '' }}" name="twitter"/>
-                                <span class="help-block">Twitter.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Youtube</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['youtube'] or '' }}" name="youtube"/>
-                                <span class="help-block">Youtube chanel.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Instagram</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['instagram'] or '' }}" name="instagram"/>
-                                <span class="help-block">Instagram.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Pinterest</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['pinterest'] or '' }}" name="pinterest"/>
-                                <span class="help-block">Pinterest.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Github</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" value="{{ $settings['github'] or '' }}" name="github"/>
-                                <span class="help-block">Github page.</span>
-                            </div>
-                        </div>
+                                </ul>
+                            @elseif($setting->type == "checkbox")
+                                <?php $options = json_decode($setting->details); ?>
+                                <?php $checked = (isset($setting->option_value) && $setting->option_value == 1) ? true : false; ?>
+                                @if (isset($options->on) && isset($options->off))
+                                    <input type="checkbox" name="{{ $setting->option_key }}" class="toggleswitch" @if($checked) checked @endif data-on="{{ $options->on }}" data-off="{{ $options->off }}">
+                                @else
+                                    <input type="checkbox" name="{{ $setting->option_key }}" @if($checked) checked @endif class="toggleswitch">
+                                @endif
+                            @elseif($setting->type == "keywords")
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">{{ $setting->display_name }}</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control js-tags-editor" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}"/>
+                                    </div>
+                                </div>
+                            @elseif($setting->type == "resize")
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">{{ $setting->display_name }}</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}" placeholder="Chiều rộng x Chiều cao"/>
+                                    </div>
+                                </div>
+                            @endif
+                            {{-- @if(!$loop->last)
+                                <hr>
+                            @endif--}}
+                        @endforeach
+                        
+                        
                         <div class="form-group">
                             <label class="control-label col-md-3">Construction mode</label>
                             <div class="col-md-7">
                                 <div class="md-checkbox">
                                     <input type="checkbox"
-                                           value="1"
-                                           id="construction_mode"
-                                           name="construction_mode"
-                                           {{ (isset($settings['construction_mode']) && (int)$settings['construction_mode'] == 1) ? 'checked' : '' }}
-                                           class="md-radiobtn">
+                                            value="1"
+                                            id="construction_mode"
+                                            name="construction_mode"
+                                            {{ (isset($settings['construction_mode']) && (int)$settings['construction_mode'] == 1) ? 'checked' : '' }}
+                                            class="md-radiobtn">
                                     <label for="construction_mode" style="margin-bottom: 0;">
                                         <span></span>
                                         <span class="check"></span>
@@ -224,11 +337,11 @@
                             <div class="col-md-7">
                                 <div class="md-checkbox">
                                     <input type="checkbox"
-                                           value="1"
-                                           id="show_admin_bar"
-                                           name="show_admin_bar"
-                                           {{ (isset($settings['show_admin_bar']) && (int)$settings['show_admin_bar'] == 1) ? 'checked' : '' }}
-                                           class="md-radiobtn">
+                                            value="1"
+                                            id="show_admin_bar"
+                                            name="show_admin_bar"
+                                            {{ (isset($settings['show_admin_bar']) && (int)$settings['show_admin_bar'] == 1) ? 'checked' : '' }}
+                                            class="md-radiobtn">
                                     <label for="show_admin_bar" style="margin-bottom: 0;">
                                         <span></span>
                                         <span class="check"></span>
@@ -238,15 +351,102 @@
                                 <span class="help-block">When admin logged in, still show admin bar in website.</span>
                             </div>
                         </div>
+                        <div class="text-right" style="padding: 15px;">
+                            <button type="submit" class="btn btn-circle green font-white btn-default">
+                                <i class="fa fa-check"></i> Update
+                            </button>
+                        </div>
+                        </div>
                     </div>
                 </div>
-                <!-- END FORM-->
             </div>
-            <div class="text-right" style="padding: 15px;">
-                <button type="submit" class="btn btn-circle green font-white btn-default">
-                    <i class="fa fa-check"></i> Update
-                </button>
+            <!-- END FORM-->
+        </div>
+        <div class="clearfix"></div>
+    </form>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light form-fit">
+                
+
+                <div style="clear:both"></div>
+
+                <div class="panel" style="margin-top:10px;">
+                    <div class="panel-heading new-setting">
+                        <hr>
+                        <label>
+                            <i class="icon-plus"></i> New Setting
+                        </label>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{{ route('web.settings.create') }}" method="POST">
+                            {{ csrf_field() }}
+                            <div class="col-md-4">
+                                <label for="display_name">Name</label>
+                                <input type="text" class="form-control" name="display_name">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="key">Key</label>
+                                <input type="text" class="form-control" name="option_key">
+                            </div>
+                            <div class="col-md-4">
+                                <label>Type</label>
+                                <select name="type" class="form-control">
+                                    <option value="text">Text Box</option>
+                                    <option value="text_area">Text Area</option>
+                                    <option value="rich_text_box">Rich Textbox</option>
+                                    <option value="checkbox">Check Box</option>
+                                    <option value="radio_btn">Radio Button</option>
+                                    <option value="select_dropdown">Select Dropdown</option>
+                                    <option value="file">File</option>
+                                    <option value="image">Image</option>
+                                    <option value="resize">Resize</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <a id="toggle_options"><i class="voyager-double-down"></i> OPTIONS</a>
+                                <div class="new-settings-options">
+                                    <label for="options">Options
+                                        <small>(optional, only applies to certain types like dropdown box or radio button)
+                                        </small>
+                                    </label>
+                                    <textarea name="details" id="options_textarea" class="form-control" placeholder='[{"a":"b"}]'></textarea>
+                                    <div id="valid_options" class="alert-success alert" style="display:none">Valid Json</div>
+                                    <div id="invalid_options" class="alert-danger alert" style="display:none">Invalid Json</div>
+                                </div>
+                            </div>
+                            
+                            <div style="clear:both"></div>
+                            <button type="submit" class="btn btn-primary pull-right new-setting-btn">
+                                <i class="voyager-plus"></i> Add New Setting
+                            </button>
+                            <div style="clear:both"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+      
+    <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="voyager-trash"></i>Bạn đồng ý xóa item này?</h4>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('web.settings.delete') }}" id="delete_form"
+                        method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <input type="submit" class="btn btn-danger pull-right delete-confirm"
+                            value="Đồng ý xóa item này">
+                </form>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Hủy</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+    
 @endsection

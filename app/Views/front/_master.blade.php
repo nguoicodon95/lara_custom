@@ -19,6 +19,7 @@
     <!-- END OTHER PLUGINS -->
 
     <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
     <link href="/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
 
@@ -31,24 +32,40 @@
     {!! $CMSSettings['google_analytics'] or '' !!}
 </head>
 
-<body class="on-loading {{ $bodyClass or '' }}">
+<body class="cms-index-index cms-home">
 
 @if($showHeaderAdminBar)
     @include('admin/_shared/_admin-bar')
 @endif
 
-<div class="site-wrapper">
-    <header class="header">
-        @include('front/_shared/_header')
-    </header>
+<div class="wrapper">
+    <noscript>
+        <div class="global-site-notice noscript">
+            <div class="notice-inner">
+                <p>
+                    <strong>Dường như JavaScript bị tắt trong trình duyệt của bạn.</strong><br />
+                    Bạn phải có bật Javascript trong trình duyệt của bạn để sử dụng các chức năng của trang web này.
+                </p>
+            </div>
+        </div>
+    </noscript>
+    <div class="page">
+        <header class="header">
+            @include('front/_shared/_header')
+        </header>
 
-    <main class="main">
-        @yield('content')
-    </main>
+        <div id="maincontain" class="container col1-layout">
+            <div class="main">
+                <div class="col-main">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
 
-    <footer class="footer">
-        @include('front/_shared/_footer')
-    </footer>
+        <footer class="footer">
+            @include('front/_shared/_footer')
+        </footer>
+    </div>
 </div>
 
 <!--Modals-->

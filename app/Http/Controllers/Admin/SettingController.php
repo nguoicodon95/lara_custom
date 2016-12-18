@@ -21,170 +21,123 @@ class SettingController extends BaseAdminController
         $this->_loadAdminMenu($this->routeLink);
     }
 
-    public function getIndex(Request $request)
+    public function index()
     {
-        $this->dis['settings'] = Models\Setting::getAllSettings();
+        $settings = Models\Setting::orderBy('order', 'ASC')->get();
 
-        $this->dis['pages'] = Models\Page::getBy([
+        $pages = Models\Page::getBy([
             'status' => 1,
-        ], ['global_title' => 'ASC'], true);
+        ], ['title' => 'ASC'], true);
 
-        return $this->_viewAdmin('settings.index', $this->dis);
+        return $this->_viewAdmin('settings.index', compact('settings', 'pages'));
     }
 
-    public function postIndex(Request $request)
+    public function create(Request $request, Models\Setting $setting)
     {
-        $data = $request->except([
-            '_token',
-        ]);
-        $data['construction_mode'] = ($request->has('construction_mode')) ? 1 : 0;
-        $data['show_admin_bar'] = ($request->has('show_admin_bar')) ? 1 : 0;
-        $result = Models\Setting::updateSettings($data);
-        if ($result['error']) {
-            $this->_setFlashMessage($result['message'], 'error');
-            $this->_setFlashMessage(implode(', ', $result['errors']), 'error');
-        } else {
-            $this->_setFlashMessage($result['message'], 'success');
+        $setting->createItem($request->all());
+
+        $this->_setFlashMessage('Successfully Created New Setting', 'success');
+       
+        $this->_showFlashMessages();
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        Models\Setting::destroy($id);
+
+        $this->_setFlashMessage('Successfully Deleted Setting', 'success');
+       
+        $this->_showFlashMessages();
+        return redirect()->back();
+    }
+
+    public function delete_value($id)
+    {
+        $setting = Models\Setting::find($id);
+
+        if (isset($setting->id)) {
+            // If the type is an image... Then delete it
+            if ($setting->type == 'image') {
+                if (Storage::exists(config('voyager.storage.subfolder').$setting->value)) {
+                    Storage::delete(config('voyager.storage.subfolder').$setting->value);
+                }
+            }
+            $setting->value = '';
+            $setting->save();
         }
+
+        $this->_setFlashMessage('Successfully removed {$setting->display_name} value', 'success');
+
+        $this->_showFlashMessages();
+        return redirect()->back();
+    }
+
+
+    public function save(Request $request)
+    {
+        $settings = Models\Setting::all();
+        foreach ($settings as $setting) {
+            $content = $this->getContentBasedOnType($request, 'settings', (object) [
+                'type'    => $setting->type,
+                'field'   => $setting->option_key,
+            ]);
+
+            if ($content === null && isset($setting->option_value)) {
+                $content = $setting->option_value;
+            }
+
+            $setting->option_value = $content;
+            $setting->save();
+        }
+
+        $this->_setFlashMessage('Successfully Saved Settings', 'success');
+
         $this->_showFlashMessages();
 
         return redirect()->back();
     }
-
-    public function getLanguages(Request $request)
+    
+    private function getContentBasedOnType(Request $request, $slug, $row)
     {
-        $this->_setPageTitle('Languages', 'manage website languages');
-        $this->_setBodyClass($this->bodyClass . ' languages-setting-page');
+        $content = null;
+        switch ($row->type) {
+            /********** PASSWORD TYPE **********/
+            case 'password':
+                $pass_field = $request->input($row->field);
 
-        $this->_loadAdminMenu($this->routeLink . '/languages');
-
-        return $this->_viewAdmin('settings.languages');
-    }
-
-    public function postLanguages(Request $request, Models\Language $object)
-    {
-        /**
-         * Paging
-         **/
-        $offset = $request->get('start', 0);
-        $limit = $request->get('length', 10);
-        $paged = ($offset + $limit) / $limit;
-        Paginator::currentPageResolver(function () use ($paged) {
-            return $paged;
-        });
-
-        $records = [];
-        $records["data"] = [];
-
-        /*Group actions*/
-        if ($request->get('customActionType', null) == 'group_action') {
-            $records["customActionStatus"] = "danger";
-            $records["customActionMessage"] = "Group action did not completed. Some error occurred.";
-            $ids = (array) $request->get('id', []);
-            $result = $object->updateMultiple($ids, [
-                'status' => $request->get('customActionValue', 0),
-            ], true);
-            if (!$result['error']) {
-                $records["customActionStatus"] = "success";
-                $records["customActionMessage"] = "Group action has been completed.";
-            }
-        }
-
-        /*
-         * Sortable data
-         */
-        $orderBy = $request->get('order')[0]['column'];
-        switch ($orderBy) {
-            case 1:
-                {
-                    $orderBy = 'id';
+                if (isset($pass_field) && !empty($pass_field)) {
+                    return bcrypt($request->input($row->field));
                 }
                 break;
-            case 2:
-                {
-                    $orderBy = 'language_name';
+
+            /********** CHECKBOX TYPE **********/
+            case 'checkbox':
+                $checkBoxRow = $request->input($row->field);
+
+                if (isset($checkBoxRow)) {
+                    return 1;
                 }
+
+                $content = 0;
                 break;
-            case 3:
-                {
-                    $orderBy = 'language_code';
-                }
-                break;
-            case 4:
-                {
-                    $orderBy = 'default_locale';
-                }
-                break;
-            case 5:
-                {
-                    $orderBy = 'currency';
-                }
-                break;
-            case 6:
-                {
-                    $orderBy = 'status';
-                }
-                break;
+
+            /********** FILE TYPE **********/
+            case 'file':
+                $file = $request->file($row->field);
+                $filename = Str::random(20);
+                $path = $slug.'/'.date('F').date('Y').'/';
+
+                $fullPath = $path.$filename.'.'.$file->getClientOriginalExtension();
+
+
+                return $fullPath;
+
+            /********** ALL OTHER TEXT TYPE **********/
             default:
-                {
-                    $orderBy = 'id';
-                }
-                break;
-        }
-        $orderType = $request->get('order')[0]['dir'];
-
-        $getByFields = [];
-        if ($request->get('language_name', null) != null) {
-            $getByFields['language_name'] = ['compare' => 'LIKE', 'value' => $request->get('language_name')];
-        }
-        if ($request->get('language_code', null) != null) {
-            $getByFields['language_code'] = ['compare' => '=', 'value' => $request->get('language_code')];
-        }
-        if ($request->get('status', null) != null) {
-            $getByFields['status'] = ['compare' => '=', 'value' => $request->get('status')];
+                return $request->input($row->field);
         }
 
-        $items = $object->searchBy($getByFields, [$orderBy => $orderType], true, $limit);
-
-        $iTotalRecords = $items->total();
-        $sEcho = intval($request->get('sEcho'));
-
-        foreach ($items as $key => $row) {
-            $status = '<span class="label label-success label-sm">Activated</span>';
-            if ($row->status != 1) {
-                $status = '<span class="label label-danger label-sm">Disabled</span>';
-            }
-
-            $records["data"][] = array(
-                '<input type="checkbox" name="id[]" value="' . $row->id . '">',
-                $row->id,
-                $row->language_name,
-                $row->language_code,
-                $row->default_locale,
-                $row->currency,
-                $status,
-                '<a class="fast-edit" title="Fast edit">Fast edit</a>',
-            );
-        }
-
-        $records["sEcho"] = $sEcho;
-        $records["iTotalRecords"] = $iTotalRecords;
-        $records["iTotalDisplayRecords"] = $iTotalRecords;
-
-        return response()->json($records);
-    }
-
-    public function postFastEditLanguages(Request $request, Models\Language $object)
-    {
-        $data = [
-            'id' => $request->get('args_0', null),
-            'language_name' => $request->get('args_1', null),
-            'language_code' => $request->get('args_2', null),
-            'default_locale' => $request->get('args_3', null),
-            'currency' => $request->get('args_4', null),
-        ];
-
-        $result = $object->fastEdit($data, false, true);
-        return response()->json($result, $result['response_code']);
+        return $content;
     }
 }

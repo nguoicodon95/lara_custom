@@ -291,6 +291,12 @@ class ProductController extends BaseAdminController
             }
         }
 
+        $image = $request->thumbnail_path;
+        $name = str_slug($request->title);
+
+        _resizeImage($image, $name);
+
+
         \DB::beginTransaction();
 
         if ($id == 0) {

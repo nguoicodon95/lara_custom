@@ -367,15 +367,15 @@ class CmsMenu
                     $slug = (trim($page->slug) != '') ? trim($page->slug) : '';
                 }
 
-                $result = _getPageLink($slug, $this->languageCode);
+                $result = _getPageLink($slug);
             }
                 break;
             case 'category': {
-                $result = _getCategoryLinkWithParentSlugs($item->related_id, $this->languageCode);
+                $result = _getCategoryLinkWithParentSlugs($item->related_id);
             }
                 break;
             case 'product-category': {
-                $result = _getProductCategoryLinkWithParentSlugs($item->related_id, $this->languageCode);
+                $result = _getProductCategoryLinkWithParentSlugs($item->related_id);
             }
                 break;
             case 'custom-link': {

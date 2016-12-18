@@ -8,7 +8,7 @@
                     case 'category':{
                         $category = $row->category;
                         if ($category) {
-                            $dataTitle = $category->global_title;
+                            $dataTitle = $category->title;
                         }
                     }
                         break;
@@ -22,14 +22,14 @@
                     case 'page':{
                         $post = $row->page;
                         if ($post) {
-                            $dataTitle = $post->global_title;
+                            $dataTitle = $post->title;
                         }
                     }
                         break;
                     default:{
                         $post = $row->page;
                         if ($post) {
-                            $dataTitle = $post->global_title;
+                            $dataTitle = $post->title;
                         }
                     }
                         break;

@@ -59,7 +59,7 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->controller('brands', 'BrandController');
 
         /*Settings*/
-        $router->controller('settings', 'SettingController');
+        // $router->controller('settings', 'SettingController');
 
         /*Menus*/
         $router->controller('menus', 'MenuController');
@@ -81,6 +81,14 @@ $router->group(['middleware' => ['web']], function ($router) {
 
         /*Comments*/
         $router->controller('comments', 'CommentController');
+
+        /*Setting gernerate*/
+		Route::get('settings', 'SettingController@index')->name('web.settings');
+		Route::post('settings', 'SettingController@save');
+		Route::post('settings/create', 'SettingController@create')->name('web.settings.create');
+		Route::delete('settings/{id?}', 'SettingController@delete')->name('web.settings.delete');
+		Route::get('settings/delete_value/{id}', 'SettingController@delete_value')->name('web.settings.delete_value');
+
     });
     /*
     |--------------------------------------------------------------------------

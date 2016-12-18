@@ -9,7 +9,12 @@ class Setting extends AbstractModel
     protected $editableFields = [
         'option_key',
         'option_value',
+        'display_name',
+        'type',
+        'order',
+        'details',
     ];
+    protected $table = 'settings';
 
     public function __construct()
     {
@@ -21,7 +26,6 @@ class Setting extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'settings';
 
     protected $primaryKey = 'id';
 
@@ -73,4 +77,13 @@ class Setting extends AbstractModel
         }
         return $result;
     }
+
+
+    public function createItem($data, $justUpdateSomeFields = true)
+    {
+        $data['id'] = 0;
+        $result = $this->fastEdit($data, true, $justUpdateSomeFields);
+        return $result;
+    }
+    
 }

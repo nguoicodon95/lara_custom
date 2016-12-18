@@ -47,7 +47,7 @@
                     },
                     slug: {
                         required: true,
-                        minlength: 3,
+                        minlength: 1,
                         maxlength: 255
                     },
                     description: {

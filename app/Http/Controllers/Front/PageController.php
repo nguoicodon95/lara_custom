@@ -22,6 +22,7 @@ class PageController extends BaseFrontController
         }
         
         if(in_array($item->slug, $this->_setVariableHome)) {
+            $this->_loadFrontMenu($item->id, 'page');
             return $this->_page_Homepage($item);
         }
         

@@ -34,8 +34,8 @@ abstract class BaseFrontController extends BaseController
             'containerId' => '',
             'containerTag' => 'ul',
             'childTag' => 'li',
-            'itemHasChildrenClass' => 'menu-item-has-children',
-            'subMenuClass' => 'dropdown-menu sub-menu',
+            'itemHasChildrenClass' => '',
+            'subMenuClass' => '',
             'menuActive' => [
                 'type' => $type,
                 'related_id' => $menuActive,
