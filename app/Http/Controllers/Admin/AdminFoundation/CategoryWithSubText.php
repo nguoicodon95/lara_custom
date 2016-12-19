@@ -8,7 +8,7 @@ trait CategoryWithSubText
      * @param $parentId: parent_id.
      * @return array
      * */
-    private function _recursiveGetCategories($object, $parentId, $orderBy = 'global_title', $orderType = 'ASC')
+    private function _recursiveGetCategories($object, $parentId, $orderBy = 'title', $orderType = 'ASC')
     {
         $results = [];
         $getByFields = [
@@ -44,7 +44,7 @@ trait CategoryWithSubText
             $data = [
                 'id' => $row->id,
                 'parent_id' => $row->parent_id,
-                'title' => $row->global_title,
+                'title' => $row->title,
                 'sub_title' => $childText,
                 'status' => $row->status,
                 'created_at' => $row->created_at->toDateTimeString(),
@@ -133,7 +133,7 @@ trait CategoryWithSubText
         $categories = $categories->orderBy($orderBy, $orderType)->get();
 
         foreach ($categories as $key => $row) {
-            $updateTo .= '<option value="' . $row->id . '"' . (($row->id == $selectedNode) ? ' selected="selected"' : '') . '>' . $child . ' ' . $row->global_title . '</option>';
+            $updateTo .= '<option value="' . $row->id . '"' . (($row->id == $selectedNode) ? ' selected="selected"' : '') . '>' . $child . ' ' . $row->title . '</option>';
             $updateTo .= $this->_recursiveGetCategoriesSelectSrc($object, $row->id, $orderBy, $orderType, $childText + 1, $selectedNode, $exceptIds);
 
         }

@@ -15,17 +15,7 @@ if (! function_exists('_formatPrice')) {
     function _formatPrice($price)
     {
         $price = number_format($price, 0, ',', '.');
-        $locale = app()->getLocale();
-        switch ($locale) {
-            case 'vi_VN': {
-                return $price . ' đ';
-            }
-                break;
-            default: {
-                return '$' . $price;
-            }
-                break;
-        }
+        return $price . ' ₫';
     }
 }
 

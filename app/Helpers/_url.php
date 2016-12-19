@@ -1,14 +1,10 @@
 <?php
 
 if (!function_exists('_getPageLink')) {
-    function _getPageLink($page, $currentLanguageCode = null)
+    function _getPageLink($page)
     {
         if (!is_string($page)) {
             $page = $page->slug;
-        }
-
-        if ($currentLanguageCode) {
-            return '/' . $currentLanguageCode . '/' . $page;
         }
 
         return '/' . $page;
@@ -16,14 +12,10 @@ if (!function_exists('_getPageLink')) {
 }
 
 if (!function_exists('_getPostLink')) {
-    function _getPostLink($post, $currentLanguageCode = null)
+    function _getPostLink($post)
     {
         if (!is_string($post)) {
             $post = $post->slug;
-        }
-
-        if ($currentLanguageCode) {
-            return '/' . $currentLanguageCode . '/' . trans('url.post') . '/' . $post;
         }
 
         return '/' . trans('url.post') . '/' . $post;
@@ -31,44 +23,24 @@ if (!function_exists('_getPostLink')) {
 }
 
 if (!function_exists('_getProductLink')) {
-    function _getProductLink($product, $currentLanguageCode = null)
+    function _getProductLink($slug)
     {
-        if (!is_string($product)) {
-            $product = $product->slug;
-        }
-
-        if ($currentLanguageCode) {
-            return '/' . $currentLanguageCode . '/' . trans('url.product') . '/' . $product;
-        }
-
-        return '/' . trans('url.product') . '/' . $product;
+        return route('product.link', $slug);
     }
 }
 
 if (!function_exists('_getCategoryLink')) {
-    function _getCategoryLink($category, $currentLanguageCode = null)
+    function _getCategoryLink($slug)
     {
-        if (!is_string($category)) {
-            $category = $category->slug;
-        }
-
-        if ($currentLanguageCode) {
-            return '/' . $currentLanguageCode . '/' . trans('url.category') . '/' . $category;
-        }
-
-        return '/' . trans('url.category') . '/' . $category;
+        return route('category.link', $slug);
     }
 }
 
 if (!function_exists('_getProductCategoryLink')) {
-    function _getProductCategoryLink($category, $currentLanguageCode = null)
+    function _getProductCategoryLink($category)
     {
         if (!is_string($category)) {
             $category = $category->slug;
-        }
-
-        if ($currentLanguageCode) {
-            return '/' . $currentLanguageCode . '/' . trans('url.productCategory') . '/' . $category;
         }
 
         return '/' . trans('url.productCategory') . '/' . $category;
@@ -100,7 +72,7 @@ if (!function_exists('_getCategorySlugs')) {
             $slug = $category->slug;
             $parentId = $category->parent_id;
             if ($parentId) {
-                $parentSlug = _getCategorySlugs($type, $parentId, $currentLanguageId);
+                $parentSlug = _getCategorySlugs($type, $parentId);
                 $slug = $parentSlug . '/' . $slug;
             }
         }
@@ -109,27 +81,25 @@ if (!function_exists('_getCategorySlugs')) {
 }
 
 if (!function_exists('_getCategoryLinkWithParentSlugs')) {
-    function _getCategoryLinkWithParentSlugs($categoryId, $currentLanguageCode = null)
+    function _getCategoryLinkWithParentSlugs($categoryId)
     {
         return '/' . trans('url.category') . '/' . _getCategorySlugs('category', $categoryId);
     }
 }
 
 if (!function_exists('_getProductCategoryLinkWithParentSlugs')) {
-    function _getProductCategoryLinkWithParentSlugs($categoryId, $currentLanguageCode = null)
+    function _getProductCategoryLinkWithParentSlugs($categoryId)
     {
         $currentLanguageId = \App\Models\Language::getBy(['language_code' => $currentLanguageCode], null, false, 0, ['id']);
-        if ($currentLanguageCode) {
-            $currentLanguageCode = $currentLanguageCode . '/';
-        }
-        return '/' . $currentLanguageCode . trans('url.productCategory') . '/' . _getCategorySlugs('productCategory', $categoryId, $currentLanguageId->id);
+       
+        return '/' . trans('url.productCategory') . '/' . _getCategorySlugs('productCategory', $categoryId, $currentLanguageId->id);
     }
 }
 
 /*CART*/
 if (!function_exists('_getAddToCartLink')) {
-    function _getAddToCartLink($currentLanguageCode, $productContentId, $quantity = 1)
+    function _getAddToCartLink($productContentId, $quantity = 1)
     {
-        return '/' . $currentLanguageCode . '/cart/add-to-cart/' . $productContentId . '/' . $quantity;
+        return '/' .  '/cart/add-to-cart/' . $productContentId . '/' . $quantity;
     }
 }

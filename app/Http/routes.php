@@ -115,17 +115,17 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->get('/', 'PageController@index');
         $router->get('/{slug_1}', 'PageController@_handle');
 
-        $router->get('/' . trans('url.post') . '/{slug_1}', 'PostController@_handle');
+        $router->get('/bai-viet/{slug_1}', 'PostController@_handle');
 
-        $router->get('/' . trans('url.category') . '/{slug_1}', 'CategoryController@_handle');
-        $router->get('/' . trans('url.category') . '/{slug_1}/{slug_2}', 'CategoryController@_handle');
-        $router->get('/' . trans('url.category') . '/{slug_1}/{slug_2}/{slug_3}', 'CategoryController@_handle');
+        $router->get('/danh-muc/{slug_1}', 'CategoryController@_handle')->name('category.link');
+        $router->get('/danh-muc/{slug_1}/{slug_2}', 'CategoryController@_handle');
+        $router->get('/danh-muc/{slug_1}/{slug_2}/{slug_3}', 'CategoryController@_handle');
 
-        $router->get('/' . trans('url.product') . '/{slug_1}', 'ProductController@_handle');
+        $router->get('/san-pham/{slug_1}', 'ProductController@_handle')->name('product.link');
 
-        $router->get('/' . trans('url.productCategory') . '/{slug_1}', 'ProductCategoryController@_handle');
-        $router->get('/' . trans('url.productCategory') . '/{slug_1}/{slug_2}', 'ProductCategoryController@_handle');
-        $router->get('/' . trans('url.productCategory') . '/{slug_1}/{slug_2}/{slug_3}', 'ProductCategoryController@_handle');
+        $router->get('/danh-muc-san-pham/{slug_1}', 'ProductCategoryController@_handle');
+        $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}', 'ProductCategoryController@_handle');
+        $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}/{slug_3}', 'ProductCategoryController@_handle');
     });
     /*
 |--------------------------------------------------------------------------

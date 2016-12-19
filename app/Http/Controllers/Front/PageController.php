@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers\Front;
 
+use App\Models;
 use App\Models\Page;
 use App\Models\PageMeta;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class PageController extends BaseFrontController
 {
@@ -81,6 +83,41 @@ class PageController extends BaseFrontController
             ] ;
         }
         $this->dis['slideshow'] = $slider;
+
+        /* Get catalog product */
+
+        $product_category = Models\ProductCategory::where('order', '>', 0)->get();
+        $pushItem = [];
+        
+        $offset = 0;
+        $limit = 4;
+        $paged = ($offset + $limit) / $limit;
+        Paginator::currentPageResolver(function () use ($paged) {
+            return $paged;
+        });
+        foreach($product_category as $_getProduct) {
+            $getByFields['is_popular'] = ['compare' => '=', 'value' => 1];
+            $product = Models\Product::getNoContentByCategory($_getProduct->id, $getByFields, [], ['products.*'], $limit);
+            foreach($product as $p) {
+                $row = $p->productContent[0];
+                $pushItem[$_getProduct->title][] = [
+                    'id' => $row->product_id,
+                    'title' => $row->title,
+                    'slug' => $row->slug,
+                    'status' => $row->status,
+                    'thumbnail' => $row->thumbnail,
+                    'tags' => $row->tags,
+                    'price' => $row->price,
+                    'old_price' => $row->old_price,
+                    'sku' => $row->product->sku,
+                ];
+            }
+            $pushItem[$_getProduct->title]['slug'] = $_getProduct->slug;
+        }
+        $this->dis['groups'] =  $pushItem;
+
+        $new_product = Models\Product::getAll(null, ['id' => 'DESC'], 4 );
+        $this->dis['new_product'] = (object) $new_product;
         return $this->_viewFront('page-templates.homepage', $this->dis);
     }
 

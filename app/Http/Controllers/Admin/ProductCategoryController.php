@@ -80,7 +80,7 @@ class ProductCategoryController extends BaseAdminController
                 break;
             case 2:
                 {
-                    $orderBy = 'title';
+                    $orderBy = 'global_title';
                 }
                 break;
             case 3:
@@ -140,7 +140,7 @@ class ProductCategoryController extends BaseAdminController
 
         $data = [
             'id' => $request->get('args_0', null),
-            'title' => $request->get('args_1', null),
+            'global_title' => $request->get('args_1', null),
             'order' => $order,
         ];
 
@@ -281,7 +281,7 @@ class ProductCategoryController extends BaseAdminController
             $records["data"][] = array(
                 '<input type="checkbox" name="id[]" value="' . $row->id . '">',
                 $row->id,
-                $row->title,
+                $row->global_title,
                 $status,
                 $row->order,
                 $popular,
