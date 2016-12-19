@@ -292,7 +292,7 @@ class ProductController extends BaseAdminController
         }
 
         $image = $request->thumbnail_path;
-        $name = str_slug($request->title);
+        $name = $request->thumbnail;
 
         _resizeImage($image, $name);
 

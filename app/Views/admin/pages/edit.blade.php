@@ -161,6 +161,9 @@
                                         <div class="clearfix"></div>
                                         <a title="" class="show-add-media-popup"><img src="{{ (isset($object) && trim($object->thumbnail != '')) ? $object->thumbnail : '/admin/images/no-image.png' }}" alt="Thumbnail" class="img-responsive"></a>
                                         <input type="hidden" name="thumbnail" value="{{ $object->thumbnail or '' }}" class="input-file">
+                                        
+                                        <input type="hidden" name="thumbnail_path"
+                                                class="thumbnail-path hidden">
                                         <a title="" class="remove-image"><span>&nbsp;</span></a>
                                     </div>
                                 </div>

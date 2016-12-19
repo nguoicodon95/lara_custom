@@ -84,7 +84,7 @@ if (! function_exists('_resizeImage')) {
 
         Image::make(public_path($thumb))
                         ->resize($w_large, $h_large)
-                        ->save(public_path('uploads/large/'.$name.'-'.$w_large.'-'.$h_large.'.png'));
+                        ->save(public_path('uploads/large/'.$name));
 
         /*Get size Normal*/
         $normal = $CMSSettings['normal_image'];
@@ -94,7 +94,7 @@ if (! function_exists('_resizeImage')) {
 
         Image::make(public_path($thumb))
                         ->resize($w_normal, $h_normal)
-                        ->save(public_path('uploads/normal/'.$name.'-'.$w_normal.'-'.$h_normal.'.png'));
+                        ->save(public_path('uploads/normal/'.$name));
 
         /*Get size Small*/
         $small = $CMSSettings['small_image'];
@@ -104,7 +104,7 @@ if (! function_exists('_resizeImage')) {
         
         Image::make(public_path($thumb))
                         ->resize($w_small, $h_small)
-                        ->save(public_path('uploads/small/'.$name.'-'.$w_small.'-'.$h_small.'.png'));
+                        ->save(public_path('uploads/small/'.$name));
         
         return ;
     }

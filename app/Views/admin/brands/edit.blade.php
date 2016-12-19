@@ -97,6 +97,9 @@
                                             alt="Thumbnail" class="img-responsive"></a>
                                 <input type="hidden" name="thumbnail" value="{{ $object->thumbnail or '' }}"
                                        class="input-file">
+                                
+                                <input type="hidden" name="thumbnail_path"
+                                        class="thumbnail-path hidden">
                                 <a title="" class="remove-image"><span>&nbsp;</span></a>
                             </div>
                         </div>
