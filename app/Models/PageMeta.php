@@ -36,6 +36,6 @@ class PageMeta extends AbstractModel implements HasCustomFieldsInterface
 
     public function relatedContent()
     {
-        return $this->belongsTo('App\Models\PageContent', 'content_id');
+        return $this->belongsTo('App\Models\Page', 'content_id');
     }
 }

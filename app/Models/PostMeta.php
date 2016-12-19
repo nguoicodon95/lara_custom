@@ -25,7 +25,7 @@ class PostMeta extends AbstractModel implements HasCustomFieldsInterface
     protected $primaryKey = 'id';
 
     protected $editableFields = [
-        'post_id',
+        'content_id',
         'meta_key',
         'meta_value',
     ];
@@ -36,6 +36,6 @@ class PostMeta extends AbstractModel implements HasCustomFieldsInterface
 
     public function relatedContent()
     {
-        return $this->belongsTo('App\Models\Post', 'post_id');
+        return $this->belongsTo('App\Models\Post', 'content_id');
     }
 }

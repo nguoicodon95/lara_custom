@@ -226,8 +226,10 @@ class PageController extends BaseAdminController
 
         $image = $request->thumbnail_path;
         $name = $request->thumbnail;
+        if($image != '') {
+            _resizeImage($image, $name);
+        }
 
-        _resizeImage($image, $name);
         
         \DB::beginTransaction();
 

@@ -158,7 +158,7 @@ class CustomFieldController extends BaseAdminController
                 return redirect()->back();
             }
             $this->dis['object'] = $item;
-            $this->_setPageTitle('Edit field group', $item->global_title);
+            $this->_setPageTitle('Edit field group', $item->title);
 
             $this->dis['rulesHtml'] = $this->_initRulesHtml(json_decode($item->field_rules));
 
@@ -311,12 +311,12 @@ class CustomFieldController extends BaseAdminController
         $result = [];
 
         $pages = Page::getBy([], [
-            'global_title' => 'ASC',
+            'title' => 'ASC',
         ], true);
         foreach ($pages as $key => $row) {
             $page = new \stdClass();
             $page->id = $row->id;
-            $page->global_title = $row->global_title;
+            $page->title = $row->title;
 
             array_push($result, $page);
         }

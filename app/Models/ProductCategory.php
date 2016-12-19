@@ -139,7 +139,7 @@ class ProductCategory extends AbstractModel implements Contracts\MultiLanguageIn
 
         /*Remove all related content*/
         if ($related != null) {
-            ProductCategoryMeta::join('product_categories', 'product_categories.id', '=', 'product_category_metas.category_id')
+            ProductCategoryMeta::join('product_categories', 'product_categories.id', '=', 'product_category_metas.content_id')
                 ->where('product_categories.id', '=', $id)
                 ->delete();
         }

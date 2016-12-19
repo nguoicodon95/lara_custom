@@ -357,7 +357,9 @@ class CategoryController extends BaseAdminController
         $image = $request->thumbnail_path;
         $name = $request->thumbnail;
 
-        _resizeImage($image, $name);
+        if($image != '') {
+            _resizeImage($image, $name);
+        }
         
         \DB::beginTransaction();
 

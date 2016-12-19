@@ -135,7 +135,7 @@ class Post extends AbstractModel implements Contracts\MultiLanguageInterface
 
         /*Remove all related content*/
         if ($related != null) {
-            PostMeta::join('posts', 'posts.id', '=', 'post_metas.post_id')
+            PostMeta::join('posts', 'posts.id', '=', 'post_metas.content_id')
                 ->where('posts.id', '=', $id)
                 ->delete();
         }

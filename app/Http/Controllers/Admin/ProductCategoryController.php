@@ -131,10 +131,17 @@ class ProductCategoryController extends BaseAdminController
 
     public function postFastEdit(Request $request, ProductCategory $object)
     {
+        $lastOrder = ProductCategory::orderBy('order', 'DESC')->first();
+        if($request->args_2 == $lastOrder->order && $request->args_2 > 0) {
+            $order = intval($lastOrder->order) + 1;
+        } else {
+            $order = $request->get('args_2', null);
+        }
+
         $data = [
             'id' => $request->get('args_0', null),
             'title' => $request->get('args_1', null),
-            'order' => $request->get('args_2', null),
+            'order' => $order,
         ];
 
         $result = $object->fastEdit($data, false, true);
@@ -350,7 +357,9 @@ class ProductCategoryController extends BaseAdminController
         $image = $request->thumbnail_path;
         $name = $request->thumbnail;
 
-        _resizeImage($image, $name);
+        if($image != '') {
+            _resizeImage($image, $name);
+        }
         
         \DB::beginTransaction();
 

@@ -7,21 +7,15 @@
 @section('content')
     <div class="slideshow">
         <ul id="gallery">
+            @if(isset($slideshow) && !empty($slideshow))
+                @foreach($slideshow as $s)
             <li>
-                <a href="">
-                    <img src="http://shopping.pnj.com.vn/media/banner/1/4/1400x400-slider-hpv_1.png" alt="">
+                <a href="{{ $s['link'] }}">
+                    <img src="{{ $s['image'] }}">
                 </a>
             </li>
-            <li>
-                <a href="">
-                    <img src="http://shopping.pnj.com.vn/media/banner/g/o/goi-pnj-1400x400.jpg" alt="">
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img src="http://shopping.pnj.com.vn/media/banner/h/o/home-melody-collection-1400x400_1.jpg" alt="">
-                </a>
-            </li>
+                @endforeach
+            @endif
         </ul>
     </div>
     <div class="std">

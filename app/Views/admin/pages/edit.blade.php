@@ -149,9 +149,9 @@
                                 <div class="form-group">
                                     <label><b>Status</b></label>
                                     <select name="status" class="form-control">
-                                        <option value="1" {{ (isset($object) && $object->status == 1) ? 'selected' : '' }}>Published</option>
-                                        <option value="0" {{ (isset($object) && $object->status == 0) ? 'selected' : '' }}>Disabled</option>
-                                        <option value="2" {{ (isset($object) && $object->status == 2) ? 'selected' : '' }}>Draft</option>
+                                        <option value="1" {{ (isset($object) && $object->global_status == 1) ? 'selected' : '' }}>Published</option>
+                                        <option value="0" {{ (isset($object) && $object->global_status == 0) ? 'selected' : '' }}>Disabled</option>
+                                        <option value="2" {{ (isset($object) && $object->global_status == 2) ? 'selected' : '' }}>Draft</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -159,7 +159,7 @@
                                     <div class="select-media-box">
                                         <button type="button" class="btn blue show-add-media-popup">Choose image</button>
                                         <div class="clearfix"></div>
-                                        <a title="" class="show-add-media-popup"><img src="{{ (isset($object) && trim($object->thumbnail != '')) ? $object->thumbnail : '/admin/images/no-image.png' }}" alt="Thumbnail" class="img-responsive"></a>
+                                        <a title="" class="show-add-media-popup"><img src="{{ (isset($object) && trim($object->thumbnail != '')) ? '/uploads/normal/'.$object->thumbnail : '/admin/images/no-image.png' }}" alt="Thumbnail" class="img-responsive"></a>
                                         <input type="hidden" name="thumbnail" value="{{ $object->thumbnail or '' }}" class="input-file">
                                         
                                         <input type="hidden" name="thumbnail_path"

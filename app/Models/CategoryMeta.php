@@ -25,7 +25,7 @@ class CategoryMeta extends AbstractModel implements HasCustomFieldsInterface
     protected $primaryKey = 'id';
 
     protected $editableFields = [
-        'category_id',
+        'content_id',
         'meta_key',
         'meta_value',
     ];
@@ -36,6 +36,6 @@ class CategoryMeta extends AbstractModel implements HasCustomFieldsInterface
 
     public function relatedContent()
     {
-        return $this->belongsTo('App\Models\Category', 'category_id');
+        return $this->belongsTo('App\Models\Category', 'content_id');
     }
 }

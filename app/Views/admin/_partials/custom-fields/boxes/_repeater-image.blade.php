@@ -9,7 +9,7 @@ if (!trim((string)$imgSrc)) {
         <a title="" class="btn blue show-add-media-popup">Choose image</a>
         <div class="clearfix"></div>
         <a title="" class="show-add-media-popup"><img src="{{ $imgSrc or '' }}" alt="" class="img-responsive"></a>
-        <input type="hidden" data-slug="{{ $fieldItem->slug or '' }}" data-fieldtype="{{ $fieldItem->field_type_updated or '' }}" value="{{ $theMeta or '' }}" class="input-file">
+        <input type="hidden" data-slug="{{ $fieldItem->slug or '' }}" data-fieldtype="{{ $fieldItem->field_type_updated or '' }}" value="{{ $theMeta or '' }}" class="input-file-customs-field">
         <a href="#" title="" class="remove-image"><span>&nbsp;</span></a>
     </div>
 </div>

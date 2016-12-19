@@ -36,6 +36,6 @@ class ProductCategoryMeta extends AbstractModel implements HasCustomFieldsInterf
 
     public function relatedContent()
     {
-        return $this->belongsTo('App\Models\ProductCategoryContent', 'content_id');
+        return $this->belongsTo('App\Models\ProductCategory', 'content_id');
     }
 }

@@ -14,15 +14,15 @@ class PageController extends BaseFrontController
         $this->bodyClass = 'page';
     }
 
-    public function index(Request $request, Page $object)
+    public function index(Request $request, Page $object, PageMeta $objectMeta)
     {
-        $item = $object->getById($this->_getSetting('default_homepage'), 'vi');
+        $item = $object->getById($this->_getSetting('default_homepage'));
         if (!$item) {
             return $this->_showErrorPage(404, 'Page not found');
         }
-        
         if(in_array($item->slug, $this->_setVariableHome)) {
             $this->_loadFrontMenu($item->id, 'page');
+            $this->_getAllCustomFields($objectMeta, $item->id, 'page');
             return $this->_page_Homepage($item);
         }
         
@@ -44,7 +44,7 @@ class PageController extends BaseFrontController
 
         $this->dis['object'] = $item;
         $this->_getAllCustomFields($objectMeta, $item->id, 'page');
-        //dd($this->dis['currentObjectCustomFields']);
+        // dd($this->dis['currentObjectCustomFields']);
         
         return $this->_showItem($item);
     }
@@ -72,6 +72,15 @@ class PageController extends BaseFrontController
     {
         $this->_setBodyClass($this->bodyClass . ' page-homepage');
 
+        $slideshows = json_decode($this->dis['currentObjectCustomFields']['25_slideshow']);
+        $slider = [];
+        foreach($slideshows as $s) {
+            $slider[] = [
+                'image' => $s[0]->field_value,
+                'link' => $s[1]->field_value
+            ] ;
+        }
+        $this->dis['slideshow'] = $slider;
         return $this->_viewFront('page-templates.homepage', $this->dis);
     }
 

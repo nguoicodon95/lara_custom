@@ -18,7 +18,7 @@ trait MetaFunctions
     {
         $result = [];
         $fields = static::getBy([
-            $related.'_id' => $content_id,
+            'content_id' => $content_id,
         ], null, true);
 
         foreach ($fields as $key => $row) {

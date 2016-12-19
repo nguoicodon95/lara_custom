@@ -131,7 +131,7 @@ class Category extends AbstractModel implements Contracts\MultiLanguageInterface
 
         /*Remove all related content*/
         if ($related != null) {
-            CategoryMeta::join('categories', 'categories.id', '=', 'category_metas.category_id')
+            CategoryMeta::join('categories', 'categories.id', '=', 'category_metas.content_id')
                 ->where('categories.id', '=', $id)
                 ->delete();
 

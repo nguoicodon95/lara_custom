@@ -74,38 +74,37 @@ if (! function_exists('_stripTags')) {
 if (! function_exists('_resizeImage')) {
     function _resizeImage($thumb = '', $name = '')
     {
-        $CMSSettings = \App\Models\Setting::getAllSettings();
+        if($name != '' && $thumb != '') {
+            $CMSSettings = \App\Models\Setting::getAllSettings();
+            $image = Image::make(public_path($thumb));
+            /*Get size Large*/
+            $large = $CMSSettings['large_image'];
+            $ex_large = explode('x', $large);
+            $w_large = $ex_large[0];
+            $h_large = $ex_large[1];
 
-        /*Get size Large*/
-        $large = $CMSSettings['large_image'];
-        $ex_large = explode('x', $large);
-        $w_large = $ex_large[0];
-        $h_large = $ex_large[1];
+            $image->resize($w_large, $h_large)
+                            ->save(public_path('uploads/large/'.$name));
 
-        Image::make(public_path($thumb))
-                        ->resize($w_large, $h_large)
-                        ->save(public_path('uploads/large/'.$name));
+            /*Get size Normal*/
+            $normal = $CMSSettings['normal_image'];
+            $ex_normal = explode('x', $normal);
+            $w_normal = $ex_normal[0];
+            $h_normal = $ex_normal[1];
 
-        /*Get size Normal*/
-        $normal = $CMSSettings['normal_image'];
-        $ex_normal = explode('x', $normal);
-        $w_normal = $ex_normal[0];
-        $h_normal = $ex_normal[1];
+            $image->resize($w_normal, $h_normal)
+                            ->save(public_path('uploads/normal/'.$name));
 
-        Image::make(public_path($thumb))
-                        ->resize($w_normal, $h_normal)
-                        ->save(public_path('uploads/normal/'.$name));
-
-        /*Get size Small*/
-        $small = $CMSSettings['small_image'];
-        $ex_small = explode('x', $small);
-        $w_small = $ex_small[0];
-        $h_small = $ex_small[1];
-        
-        Image::make(public_path($thumb))
-                        ->resize($w_small, $h_small)
-                        ->save(public_path('uploads/small/'.$name));
-        
-        return ;
+            /*Get size Small*/
+            $small = $CMSSettings['small_image'];
+            $ex_small = explode('x', $small);
+            $w_small = $ex_small[0];
+            $h_small = $ex_small[1];
+            
+            $image->resize($w_small, $h_small)
+                            ->save(public_path('uploads/small/'.$name));
+            
+            return ;
+        }
     }
 }

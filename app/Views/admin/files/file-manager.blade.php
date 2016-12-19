@@ -61,6 +61,7 @@
                         }
 
                         $target.find('.input-file').val(file.name);
+                        $target.find('.input-file-customs-field').val(URL);
                         $target.find('.thumbnail-path').val(URL);
                         $modal.find('iframe').remove();
                         $modal.modal('hide');

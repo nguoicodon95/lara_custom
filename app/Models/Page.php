@@ -101,7 +101,7 @@ class Page extends AbstractModel
 
         /*Remove all related content*/
         if ($related != null) {
-            PageMeta::join('pages', 'pages.id', '=', 'page_metas.page_id')
+            PageMeta::join('pages', 'pages.id', '=', 'page_metas.content_id')
                 ->where('pages.id', '=', $id)
                 ->delete();
         }
