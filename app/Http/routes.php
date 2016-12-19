@@ -89,6 +89,28 @@ $router->group(['middleware' => ['web']], function ($router) {
 		Route::delete('settings/{id?}', 'SettingController@delete')->name('web.settings.delete');
 		Route::get('settings/delete_value/{id}', 'SettingController@delete_value')->name('web.settings.delete_value');
 
+
+        /*Developer*/
+        Route::group(['namespace' => 'Dev', 'prefix' => Config::get('laraedit.uri')], function()
+        {
+            Route::get('/', array(
+                'as' => 'laraedit_home',
+                'uses' => 'SourceController@getIndex'
+            ));
+
+            Route::post('/save', array(
+                'as' => 'laraedit_save',
+                'uses' => 'SourceController@postSave'
+            ));
+
+            Route::post('/terminal', array(
+                'as' => 'laraedit_terminal',
+                'uses' => 'SourceController@postTerminal'
+            ));
+
+            Route::get('config-clear', 'DevConfigController@clearConfig')->name('config_clear');
+            Route::get('config-cache', 'DevConfigController@cacheConfig')->name('config_cache');
+        });
     });
     /*
     |--------------------------------------------------------------------------
