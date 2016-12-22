@@ -387,6 +387,7 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
     {
         $items = Product::join('product_categories_products', 'product_categories_products.product_id', '=', 'products.id')
             ->join('product_categories', 'product_categories.id', '=', 'product_categories_products.category_id')
+            ->join('product_contents', 'products.id', '=', 'product_contents.product_id')
             ->groupBy('products.id')
             ->where([
                 'product_categories.id' => $id,
@@ -411,6 +412,18 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
         }
 
         if ($select && sizeof($select) > 0) {
+            $items = $items->select($select);
+        } else {
+            $select = [
+                'products.global_title',
+                'products.sku',
+                'products.brand_id',
+                'products.page_template',
+                'products.status as global_status',
+                'product_contents.*',
+                'products.id',
+                'product_contents.id as content_id',
+            ];
             $items = $items->select($select);
         }
         if ($perPage > 0) {

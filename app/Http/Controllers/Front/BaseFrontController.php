@@ -67,9 +67,9 @@ abstract class BaseFrontController extends BaseController
      * @param Models\Foundation\MetaFunctions $modelObject
      * @param int $rules: $contentId
      **/
-    protected function _getAllCustomFields($modelObject, $contentId, $related)
+    protected function _getAllCustomFields($modelObject, $contentId)
     {
-        $this->dis['currentObjectCustomFields'] = $modelObject->getAllContentMeta($contentId, $related);
+        $this->dis['currentObjectCustomFields'] = $modelObject->getAllContentMeta($contentId);
     }
 
     protected function _setMetaSEO($keywords = null, $description = null, $image = null)

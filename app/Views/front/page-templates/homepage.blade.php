@@ -42,7 +42,7 @@
                                 <h3>
                                     <a href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">{{ $row->title }}</a>
                                 </h3>
-                                <p class="sku">Mã SP: {{ $row->sku }}</p>
+                                <p class="sku">Mã SP: {{ $p->sku }}</p>
                                 <div class="price-box">
                                     <span class="regular-price">
                                         @if($row->old_price != 0)
@@ -79,7 +79,7 @@
         @foreach($groups as $key => $group)
         <div class="products_grid p_block_home">
             <h2 class="group_title">
-                <a href="{{ _getCategoryLink($group['slug']) }}"><span>{{ $key }}</span></a>
+                <a href="{{ _getProductCategoryLink($group['slug']) }}"><span>{{ $key }}</span></a>
             </h2>
             <div class="row">
                 @if(!empty($group))

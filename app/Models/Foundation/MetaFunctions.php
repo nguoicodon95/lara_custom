@@ -14,7 +14,7 @@ trait MetaFunctions
         return ($field) ? $field->meta_value : null;
     }
 
-    public static function getAllContentMeta($content_id, $related)
+    public static function getAllContentMeta($content_id)
     {
         $result = [];
         $fields = static::getBy([

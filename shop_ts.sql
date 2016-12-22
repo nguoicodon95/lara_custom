@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2016 at 10:45 AM
+-- Generation Time: Dec 19, 2016 at 03:33 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.13-1+deb.sury.org~xenial+1
 
@@ -4988,8 +4988,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `is_popular`, `brand_id`, `global_title`, `sku`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 0, 1, 'm21™ - 14SFG Special forces drop point  with veff serrations™', 'M2114SFG', '', 1, 0, 1, '2016-07-08 11:24:12', '2016-07-08 14:27:22'),
-(5, 0, 0, 'Demo product 1', '005145', '', 1, 0, 1, '2016-12-14 16:45:30', '2016-12-19 08:49:36');
+(6, 1, 0, 'Nhẫn CZ vàng 18K', 'GNDRYA82427.102', '', 1, 0, 1, '2016-12-19 10:59:08', '2016-12-19 11:12:01'),
+(7, 0, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82349.106', '', 1, 0, 1, '2016-12-19 11:04:16', '2016-12-19 11:06:20'),
+(9, 1, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82177.106', '', 1, 0, 1, '2016-12-19 11:07:01', '2016-12-19 11:12:01'),
+(10, 1, 0, 'Nhẫn ECZ vàng 10K', 'GNDRXB81209.106', '', 1, 0, 1, '2016-12-19 11:08:53', '2016-12-19 11:12:01'),
+(12, 1, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82295.106', '', 1, 0, 1, '2016-12-19 11:11:25', '2016-12-19 11:12:01'),
+(13, 1, 0, 'Dây cổ vàng Mystery', 'GCDRCB81483.106', '', 1, 0, 1, '2016-12-19 11:15:58', '2016-12-19 11:23:11'),
+(14, 1, 0, 'Dây cổ vàng trắng 10K', 'GCDRWB82446.406', '', 1, 0, 1, '2016-12-19 11:17:21', '2016-12-19 11:23:11'),
+(15, 1, 0, 'Dây cổ ECZ vàng 10K', 'GCDRXB78725.106', '', 1, 0, 1, '2016-12-19 11:19:06', '2016-12-19 11:23:11'),
+(16, 1, 0, 'Dây cổ ECZ vàng trắng 10K', 'GCDRWB77770.106', '', 1, 0, 1, '2016-12-19 11:20:31', '2016-12-19 14:04:12'),
+(18, 0, 0, 'Dây cổ ECZ vàng trắng 10K', 'GCDRWB78725.106', '', 1, 0, 1, '2016-12-19 11:22:06', '2016-12-19 11:22:06');
 
 -- --------------------------------------------------------
 
@@ -5033,20 +5041,6 @@ CREATE TABLE `product_attributes_products` (
   `change_price` double NOT NULL DEFAULT '0',
   `is_percentage` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `product_attributes_products`
---
-
-INSERT INTO `product_attributes_products` (`id`, `attribute_id`, `product_id`, `change_price`, `is_percentage`) VALUES
-(16, 1, 1, 5, 1),
-(17, 2, 1, -5, 1),
-(18, 3, 1, -10, 1),
-(19, 4, 1, -10000, 0),
-(20, 5, 1, 0, 0),
-(21, 6, 1, 10000, 0),
-(22, 7, 1, 20000, 0),
-(23, 8, 1, 30000, 0);
 
 -- --------------------------------------------------------
 
@@ -5130,10 +5124,10 @@ CREATE TABLE `product_categories` (
 
 INSERT INTO `product_categories` (`id`, `parent_id`, `title`, `slug`, `description`, `content`, `thumbnail`, `icon_font`, `tags`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
 (10, 0, 'Đồng hồ', 'dong-ho', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:42:57', '2016-12-19 10:42:57'),
-(11, 0, 'Vòng đeo tay', 'vong-deo-tay', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:43:36', '2016-12-19 10:43:36'),
-(12, 0, 'Vòng đeo cổ', 'vong-deo-co', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:43:59', '2016-12-19 10:43:59'),
-(13, 0, 'Nhẫn', 'nhan', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:44:18', '2016-12-19 10:44:18'),
-(14, 0, 'Bông tai', 'bong-tai', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:44:29', '2016-12-19 10:44:29');
+(11, 0, 'Vòng đeo tay', 'vong-deo-tay', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:43:36', '2016-12-19 11:22:48'),
+(12, 0, 'Vòng đeo cổ', 'vong-deo-co', '', '', '', '', '', '', 1, 2, 0, '2016-12-19 10:43:59', '2016-12-19 10:47:53'),
+(13, 0, 'Nhẫn', 'nhan', '', '', '', '', '', '', 1, 1, 0, '2016-12-19 10:44:18', '2016-12-19 10:47:39'),
+(14, 0, 'Bông tai', 'bong-tai', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:44:29', '2016-12-19 10:49:57');
 
 -- --------------------------------------------------------
 
@@ -5146,6 +5140,20 @@ CREATE TABLE `product_categories_products` (
   `product_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `product_categories_products`
+--
+
+INSERT INTO `product_categories_products` (`id`, `product_id`, `category_id`) VALUES
+(18, 10, 13),
+(23, 15, 12),
+(24, 16, 12),
+(21, 13, 12),
+(17, 7, 13),
+(22, 14, 12),
+(15, 6, 13),
+(20, 12, 13);
 
 -- --------------------------------------------------------
 
@@ -5193,10 +5201,18 @@ CREATE TABLE `product_contents` (
 --
 
 INSERT INTO `product_contents` (`id`, `product_id`, `is_out_of_stock`, `title`, `slug`, `description`, `content`, `status`, `thumbnail`, `tags`, `label`, `price`, `old_price`, `sale_status`, `sale_from`, `sale_to`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 'm21™ - 14SFG Special forces drop point  with veff serrations™', 'm21-14sfg-special-forces-drop-point-with-veff-serrations', '', '', 1, '6_phim-manga_luan-ban-6-ly-do-khien-luffy-la-nhan-vat-manga-tieu-bieu-cua-thap-ky_182325.jpg', '', 'best seller,new', 399000, 599000, 0, '2016-12-08 00:00:00', '2016-12-22 00:00:00', 0, '2016-07-08 11:24:12', '2016-12-19 09:03:55'),
 (2, 3, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0, '2016-12-14 16:44:00', '2016-12-14 16:44:00', 0, '2016-12-14 16:44:00', '2016-12-14 16:44:00'),
 (3, 4, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0, '2016-12-14 16:45:18', '2016-12-14 16:45:18', 0, '2016-12-14 16:45:18', '2016-12-14 16:45:18'),
-(4, 5, 0, 'Demo product 1', 'demo-product-1', '', '', 1, '15181324_1159059337521584_4074129930717035978_n.jpg', '', '', 0, 0, 0, '2016-12-14 16:45:31', '2016-12-14 16:45:31', 0, '2016-12-14 16:45:31', '2016-12-19 02:12:32');
+(5, 6, 0, 'Nhẫn CZ vàng 18K', 'nhan-cz-vang-18k', '', '<p>Gi&aacute; b&aacute;n sản phẩm chỉ mang t&iacute;nh chất tham khảo phụ thuộc v&agrave;o trọng lượng v&agrave;ng v&agrave; thuộc t&iacute;nh của đ&aacute;. Khi Đơn H&agrave;ng th&agrave;nh c&ocirc;ng, PNJ sẽ x&aacute;c nhận v&agrave; lấy sản phẩm với gi&aacute; b&aacute;n thực tế tại cửa h&agrave;ng tương ứng trọng lượng v&agrave;ng cụ thể b&aacute;o lại cho kh&aacute;ch h&agrave;ng v&agrave; hưởng ch&iacute;nh s&aacute;ch ưu đ&atilde;i tr&ecirc;n online.</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN CZ V&Agrave;NG 18K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRYA82427.102</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>14K (585)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u v&agrave;ng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>CZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', 1, 'nhan-cz-vang-18k-gndrya82427.102.png', '', '', 5783000, 0, 0, '2016-12-19 10:59:09', '2016-12-19 10:59:09', 0, '2016-12-19 10:59:09', '2016-12-19 10:59:09'),
+(6, 7, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRWB82349.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', 1, 'nhan-ecz-vang-trang-10k-gndrwb82349.106_1.png', '', '', 4261000, 0, 0, '2016-12-19 11:04:16', '2016-12-19 11:04:16', 0, '2016-12-19 11:04:16', '2016-12-19 11:04:17'),
+(8, 9, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k-9364', '', '', 1, 'nhan-ecz-vang-trang-10k-gndrwb82177.106_3.png', '', '', 3114000, 0, 0, '2016-12-19 11:07:01', '2016-12-19 11:07:01', 0, '2016-12-19 11:07:01', '2016-12-19 11:07:01'),
+(9, 10, 0, 'Nhẫn ECZ vàng 10K', 'nhan-ecz-vang-10k', '', '<p>Nhẫn, chất liệu v&agrave;ng 10K, Gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRXB81209.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Ghi ch&uacute;</th>\r\n			<td>kh&ocirc;ng tồn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Nhẫn ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-ecz-vang-hong-10k.png" style="height:560px; width:560px" title=" Nhẫn ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'nhan-ecz-vang-hong-10k.png', '', '', 4098000, 0, 0, '2016-12-19 11:08:53', '2016-12-19 11:08:53', 0, '2016-12-19 11:08:53', '2016-12-19 11:08:53'),
+(11, 12, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k-9365', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRWB82295.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ SWAROVSKI GEMTM .Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng</p>\r\n', 1, 'nhan-ecz-vang-trang-10k-gndrwb82295.106_2.png', '', '', 4557000, 0, 0, '2016-12-19 11:11:25', '2016-12-19 11:11:25', 0, '2016-12-19 11:11:25', '2016-12-19 11:11:25'),
+(12, 13, 0, 'Dây cổ vàng Mystery', 'day-co-vang-mystery', '', '<p>D&acirc;y cổ v&agrave;ng Mystery</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ V&Agrave;NG MYSTERY</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRCB81483.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>Hai m&agrave;u</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mystery Collection,&nbsp;bộ sưu tập l&agrave; hiện th&acirc;n của vẻ đẹp huyền b&iacute; đầy nữ t&iacute;nh, khơi nguồn cảm hứng để ph&aacute;i đẹp tỏa s&aacute;ng, chinh phục th&agrave;nh c&ocirc;ng c&ugrave;ng nguyện ước ch&acirc;n th&agrave;nh cho những điều tốt đẹp nhất trong cuộc sống</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/trang-suc-laurel-nguyet-que.html" target="_blank"><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-vang-mystery_5.jpg" title="Dây cổ vàng Mystery" /></a></p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/p/n/pnj_brochure_mystery_2015_2-1_3.jpg" style="height:570px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n\r\n<p>Mystery Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ&nbsp;SWAROVSKI GEM<sup>TM</sup>&nbsp;.Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/d/_/d_y-c_-mysterygcdrcb81483_1.jpg" style="height:594px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n', 1, 'd_y-c_-mysterygcdrcb81483_1.jpg', '', '', 14197000, 0, 0, '2016-12-19 11:15:59', '2016-12-19 11:15:59', 0, '2016-12-19 11:15:59', '2016-12-19 11:15:59'),
+(13, 14, 0, 'Dây cổ vàng trắng 10K', 'day-co-vang-trang-10k', '', '<p>D&acirc;y cổ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB82446.406</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>Synthetic</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Oval</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại đ&aacute; phụ</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Đỏ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; phụ</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p>ECZ - ROYAL l&agrave; d&ograve;ng trang sức hội tụ vẻ đẹp lấp l&aacute;nh của những vi&ecirc;n đ&aacute; ECZ - Excellence Cubic Zirconia - mang sắc xanh huyền b&iacute;, sắc đỏ rực rỡ hay sắc ngọc lục bảo quyến rũ với gi&aacute;c cắt ho&agrave;n hảo tựa kim cương, thể hiện trọn vẹn vẻ đẹp đa chiều ở người phụ nữ - vừa thanh lịch, qu&yacute; ph&aacute;i vừa rực lửa đam m&ecirc; - th&agrave;nh c&ocirc;ng.</p>\r\n\r\n<p>Bộ sản phẩm l&agrave;m từ chất liệu v&agrave;ng trắng 10K gắn đ&aacute; ECZ đỏ.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-da-ecz-royal-vang-trang-10k.html" target="_blank"><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/e/c/ecz-royal-2-do.jpg" style="height:1000px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&acirc;y cổ v&agrave;ng trắng 10K, gắn đ&aacute; ECZ cao cấp: 1 vi&ecirc;n Oval đỏ 9*11mm + 5 vi&ecirc;n Oval đỏ 7*9mm + 3 vi&ecirc;n 3.0 ly + 92 vi&ecirc;n 2.5 ly + 36 vi&ecirc;n 2.0 ly + 88 vi&ecirc;n 1.5 ly.</p>\r\n\r\n<p><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb82446.406_1.jpg" style="height:1266px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></p>\r\n', 1, 'day-co-da-ecz-vang-trang-10k.jpg', '', '', 23482000, 0, 0, '2016-12-19 11:17:21', '2016-12-19 11:17:21', 0, '2016-12-19 11:17:21', '2016-12-19 11:17:21'),
+(14, 15, 0, 'Dây cổ ECZ vàng 10K', 'day-co-ecz-vang-10k', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n kh&ocirc;ng mang t&iacute;nh tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRXB78725.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-ecz-vang-trang-10k-7756.html" target="_blank"><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/S/P/SPBECZ01.ROSE.jpg" style="height:577px; width:600px" title=" Dây cổ ECZ vàng 10K " /></a></p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRXB78725.106.jpg" style="height:582px; width:600px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/1/1/11021101_1037513036260361_6252307144123743164_n.jpg" style="height:960px; width:960px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'day-co-ecz-vang-trang-10k-1_1.jpg', '', '', 3520000, 0, 0, '2016-12-19 11:19:06', '2016-12-19 11:19:06', 0, '2016-12-19 11:19:06', '2016-12-19 11:19:06'),
+(15, 16, 0, 'Dây cổ ECZ vàng trắng 10K', 'day-co-ecz-vang-trang-10k', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB77770.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="" src="http://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb77770.106.jpg" style="height:800px; width:800px" /></p>\r\n\r\n<p>D&acirc;y cổ, Thiết kế mặt Hoa Hồng, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ</p>\r\n', 1, 'day-co-ecz-vang-trang-10k_4.jpg', '', '', 24974000, 0, 0, '2016-12-19 11:20:31', '2016-12-19 11:20:31', 0, '2016-12-19 11:20:31', '2016-12-19 11:20:31'),
+(17, 18, 0, 'Dây cổ ECZ vàng trắng 10K', 'day-co-ecz-vang-trang-10k-9310', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB78725.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng trắng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRWB78725.106.jpg" style="height:595px; width:600px" title=" Dây cổ ECZ vàng trắng 10K " /></p>\r\n\r\n<p>D&acirc;y Cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly.</p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, 'day-co-ecz-vang-trang-10k_3.jpg', '', '', 3576000, 0, 0, '2016-12-19 11:22:06', '2016-12-19 11:22:06', 0, '2016-12-19 11:22:06', '2016-12-19 11:22:06');
 
 -- --------------------------------------------------------
 
@@ -5260,8 +5276,8 @@ INSERT INTO `settings` (`id`, `display_name`, `option_key`, `option_value`, `typ
 (10, '', 'show_admin_bar', '1', '', 0, '', '2016-01-26 10:00:54', '2016-06-11 00:10:23'),
 (34, 'Site keywords', 'site_keywords', 'Working shop', 'keywords', 0, '', '2016-12-19 00:35:02', '2016-12-19 00:36:45'),
 (40, 'Ảnh lớn', 'large_image', '768x450', 'resize', 0, '', '2016-12-19 01:35:28', '2016-12-19 01:40:13'),
-(41, 'Ản Vừa', 'normal_image', '430x225', 'resize', 0, '', '2016-12-19 01:35:54', '2016-12-19 01:40:13'),
-(42, 'Ảnh nhỏ', 'small_image', '280x160', 'resize', 0, '', '2016-12-19 01:36:11', '2016-12-19 01:40:13');
+(41, 'Ản Vừa', 'normal_image', '440x440', 'resize', 0, '', '2016-12-19 01:35:54', '2016-12-19 11:01:26'),
+(42, 'Ảnh nhỏ', 'small_image', '283x283', 'resize', 0, '', '2016-12-19 01:36:11', '2016-12-19 11:01:26');
 
 -- --------------------------------------------------------
 
@@ -5666,7 +5682,7 @@ ALTER TABLE `post_metas`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `product_attributes`
 --
@@ -5696,7 +5712,7 @@ ALTER TABLE `product_categories`
 -- AUTO_INCREMENT for table `product_categories_products`
 --
 ALTER TABLE `product_categories_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `product_category_metas`
 --
@@ -5706,7 +5722,7 @@ ALTER TABLE `product_category_metas`
 -- AUTO_INCREMENT for table `product_contents`
 --
 ALTER TABLE `product_contents`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `product_metas`
 --

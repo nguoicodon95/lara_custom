@@ -18,7 +18,7 @@ if (!function_exists('_getPostLink')) {
             $post = $post->slug;
         }
 
-        return '/' . trans('url.post') . '/' . $post;
+        return '/bai-viet/' . $post;
     }
 }
 
@@ -37,33 +37,29 @@ if (!function_exists('_getCategoryLink')) {
 }
 
 if (!function_exists('_getProductCategoryLink')) {
-    function _getProductCategoryLink($category)
+    function _getProductCategoryLink($slug)
     {
-        if (!is_string($category)) {
-            $category = $category->slug;
-        }
-
-        return '/' . trans('url.productCategory') . '/' . $category;
+        return route('productcategory.link', $slug);
     }
 }
 
 /*Category link with parent slugs*/
 if (!function_exists('_getCategorySlugs')) {
-    function _getCategorySlugs($type, $categoryId, $currentLanguageId = null)
+    function _getCategorySlugs($type, $categoryId)
     {
         $slug = '';
         switch ($type) {
             case 'productCategory': {
-                $category = \App\Models\ProductCategory::getById($categoryId, $currentLanguageId, [], [
+                $category = \App\Models\ProductCategory::getById($categoryId, [], [
                     'product_categories.parent_id',
-                    'product_category_contents.slug',
+                    'product_categories.slug',
                 ]);
             }
                 break;
             default: {
-                $category = \App\Models\Category::getById($categoryId, $currentLanguageId, [], [
+                $category = \App\Models\Category::getById($categoryId, [], [
                     'categories.parent_id',
-                    'category_contents.slug',
+                    'categories.slug',
                 ]);
             }
                 break;
@@ -83,16 +79,15 @@ if (!function_exists('_getCategorySlugs')) {
 if (!function_exists('_getCategoryLinkWithParentSlugs')) {
     function _getCategoryLinkWithParentSlugs($categoryId)
     {
-        return '/' . trans('url.category') . '/' . _getCategorySlugs('category', $categoryId);
+        return '/danh-muc/' . _getCategorySlugs('category', $categoryId);
     }
 }
 
 if (!function_exists('_getProductCategoryLinkWithParentSlugs')) {
     function _getProductCategoryLinkWithParentSlugs($categoryId)
     {
-        $currentLanguageId = \App\Models\Language::getBy(['language_code' => $currentLanguageCode], null, false, 0, ['id']);
        
-        return '/' . trans('url.productCategory') . '/' . _getCategorySlugs('productCategory', $categoryId, $currentLanguageId->id);
+        return '/danh-muc-san-pham/' . _getCategorySlugs('productCategory', $categoryId);
     }
 }
 
@@ -100,6 +95,6 @@ if (!function_exists('_getProductCategoryLinkWithParentSlugs')) {
 if (!function_exists('_getAddToCartLink')) {
     function _getAddToCartLink($productContentId, $quantity = 1)
     {
-        return '/' .  '/cart/add-to-cart/' . $productContentId . '/' . $quantity;
+        return '/cart/add-to-cart/' . $productContentId . '/' . $quantity;
     }
 }

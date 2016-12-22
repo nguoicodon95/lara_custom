@@ -279,13 +279,7 @@ class CmsMenu
                         'id' => $item->related_id,
                     ]);
                     if ($page) {
-                        $pageContent = $page->pageContent()->join('languages', 'languages.id', '=', 'page_contents.language_id')
-                            ->where('languages.id', '=', $this->localeObj->id)
-                            ->select('page_contents.title')
-                            ->first();
-                        if ($pageContent) {
-                            $title = ((trim($pageContent->title) != '') ? trim($pageContent->title) : trim($page->global_title));
-                        }
+                        $title = ((trim($page->title) != '') ? trim($page->title) : '');
                     } else {
                         $title = '';
                     }

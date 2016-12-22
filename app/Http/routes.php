@@ -145,7 +145,7 @@ $router->group(['middleware' => ['web']], function ($router) {
 
         $router->get('/san-pham/{slug_1}', 'ProductController@_handle')->name('product.link');
 
-        $router->get('/danh-muc-san-pham/{slug_1}', 'ProductCategoryController@_handle');
+        $router->get('/danh-muc-san-pham/{slug_1}', 'ProductCategoryController@_handle')->name('productcategory.link');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}', 'ProductCategoryController@_handle');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}/{slug_3}', 'ProductCategoryController@_handle');
     });

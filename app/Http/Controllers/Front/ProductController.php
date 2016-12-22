@@ -2,6 +2,7 @@
 
 use App\Models\Product;
 use App\Models\ProductMeta;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseFrontController
@@ -14,13 +15,13 @@ class ProductController extends BaseFrontController
 
     public function _handle(Request $request, Product $object, ProductMeta $objectMeta, $slug)
     {
-        $item = $object->getBySlug($slug, $this->currentLanguageId);
+        $item = $object->getBySlug($slug);
 
         if (!$item) {
             return $this->_showErrorPage(404, 'Page not found');
         }
 
-        $this->_setCurrentEditLink('Edit this product', 'products/edit/' . $item->id . '/' . $this->currentLanguageId);
+        $this->_setCurrentEditLink('Edit this product', 'products/edit/' . $item->id);
 
         $relatedCategoryIds = $item->category()->getRelatedIds();
         if($relatedCategoryIds) {
@@ -28,16 +29,38 @@ class ProductController extends BaseFrontController
         } else {
             $relatedCategoryIds = [];
         }
-
         $this->_loadFrontMenu($relatedCategoryIds, 'product-category');
-
         $this->_loadFrontMenu();
         $this->_setPageTitle($item->title);
         $this->_setMetaSEO($item->tags, $item->description, $item->thumbnail);
-
         $this->dis['object'] = $item;
-        $this->_getAllCustomFields($objectMeta, $item->content_id);
+        /* Get products same category */
+        $getByFields['products.status'] = ['compare' => '=', 'value' => 1];
+        $getByFields['products.id'] = ['compare' => '!=', 'value' => $item->id];
+        $pr_sm = $products = $products_in_subcate = $product_in_cate = [];
+       
+        foreach($relatedCategoryIds as $cateId) {
+            $_getcate = ProductCategory::getById($cateId);
+            $child = $_getcate->child()->get();
+             if(!empty($child)) {
+                foreach($child as $sub_cate) {
+                    $products_in_subcate[] = Product::getNoContentByCategory($sub_cate->id, $getByFields, [], null, 0);
+                }
+            }
 
+            $product_in_cate[] = Product::getNoContentByCategory($cateId, $getByFields, [], null, 0);
+        }
+        $products = collect($products_in_subcate)->merge($product_in_cate);
+        foreach($products as $product) {
+            foreach($product->sortByDesc('id') as $p) {
+                $pr_sm[] = $p;
+            }
+        }
+        $all_product = _unique_multidim_array($pr_sm, 'id');
+        $this->dis['same_product'] = $all_product;
+
+        $this->_getAllCustomFields($objectMeta, $item->content_id);
+        
         return $this->_showItem($item);
     }
 
@@ -55,6 +78,31 @@ class ProductController extends BaseFrontController
 
     private function _defaultItem(Product $object)
     {
+        /* Get Gallery of product */
+        if(isset($this->dis['currentObjectCustomFields']['19_images'])) {
+            $gals = $this->dis['currentObjectCustomFields']['19_images'];
+            $gals = json_decode($gals, true);
+            $thumbs = [];
+            foreach($gals as $gal) {
+                $thumbs[] = [
+                    'src' => $gal[0]['field_value'],
+                    'title' => $gal[1]['field_value']
+                ];
+            }
+            $this->dis['thumbs'] = $thumbs;
+        }
+
+        /* Get Attribute of product */
+        if(isset($this->dis['currentObjectCustomFields']['29_thuoc_tinh_san_pham'])) {
+            $attr = $this->dis['currentObjectCustomFields']['29_thuoc_tinh_san_pham'];
+            $attr = json_decode($attr, true);
+            $attributes = [];
+            foreach($attr as $a) {
+                $attributes[$a[0]['field_value']] = $a[1]['field_value'];
+            }
+            $this->dis['attributes'] = $attributes;
+        }
+
         $this->_setBodyClass($this->bodyClass . ' product-default');
         return $this->_viewFront('product-templates.default', $this->dis);
     }

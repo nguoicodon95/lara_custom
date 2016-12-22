@@ -291,6 +291,13 @@ class ProductController extends BaseAdminController
             }
         }
 
+        /*
+        * Set watermask
+        **/
+        /*$img = \Image::make(public_path('uploads/root/'.$request->thumbnail));
+        $img->insert(public_path('uploads/mask.png'), 'center');
+        $img->save(public_path('uploads/root/'.$request->thumbnail));
+        */
         $image = $request->thumbnail_path;
         $name = $request->thumbnail;
         if($image != '') {

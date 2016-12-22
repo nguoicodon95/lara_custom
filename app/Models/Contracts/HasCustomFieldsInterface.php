@@ -5,7 +5,7 @@ interface HasCustomFieldsInterface
 {
     public static function getContentMeta($content_id, $key);
 
-    public static function getAllContentMeta($content_id, $related);
+    public static function getAllContentMeta($content_id);
 
     public static function checkContentMetaExists($content_id, $key);
 

@@ -18,13 +18,13 @@ class CategoryController extends BaseFrontController
         $segments = $request->segments();
         $slug = end($segments);
 
-        $item = $object->getBySlug($slug, $this->currentLanguageId);
+        $item = $object->getBySlug($slug);
 
         if (!$item) {
             return $this->_showErrorPage(404, 'Page not found');
         }
 
-        $this->_setCurrentEditLink('Edit this category', 'categories/edit/' . $item->id . '/' . $this->currentLanguageId);
+        $this->_setCurrentEditLink('Edit this category', 'categories/edit/' . $item->id . '/');
 
         $this->_loadFrontMenu($item->id, 'category');
         $this->_setPageTitle($item->title);
