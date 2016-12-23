@@ -4,34 +4,37 @@
 
 @endsection
 
+@section('slideshow')
+<div class="slideshow">
+    <ul id="gallery">
+        @if(isset($slideshow) && !empty($slideshow))
+            @foreach($slideshow as $s)
+        <li>
+            <a href="{{ $s['link'] }}">
+                <img src="{{ $s['image'] }}">
+            </a>
+        </li>
+            @endforeach
+        @endif
+    </ul>
+</div>
+@endsection
+
 @section('content')
-    <div class="slideshow">
-        <ul id="gallery">
-            @if(isset($slideshow) && !empty($slideshow))
-                @foreach($slideshow as $s)
-            <li>
-                <a href="{{ $s['link'] }}">
-                    <img src="{{ $s['image'] }}">
-                </a>
-            </li>
-                @endforeach
-            @endif
-        </ul>
-    </div>
-    <div class="std">
+    <!--div class="std">
         <div class="maintext">
             <h1>&nbsp;</h1>
         </div>
-    </div>
+    </div-->
     <div class="products_grid p_block_home_top">
         <h2 class="group_title"><span>Sản Phẩm mới nhất</span></h2>
         <!--<div class="banner-group"><img src=""></div>-->
 
         <div class="row">
             @if(isset($new_product) && !empty($new_product))
-                @foreach($new_product as $p)
+                @forelse($new_product as $p)
                     <?php $row = $p->productContent[0]; ?>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="grid">
                             <div class="item">
                                 <div class="thumb">
@@ -60,20 +63,22 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p>Hiện tại chưa có sản phẩm nào</p>
+                @endforelse
             @endif
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <div class="banner-group">
+    <!--div class="banner-group">
         <p>
             <a href="" target="_blank">
                 <img src="/images/libraries/banner.png" alt="" />
             </a>
         </p>
-    </div>
+    </div-->
 
     @if(isset($groups) && !empty($groups))
         @foreach($groups as $key => $group)
@@ -85,7 +90,7 @@
                 @if(!empty($group))
                     @foreach($group as $p)
                         @if(is_array($p))
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="grid">
                                 <div class="item">
                                     <div class="thumb">

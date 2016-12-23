@@ -18,17 +18,16 @@ abstract class BaseFrontController extends BaseController
             abort(503);
         }
         $this->_setMetaSEO();
-
         //To use cart functions, uncomment this line
         //$this->_getCart();
     }
 
-    protected function _loadFrontMenu($menuActive = '', $type = 'custom-link')
+    protected function _loadFrontMenu($menuActive = '', $type = 'custom-link', $menu_name = 'main-menu', $menu_class = "nav navbar-nav")
     {
         $menu = new Acme\CmsMenu();
         $menu->args = array(
-            'menuName' => 'main-menu',
-            'menuClass' => 'nav navbar-nav',
+            'menuName' => $menu_name,
+            'menuClass' => $menu_class,
             'container' => '',
             'containerClass' => '',
             'containerId' => '',
@@ -43,7 +42,7 @@ abstract class BaseFrontController extends BaseController
             'activeClass' => 'active current-menu-item',
             'isAdminMenu' => false,
         );
-        view()->share('CMSMenuHtml', $menu->getNavMenu());
+        view()->share(str_replace('-', '_',$menu_name), $menu->getNavMenu());
     }
 
     protected function _setPageTitle($title)

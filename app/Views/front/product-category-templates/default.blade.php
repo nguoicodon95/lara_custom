@@ -1,20 +1,45 @@
 @extends('front._master')
 
 @section('css')
+
 @endsection
 
 @section('js')
 @endsection
 
 @section('js-init')
+    <script>
+        $('input[name=sortby]').change(function () {
+            $('#form_sort_by').submit();
+        })
+    </script>
+@endsection
+
+@section('sort-a-filter')
+    <div class="sort-by">
+        <h2 class="group_title"><span>Lựa chọn</span></h2>
+        <a class="toggle">-</a>
+        <form action="" method="get" id="form_sort_by">
+            <div class="asc-sort">
+                <input type="radio" name="sortby" id="sortasc" class="radio" value="asc" {{ isset($sort_by) && ($sort_by == 'asc') ? 'checked' : null }}/>
+                <label for="sortasc">Giá từ thấp đến cao</label>
+            </div>
+            <div class="clearfix"></div>
+            <div class="desc-sort">
+                <input type="radio" name="sortby" id="sortdesc" class="radio" value="desc" {{ isset($sort_by) && ($sort_by == 'desc') ? 'checked' : null }}/>
+                <label for="sortdesc">Giá từ cao đến thấp</label>
+            </div>
+        </form>
+    </div>
+    
 @endsection
 
 @section('content')
     <div class="products_grid p_block_home">
         <div class="row">
             @if(!empty($all_product))
-                @foreach($all_product as $p)
-                    <div class="col-md-3">
+                @forelse($all_product as $p)
+                    <div class="col-md-4">
                         <div class="grid">
                             <div class="item">
                                 <div class="thumb">
@@ -40,7 +65,9 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <p>Hiện tại chưa có sản phẩm nào</p>
+                @endforelse
             @endif
         </div>
     </div> 

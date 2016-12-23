@@ -30,7 +30,7 @@ class ProductController extends BaseFrontController
             $relatedCategoryIds = [];
         }
         $this->_loadFrontMenu($relatedCategoryIds, 'product-category');
-        $this->_loadFrontMenu();
+        $this->_loadFrontMenu($relatedCategoryIds, 'product-category', 'danh-muc-san-pham', null);
         $this->_setPageTitle($item->title);
         $this->_setMetaSEO($item->tags, $item->description, $item->thumbnail);
         $this->dis['object'] = $item;

@@ -24,6 +24,7 @@ class PageController extends BaseFrontController
         }
         if(in_array($item->slug, $this->_setVariableHome)) {
             $this->_loadFrontMenu($item->id, 'page');
+            $this->_loadFrontMenu($item->id, 'product-category', 'danh-muc-san-pham', null);
             $this->_getAllCustomFields($objectMeta, $item->id, 'page');
             return $this->_page_Homepage($item);
         }
@@ -41,6 +42,7 @@ class PageController extends BaseFrontController
         $this->_setCurrentEditLink('Edit this page', 'pages/edit/' . $item->id);
 
         $this->_loadFrontMenu($item->id, 'page');
+        $this->_loadFrontMenu($item->id, 'product-category', 'danh-muc-san-pham', null);
         $this->_setPageTitle($item->title);
         $this->_setMetaSEO($item->tags, $item->description, $item->thumbnail);
 
@@ -90,7 +92,7 @@ class PageController extends BaseFrontController
         $pushItem = [];
         
         $offset = 0;
-        $limit = 4;
+        $limit = 3;
         $paged = ($offset + $limit) / $limit;
         Paginator::currentPageResolver(function () use ($paged) {
             return $paged;
@@ -116,7 +118,7 @@ class PageController extends BaseFrontController
         }
         $this->dis['groups'] =  $pushItem;
 
-        $new_product = Models\Product::getAll(null, ['id' => 'DESC'], 4 );
+        $new_product = Models\Product::getAll(null, ['id' => 'DESC'], 3 );
         $this->dis['new_product'] = (object) $new_product;
         return $this->_viewFront('page-templates.homepage', $this->dis);
     }

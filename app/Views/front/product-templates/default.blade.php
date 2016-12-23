@@ -22,25 +22,25 @@
 
         (function(){
 
-        $('#itemslider').carousel({ interval: 3000 });
-        
-        $('.carousel-showmanymoveone .item').each(function(){
-            var itemToClone = $(this);
+            $('#itemslider').carousel({ interval: 3000 });
+            
+            $('.carousel-showmanymoveone .item').each(function(){
+                var itemToClone = $(this);
 
-            for (var i=1;i<6;i++) {
-            itemToClone = itemToClone.next();
-
-
-            if (!itemToClone.length) {
-                itemToClone = $(this).siblings(':first');
-            }
+                for (var i=1;i<6;i++) {
+                itemToClone = itemToClone.next();
 
 
-            itemToClone.children(':first-child').clone()
-                .addClass("cloneditem-"+(i))
-                .appendTo($(this));
-            }
-        });
+                if (!itemToClone.length) {
+                    itemToClone = $(this).siblings(':first');
+                }
+
+
+                itemToClone.children(':first-child').clone()
+                    .addClass("cloneditem-"+(i))
+                    .appendTo($(this));
+                }
+            });
         }());
 
     </script>
@@ -48,7 +48,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
             <div class="ubislider-image-container left" data-ubislider="#slider" style="cursor: pointer"></div>
             <div id="slider" class="ubislider left">
                 <a class="arrow prev"></a>
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-md-offset-0">
+        <div class="col-md-5 col-md-offset-0">
             <div class="product_info">
                 <h1 class="name">{{ $object->title }}</h1>
                 <div>Mã sản phẩm: {{ $object->sku }}</div>
@@ -106,7 +106,7 @@
                             @endfor
                         </select>
                     </div>
-                    <a href="" class="btn btn-cart">Đặt hàng</a>
+                    <a href="" class="btn btn-cart pull-right">Đặt hàng</a>
                 </div>
             </div>
         </div>

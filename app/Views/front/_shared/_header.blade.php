@@ -25,7 +25,7 @@
 <div id="menu_area">
     <div class="container">
         <div id="mainmenu">
-            {!! $CMSMenuHtml or '' !!}
+            {!! $main_menu or '' !!}
         </div>
     </div>
 </div>

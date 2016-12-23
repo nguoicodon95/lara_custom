@@ -15,7 +15,7 @@
                     case 'product-category':{
                         $category = $row->productCategory;
                         if ($category) {
-                            $dataTitle = $category->global_title;
+                            $dataTitle = $category->title;
                         }
                     }
                         break;

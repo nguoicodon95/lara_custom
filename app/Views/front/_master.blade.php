@@ -57,7 +57,30 @@
         <div id="maincontain" class="container col1-layout">
             <div class="main">
                 <div class="col-main">
-                    @yield('content')
+                    @hasSection ('slideshow')
+                        @yield('slideshow')
+                    @else
+                        Trang chủ > page
+                    @endif
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="catalog">
+                                <h2 class="group_title"><span>Danh mục sản phẩm</span></h2>
+                                <a class="toggle">-</a>
+                                <div class="product-category">
+                                    {!! $danh_muc_san_pham or '' !!}
+                                </div>
+                            </div>
+                            @hasSection ('sort-a-filter')
+                                @yield('sort-a-filter')
+                            @else
+                                
+                            @endif
+                        </div>
+                        <div class="col-md-9">
+                            @yield('content')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
