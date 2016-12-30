@@ -4,7 +4,7 @@ if (! function_exists('_getPrice')) {
     function _getPrice($price, $oldPrice, $saleStatus, $saleFrom = null, $saleTo = null)
     {
         $finalPrice = $oldPrice;
-        if ($price > 0 && $price < $oldPrice && _isOnSale($saleStatus, $saleFrom, $saleTo)) {
+        if ((int) $oldPrice == 0 ||$price > 0 && $price < $oldPrice && _isOnSale($saleStatus, $saleFrom, $saleTo)) {
             $finalPrice = $price;
         }
         return $finalPrice;

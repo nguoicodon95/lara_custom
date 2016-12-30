@@ -1,11 +1,11 @@
 body {
     font: 14px Arial;
     position: relative;
-    min-width: 1024px;
     margin: 0;
     padding: 0;
     color: #333;
     background: #f9f8f8;
+    overflow-x: hidden;
 }
 
 a:hover {
@@ -17,7 +17,7 @@ ul li {
 }
 
 .container {
-    max-width: 1200px !important;
+    // max-width: 1200px !important;
     position: relative;
 }
 
@@ -30,7 +30,7 @@ ul li {
 .container.col2-left-layout,
 .container.col1-layout {
     padding: 5px;
-    width: 1170px !important;
+    // width: 1170px !important;
 }
 
 .col2-left-layout .colleft.sidebar {
@@ -67,27 +67,10 @@ header a:hover {
     text-decoration: none;
 }
 
-.cart {
-    float: right;
-    position: relative;
-    color: #333333;
-    display: inline-block;
-    font-size: 13px;
-    width: 100%;
-}
-
-.cart a {
-    color: #333333;
-}
-
-.cart .i-cart {
-    display: inline-block;
-}
-
 .header_container {
     margin: 0 auto;
     position: relative;
-    width: 1170px;
+    // width: 1170px;
     z-index: 50;
     height: 90px;
 }
@@ -142,6 +125,7 @@ header a:hover {
 #maincontain {
     z-index: 10;
     background: #f9f8f8;
+    width: 100%;
 }
 
 .group_title {
@@ -206,7 +190,7 @@ header a:hover {
 }
 
 .products_grid .grid .item h3 {
-    height: 40px;
+    height: 33px;
     font-size: 1.1em;
     line-height: 1.3em;
     font-weight: normal;
@@ -246,7 +230,7 @@ header a:hover {
 
 .products_grid .grid .item .price-box {
     text-align: left;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 0;
     margin-top: 0px;
 }
 
@@ -303,7 +287,6 @@ header a:hover {
 }
 
 .products_grid .grid .item #icon_online {
-    background-position: -286px -58px;
     position: absolute;
     height: 70px;
     right: -56px;
@@ -487,7 +470,7 @@ footer {
 .linkdetail {
     position: absolute;
     right: 10px;
-    bottom: 15px;
+    bottom: 10px;
     color: #898989;
     text-decoration: none;
 }
@@ -512,6 +495,7 @@ footer {
     min-height: 300px;
     max-height: 400px;
     overflow: hidden;
+    width: 100%;
 }
 
 $color_high: #e24b70 !default; // highlight colour

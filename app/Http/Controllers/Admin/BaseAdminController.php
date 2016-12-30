@@ -19,6 +19,13 @@ abstract class BaseAdminController extends BaseController
         if ($count) {
             view()->share('unreadMailCount', $count);
         }
+        $order = $this->_countUnreadOrder();
+        if ($order) {
+            view()->share([
+                'unreadTransCount' => $order['count'],
+                'lists' => $order['list'],
+            ]);
+        }
     }
 
     protected function _setPageTitle($title, $subTitle = '')
@@ -73,5 +80,13 @@ abstract class BaseAdminController extends BaseController
     protected function _countUnreadEmail()
     {
         return Models\Contact::where('status', '<>', 1)->count();
+    }
+
+    protected function _countUnreadOrder()
+    {
+        $trans = Models\Transaction::where('viewed', '<>', 1);
+        $data['count'] = $trans->count();
+        $data['list'] = $trans->get();
+        return $data;
     }
 }

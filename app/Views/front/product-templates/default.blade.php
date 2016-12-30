@@ -70,6 +70,7 @@
                     @endif
                 </ul>
             </div>
+            <div class="clearfix"></div>
         </div>
 
         <div class="col-md-5 col-md-offset-0">
@@ -106,7 +107,7 @@
                             @endfor
                         </select>
                     </div>
-                    <a href="" class="btn btn-cart pull-right">Đặt hàng</a>
+                    <a href="{{ _getAddToCartLink($object->content_id) }}" class="btn btn-cart pull-right">Đặt hàng</a>
                 </div>
             </div>
         </div>
@@ -142,7 +143,7 @@
                         </a>
                         <h4 class="text-center">{{ $p->title }}</h4>
 
-                        <div class="price-box">
+                        <div class="price-box" align="center">
                             <span class="regular-price">
                                 @if($p['old_price'] != 0)
                                 <span class="old-price">{{ _formatPrice($p->old_price) }}</span>

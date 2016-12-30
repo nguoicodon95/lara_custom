@@ -70,7 +70,7 @@
 
 <div class="copyright">
     <div class="container">
-        <div id="copyright" class="pull-left">© 2016 PNJ Shopping Online - Công ty Cổ phần Vàng Bạc Đá Quý Phú Nhuận (PNJ)</div>
+        <div id="copyright" class="pull-left">© 2016 ABC</div>
         <div class="clearfix"></div>
     </div>
 </div>

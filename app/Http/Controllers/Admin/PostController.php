@@ -238,13 +238,14 @@ class PostController extends BaseAdminController
         if (!$data['slug']) {
             $data['slug'] = str_slug($data['title']);
         }
+        $data['thumbnail'] = $request->thumbnail_path;
 
-        $image = $request->thumbnail_path;
+        /*$image = $request->thumbnail_path;
         $name = $request->thumbnail;
 
         if($image != '') {
             _resizeImage($image, $name);
-        }
+        }*/
         
         \DB::beginTransaction();
 

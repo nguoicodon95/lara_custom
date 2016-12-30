@@ -558,4 +558,19 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
         }
         return $obj->first();
     }
+    
+    /*
+    * Title: Search fulltextsearch on product table
+    * Author: Kin
+    */
+
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->whereRaw('MATCH (global_title, sku) AGAINST (?)' , array($keyword));
+            });
+        }
+        return $query;
+    }
 }

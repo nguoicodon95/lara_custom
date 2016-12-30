@@ -271,4 +271,19 @@ class Page extends AbstractModel
             ->first();
     }
 
+    /*
+    * Title: Search fulltextsearch on pages table
+    * Author: Kin
+    */
+
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->whereRaw('MATCH (title, description, tags) AGAINST (?)' , array($keyword));
+                $query->where('status', 1);
+            });
+        }
+        return $query;
+    }
 }

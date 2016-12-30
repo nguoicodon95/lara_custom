@@ -126,3 +126,90 @@ if (! function_exists('_unique_multidim_array')) {
         return $temp_array; 
     }
 }
+
+
+/*BREADCRUMB*/
+if (! function_exists('_breadcrumb')) {
+    function _breadcrumb() {
+        $breadcrumb_url = '';
+        
+        $html = '<ul class="breadcrumb"><li class="active"><a href="/">Trang chủ</a></li>';
+        switch (Request::segment(1)) {
+            case 'bai-viet': 
+                $breadcrumb_url .= '/bai-viet/';
+                for($i = 2; $i <= count(Request::segments()); $i++) {
+                    $cus = \App\Models\Post::getBySlug(Request::segment($i));
+                    $breadcrumb_url .= Request::segment($i);
+                    if( Request::segment($i) != '/' && !is_numeric(Request::segment($i))) {
+                        if($i < count(Request::segments()) && $i > 0) {
+                            $html .= '<li class="active"><a href="'.$breadcrumb_url.'">'. $cus->title .'</a></li>';
+                        }else {
+                            $html .= '<li>'. $cus->title .'</li>';
+                        }
+                    }
+                }
+                break;
+            case 'danh-muc':
+                $breadcrumb_url .= '/danh-muc/';
+                for($i = 2; $i <= count(Request::segments()); $i++) {
+                    $cus = \App\Models\Category::getBySlug(Request::segment($i));
+                    $breadcrumb_url .= Request::segment($i);
+                    if( Request::segment($i) != '/' && !is_numeric(Request::segment($i))) {
+                        if($i < count(Request::segments()) && $i > 0) {
+                            $html .= '<li class="active"><a href="'.$breadcrumb_url.'">'. $cus->title .'</a></li>';
+                        }else {
+                            $html .= '<li>'. $cus->title .'</li>';
+                        }
+                    }
+                }
+                break;
+            case 'san-pham':
+                $breadcrumb_url .= '/san-pham/';
+                for($i = 2; $i <= count(Request::segments()); $i++) {
+                    $cus = \App\Models\Product::getBySlug(Request::segment($i));
+                    $breadcrumb_url .= Request::segment($i);
+                    if( Request::segment($i) != '/' && !is_numeric(Request::segment($i))) {
+                        if($i < count(Request::segments()) && $i > 0) {
+                            $html .= '<li class="active"><a href="'.$breadcrumb_url.'">'. $cus->global_title .'</a></li>';
+                        }else {
+                            $html .= '<li>'. $cus->title .'</li>';
+                        }
+                    }
+                }
+                break;
+            case 'danh-muc-san-pham':
+                $breadcrumb_url .= '/danh-muc-san-pham/';
+                for($i = 2; $i <= count(Request::segments()); $i++) {
+                    $cus = \App\Models\ProductCategory::getBySlug(Request::segment($i));
+                    $breadcrumb_url .= Request::segment($i);
+                    if( Request::segment($i) != '/' && !is_numeric(Request::segment($i))) {
+                        if($i < count(Request::segments()) && $i > 0) {
+                            $html .= '<li class="active"><a href="'.$breadcrumb_url.'">'. $cus->title .'</a></li>';
+                        }else {
+                            $html .= '<li>'. $cus->title .'</li>';
+                        }
+                    }
+                }
+                break;
+            default: 
+                for($i = 1; $i <= count(Request::segments()); $i++) {
+                    $cus = \App\Models\Page::getBySlug(Request::segment($i));
+                    if(!$cus) return null;
+                    $breadcrumb_url .= Request::segment($i);
+                    if( Request::segment($i) != '/' && !is_numeric(Request::segment($i))) {
+                        if($i < count(Request::segments()) && $i > 0) {
+                            $html .= '<li class="active"><a href="'.$breadcrumb_url.'">'. $cus->title .'</a></li>';
+                        }else {
+                            $html .= '<li>'. $cus->title .'</li>';
+                        }
+                    }
+                }
+                break;
+       }
+
+       $html .= '</ul>';
+
+       return $html;
+    }
+}
+

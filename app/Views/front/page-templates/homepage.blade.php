@@ -56,7 +56,7 @@
                                 </div>
 
 
-                                <a class="linkdetail" href="{{ _getProductLink($row->slug) }}">Xem chi tiết</a>
+                                <a class="linkdetail" href="{{ _getAddToCartLink($row->id) }}">Đặt hàng</a>
                                 <div class="icon" id="icon_online">
                                     <span>Chỉ Bán Online</span>
                                 </div>
@@ -112,7 +112,7 @@
                                         </span>
                                     </div>
 
-                                    <a class="linkdetail" href="{{ _getProductLink($p['slug']) }}">Xem chi tiết</a>
+                                    <a class="linkdetail" href="{{ _getAddToCartLink($p['product_content_id']) }}">Đặt hàng</a>
                                 </div>
                             </div>
                         </div>

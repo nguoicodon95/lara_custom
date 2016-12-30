@@ -202,20 +202,22 @@
                 <div class="form-horizontal form-bordered">
                     <div class="form-body">
                         <div class="panel-body">
-                            <div class="form-group">
-                                <label class="control-label col-md-3">Homepage</label>
-                                <div class="col-md-7">
-                                    <select name="default_homepage" class="form-control">
-                                        @foreach($pages as $key => $row)
-                                            <option value="{{ $row->id }}" {{ (isset($settings['default_homepage']) && (int)$settings['default_homepage'] == $row->id) ? 'selected' : '' }}>{{ $row->global_title }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span class="help-block">Homepage of this website</span>
-                                </div>
-                            </div>
-                        
                         @foreach($settings as $setting)
-                            @if ($setting->type == "text")
+                            @if ($setting->type == "homepage")
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">
+                                        {{ $setting->display_name }}
+                                    </label>
+                                    <div class="col-md-7">
+                                        <select name="default_homepage" class="form-control">
+                                            @foreach($pages as $key => $row)
+                                                <option value="{{ $row->id }}" {{ $setting->option_value == $row->id ? 'selected' : '' }}>{{ $row->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        <span class="help-block">Homepage of this website</span>
+                                    </div>
+                                </div>
+                            @elseif ($setting->type == "text")
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     {{ $setting->display_name }}
@@ -302,8 +304,14 @@
                             @elseif($setting->type == "resize")
                                 <div class="form-group">
                                     <label class="control-label col-md-3">{{ $setting->display_name }}</label>
-                                    <div class="col-md-7">
+                                    <div class="col-md-6">
                                         <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}" placeholder="Chiều rộng x Chiều cao"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <i class="icon-trash"
+                                            data-id="{{ $setting->id }}"
+                                            data-display-key="{{ $setting->option_key }}"
+                                            data-display-name="{{ $setting->display_name }}"></i>
                                     </div>
                                 </div>
                             @endif

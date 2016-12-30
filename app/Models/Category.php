@@ -322,5 +322,4 @@ class Category extends AbstractModel implements Contracts\MultiLanguageInterface
             ->select($select)
             ->first();
     }
-
 }

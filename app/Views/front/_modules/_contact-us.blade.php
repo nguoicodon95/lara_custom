@@ -1,4 +1,4 @@
-<form action="/{{ $currentLanguageCode }}/global-actions/contact-us" method="POST" accept-charset="utf-8">
+<form action="/global-actions/contact-us" method="POST" accept-charset="utf-8">
     {!! csrf_field() !!}
     <div class="form-group">
         <label>Subject</label>

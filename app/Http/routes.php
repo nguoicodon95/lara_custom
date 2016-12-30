@@ -82,6 +82,9 @@ $router->group(['middleware' => ['web']], function ($router) {
         /*Comments*/
         $router->controller('comments', 'CommentController');
 
+        /*Order*/
+        $router->controller('orders', 'OrderController');
+
         /*Setting gernerate*/
 		Route::get('settings', 'SettingController@index')->name('web.settings');
 		Route::post('settings', 'SettingController@save');
@@ -125,16 +128,24 @@ $router->group(['middleware' => ['web']], function ($router) {
      */
 
     $router->group(['namespace' => 'Front'], function ($router) {
+        
         /* Authenticate disable default */
         /*$router->controller('auth', 'AuthController');
         $router->controller('password', 'PasswordController');*/
 
         //To use cart functions, uncomment this line
-        //$router->controller('cart', 'CartController');
+        
+        $router->controller('cart', 'CartController');
 
         $router->controller('global-actions', 'GlobalActionsController');
+        
+        $router->get('tim-kiem', 'SearchController@searchlable')->name('search');
 
-        $router->get('/', 'PageController@index');
+        $router->get('dat-hang', 'CheckoutController@getCheckout')->name('checkout');
+        $router->post('dat-hang', 'CheckoutController@postCheckout')->name('post.checkout');
+        $router->get('dat-hang-thanh-cong/{id}', 'CheckoutController@getOrder')->name('show.order');
+        
+        $router->get('/', 'PageController@index')->name('home');
         $router->get('/{slug_1}', 'PageController@_handle');
 
         $router->get('/bai-viet/{slug_1}', 'PostController@_handle');
@@ -148,6 +159,7 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->get('/danh-muc-san-pham/{slug_1}', 'ProductCategoryController@_handle')->name('productcategory.link');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}', 'ProductCategoryController@_handle');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}/{slug_3}', 'ProductCategoryController@_handle');
+    
     });
     /*
 |--------------------------------------------------------------------------

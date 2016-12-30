@@ -34,10 +34,6 @@ trait Cart
                         'compare' => '=',
                         'value' => 1,
                     ],
-                    'product_contents.language_id' => [
-                        'compare' => '=',
-                        'value' => $this->currentLanguageId,
-                    ],
                 ], [
                     'product_contents.*',
                     'products.global_title',
@@ -87,13 +83,19 @@ trait Cart
                 return $this->_responseJson(true, 500, trans('cart.maxQuantityError'));
             }
         } else {
+            foreach ($this->originalCart as $key => $row) {
+                if ($row['product_content_id'] == $productContentId) {
+                    $this->originalCart[$key]['quantity'] = $this->originalCart[$key]['quantity'] + 1;
+                }
+            }
+            $quantity = $this->originalCart[$key]['quantity'];
             return $this->_updateCartItem($request, $productContentId, $quantity);
         }
 
         session()->put('originalCart', $this->originalCart);
 
         if (!$request->ajax()) {
-            return $this->_responseRedirect(trans('cart.updateCartCompleted'), 'success');
+            return redirect()->route('checkout');
         }
 
         return $this->_responseJson(false, 200, trans('cart.updateCartCompleted'));
@@ -101,11 +103,13 @@ trait Cart
 
     protected function _checkItemExistsInCart($productContentId)
     {
-        foreach ($this->originalCart as $key => $row) {
-            if ($row['product_content_id'] == $productContentId) {
-                return true;
-            }
+        if($this->originalCart) {
+            foreach ($this->originalCart as $key => $row) {
+                if ($row['product_content_id'] == $productContentId) {
+                    return true;
+                }
 
+            }
         }
         return false;
     }
@@ -128,9 +132,9 @@ trait Cart
                 }
             }
         }
-        session()->put('cart', $this->originalCart);
+        session()->put('originalCart', $this->originalCart);
         if (!$request->ajax()) {
-            return $this->_responseRedirect(trans('cart.updateCartCompleted'), 'success');
+            return redirect()->route('checkout');
         }
 
         return $this->_responseJson(false, 200, trans('cart.updateCartCompleted'));

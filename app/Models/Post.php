@@ -309,11 +309,6 @@ class Post extends AbstractModel implements Contracts\MultiLanguageInterface
                 if ($args['global_status'] != null) {
                     $q->where('posts.status', '=', $args['global_status']);
                 }
-
-                if ($args['status'] != null) {
-                    $q->where('status', '=', $args['status']);
-                }
-
             })
             ->select($select)
             ->first();
@@ -401,5 +396,22 @@ class Post extends AbstractModel implements Contracts\MultiLanguageInterface
         }
 
         return $items->get();
+    }
+
+
+    /*
+    * Title: Search fulltextsearch on posts table
+    * Author: Kin
+    */
+
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->whereRaw('MATCH (title, description, tags) AGAINST (?)' , array($keyword));
+                $query->where('status', 1);
+            });
+        }
+        return $query;
     }
 }

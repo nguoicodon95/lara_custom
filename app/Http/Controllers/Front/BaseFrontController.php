@@ -2,12 +2,15 @@
 
 use Acme;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Front\FrontFoundation\Cart;
 use App\Models;
+
+use Request;
 
 abstract class BaseFrontController extends BaseController
 {
     //To use cart functions, uncomment this line
-    //use Cart;
+    use Cart;
 
     protected $dis = [], $bodyClass = '';
 
@@ -19,7 +22,9 @@ abstract class BaseFrontController extends BaseController
         }
         $this->_setMetaSEO();
         //To use cart functions, uncomment this line
-        //$this->_getCart();
+        $this->_getCart();
+        $this->_loadFrontMenu('', 'page');
+        $this->_loadFrontMenu('', 'product-category', 'danh-muc-san-pham', null);
     }
 
     protected function _loadFrontMenu($menuActive = '', $type = 'custom-link', $menu_name = 'main-menu', $menu_class = "nav navbar-nav")

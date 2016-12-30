@@ -8,16 +8,24 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
+use Acme;
+
 class ProductCategoryController extends BaseFrontController
 {
     public function __construct()
     {
         parent::__construct();
         $this->bodyClass = 'product-category';
+        
+    }
+    
+    public function index () {
+        // dd(1);
     }
 
     public function _handle(Request $request, ProductCategory $object, ProductCategoryMeta $objectMeta)
     {
+        // print_r($request->query());
         $segments = $request->segments();
         $slug = end($segments);
 
@@ -36,7 +44,7 @@ class ProductCategoryController extends BaseFrontController
 
         /* Điều kiện tình trạng sản phẩm đã được active  */
         $getByFields['products.status'] = ['compare' => '=', 'value' => 1];
-        
+
         /* Lấy ra các danh mục con */
         $child = $item->child()->get();
 
@@ -63,40 +71,71 @@ class ProductCategoryController extends BaseFrontController
         }
         /* Convert to collection */
         $ps = collect($ps);
-        /* Lấy ra giá tiền cao nhất */
-        $max = (int) $ps->max('price');
-        $step = $max/5;
-        if($max <= 10000000) {
-            $step = $max/2;
+        $ps_sort_filter = null;
+        
+        /* Tạo tìm kiếm theo giá */
+        $max = $ps->max('price');
+        if($max != 0) { 
+            switch ($max) {
+                case (int) $max < 10000000 :
+                    $step = $max/2;
+                    $per = 2;
+                    break;
+                case (int) $max > 10000000 && (int) $max <30000000 :
+                    $step = $max/3;
+                    $per = 3;
+                    break;
+                case (int) $max > 30000000 :
+                    $step = $max/5;
+                    $per = 5;
+                    break;
+                default:
+                    $step = $max;
+                    $per = 1;
+                    break;
+            }
+
+            $betweenPrice = [];
+            for($i = 0; $i <= $per; $i++ ) {
+                $betweenPrice[] = (int) ($i * $step);
+            }
+            $this->dis['rangePrice'] = $this->createRange($betweenPrice);
         }
-        $betweenPrice = [];
-        for($i = 0; $i < 5; $i++ ) {
-            $betweenPrice[] = ($i * $step);
-        }
-        $this->createRange($betweenPrice);
-       
+
         /* Sắp xếp */
-        $ps_sort = null;
         /* Nếu có request get sortby thì sắp xếp theo request */
         if( $sortBy = $request->get('sortby') ) {
             $this->dis['sort_by'] = $sortBy;
             switch ($sortBy) {
                 case 'asc': 
-                    $ps_sort = $ps->sortBy('price');
+                    $ps_sort_filter = $ps->sortBy('price');
                     break;
 
                 case 'desc': 
-                    $ps_sort = $ps->sortByDesc('price');
+                    $ps_sort_filter = $ps->sortByDesc('price');
                     break;
                 default :
-                    $ps_sort = $ps->sortByDesc('id');
+                    $ps_sort_filter = $ps->sortByDesc('id');
                     break;
             }
         } else {
-            $ps_sort = $ps->sortByDesc('id');
+            $ps_sort_filter = $ps->sortByDesc('id');
         }
+
+        /* Tìm kiếm theo khoảng giá */
+        if($_getPrice = $request->get('price')) {
+            $this->dis['price_filter'] = (string) $_getPrice;
+            $price_convert_array = explode('-', $_getPrice);
+            $ps_sort_filter = $ps->filter(function ($value, $key) use ($price_convert_array) {
+                if($value->price >= (double) $price_convert_array[0] && $value->price <= (double) $price_convert_array[1] ) {
+                    return true;                    
+                }
+                return false;
+            });
+        }
+
         /* Mặc định sắp xếp thep id giảm dần (Mới nhất) */
-        $all_product = _unique_multidim_array($ps_sort, 'id');
+        $all_product = _unique_multidim_array($ps_sort_filter, 'id');
 
         /*Tạo phân trang */
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -104,6 +143,7 @@ class ProductCategoryController extends BaseFrontController
         $perPage = 20;
         $currentPageSearchResults = $total->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $this->dis['all_product'] = new LengthAwarePaginator($currentPageSearchResults, count($total), $perPage);
+
 
         /* Trả lại kết quả*/
         $this->dis['object'] = $item;
@@ -147,14 +187,9 @@ class ProductCategoryController extends BaseFrontController
             $lowLimit = $rangeLimits[$i];
             $highLimit = $rangeLimits[$i+1];
 
-            $ranges[$i]['ranges']['min'] = $lowLimit;
-            $ranges[$i]['ranges']['max'] = $highLimit;
+            $ranges[$i]['min'] = $lowLimit;
+            $ranges[$i]['max'] = $highLimit;
 
-            foreach($array as $perPrice){
-                if($perPrice >= $lowLimit && $perPrice < $highLimit){
-                    $ranges[$i]['values'][] = $perPrice;
-                }
-            }
         }
         return $ranges;
     }

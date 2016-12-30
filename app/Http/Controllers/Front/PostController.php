@@ -16,13 +16,13 @@ class PostController extends BaseFrontController
 
     public function _handle(Request $request, Post $object, PostMeta $objectMeta, $slug)
     {
-        $item = $object->getBySlug($slug, $this->currentLanguageId);
+        $item = $object->getBySlug($slug);
 
         if (!$item) {
             return $this->_showErrorPage(404, 'Page not found');
         }
 
-        $this->_setCurrentEditLink('Edit this post', 'posts/edit/' . $item->id . '/' . $this->currentLanguageId);
+        $this->_setCurrentEditLink('Edit this post', 'posts/edit/' . $item->id );
 
         $relatedCategoryIds = $item->category()->getRelatedIds();
         if($relatedCategoryIds) {

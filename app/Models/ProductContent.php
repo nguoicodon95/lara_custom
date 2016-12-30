@@ -66,4 +66,19 @@ class ProductContent extends AbstractModel
         return $this->belongsTo('App\Models\Product', 'product_id');
     }
 
+    /*
+    * Title: Search fulltextsearch on product_content table
+    * Author: Kin
+    */
+
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->whereRaw('MATCH (title, tags, description) AGAINST (? IN BOOLEAN MODE)' , [$keyword]);
+                $query->where('status', 1);
+            });
+        }
+        return $query;
+    }
 }

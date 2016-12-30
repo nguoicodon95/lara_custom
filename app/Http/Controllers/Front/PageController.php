@@ -104,6 +104,7 @@ class PageController extends BaseFrontController
                 $row = $p->productContent[0];
                 $pushItem[$_getProduct->title][] = [
                     'id' => $row->product_id,
+                    'product_content_id' => $row->id,
                     'title' => $row->title,
                     'slug' => $row->slug,
                     'status' => $row->status,

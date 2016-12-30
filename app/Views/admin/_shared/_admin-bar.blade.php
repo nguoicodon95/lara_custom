@@ -22,11 +22,6 @@
                             Settings
                         </a>
                     </li>
-                    <li>
-                        <a target="_blank" href="/{{ $adminCpAccess }}/settings/languages">
-                            Languages
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li class="dropdown">

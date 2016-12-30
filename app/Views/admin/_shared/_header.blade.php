@@ -2,7 +2,7 @@
 <div class="page-header-inner ">
     <!-- BEGIN LOGO -->
     <div class="page-logo">
-        <a href="/{{ $defaultLanguage->language_code or '' }}">
+        <a href="/">
             <img src="/admin/theme/images/logo.png" alt="logo" class="logo-default"/>
         </a>
     </div>
@@ -10,13 +10,45 @@
     <!-- BEGIN RESPONSIVE MENU TOGGLER -->
     <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
     <!-- END RESPONSIVE MENU TOGGLER -->
-
     <!-- BEGIN TOP NAVIGATION MENU -->
     <div class="top-menu">
         <ul class="nav navbar-nav pull-right">
+            @if(isset($unreadTransCount) && $unreadTransCount)
+            <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                <a href="{{ '/'.$adminCpAccess.'/orders' }}" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                <i class="icon-bell"></i>
+                <span class="badge badge-success">{{ $unreadTransCount }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="external">
+                        <h3><span class="bold">{{ $unreadTransCount }} đơn đặt hàng</span> chưa xem</h3>
+                        <a href="{{ '/'.$adminCpAccess.'/orders' }}">view all</a>
+                    </li>
+                    <li>
+                        <div class="slimScrollDiv">
+                            @if(isset($lists) && $lists)
+                            <ul class="dropdown-menu-list scroller" style="max-height: 250px; overflow-y: auto; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                @foreach($lists as $l)
+                                <li>
+                                    <a href="{{ '/'.$adminCpAccess.'/orders/detail/'.$l->id }}">
+                                    <span class="time">{{ $l->created_at->diffForHumans() }}</span>
+                                    <span class="details">
+                                    <span class="label label-sm label-icon label-warning">
+                                    <i class="fa fa-bell-o"></i>
+                                    </span> {{ $l->name .' - '. _formatPrice($l->amount) }} </span>
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            @endif
             @if(isset($unreadMailCount) && $unreadMailCount)
                 <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
-                    <a title="You have {{ $unreadMailCount }} unread mail(s) in inbox" href="{{ '/'.$adminCpAccess.'/contacts' }}" class="dropdown-toggle" style="padding-right: 10px;">
+                    <a title="Bạn có {{ $unreadMailCount }} thư chưa đọc trong inbox" href="{{ '/'.$adminCpAccess.'/contacts' }}" class="dropdown-toggle" style="padding-right: 10px;">
                         <i class="icon-envelope-open"></i>
                         <span class="badge badge-default">{{ $unreadMailCount }}</span>
                     </a>

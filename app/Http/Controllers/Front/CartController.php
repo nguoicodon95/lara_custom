@@ -13,7 +13,6 @@ class CartController extends BaseFrontController
 
     public function getAddToCart(Request $request, $productContentId, $quantity = 1)
     {
-        $this->_unsetCart();
         $product = Models\ProductContent::find($productContentId);
         if ($product) {
             $quantity = ($request->get('quantity', null)) ? (int) $request->get('quantity', null) : (int) $quantity;
@@ -26,13 +25,11 @@ class CartController extends BaseFrontController
         if (!$request->ajax()) {
             return $this->_responseRedirect(trans('cart.addCartError'), 'error');
         }
-
         return $this->_responseJson(true, 500, trans('cart.addCartError'));
     }
 
     public function getUpdateCartQuantity(Request $request, $productContentId, $quantity)
     {
-        $this->_unsetCart();
         $product = Models\ProductContent::find($productContentId);
         if ($product) {
             $quantity = (int) $quantity;
@@ -40,7 +37,7 @@ class CartController extends BaseFrontController
                 $quantity = 1;
             }
 
-            return $this->_addToCart($request, (int) $productContentId, (int) $quantity);
+            return $this->_updateCartItem($request, (int) $productContentId, (int) $quantity);
         }
         if (!$request->ajax()) {
             return $this->_responseRedirect(trans('cart.productNotExistsInCart'), 'error');
