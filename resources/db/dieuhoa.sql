@@ -2,10 +2,10 @@
 -- version 4.5.4.1deb2ubuntu2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Dec 19, 2016 at 03:33 PM
--- Server version: 5.7.16-0ubuntu0.16.04.1
--- PHP Version: 7.0.13-1+deb.sury.org~xenial+1
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th2 18, 2017 lúc 10:47 AM
+-- Phiên bản máy phục vụ: 5.7.17-0ubuntu0.16.04.1
+-- Phiên bản PHP: 7.0.14-2+deb.sury.org~xenial+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `shop_ts`
+-- Cơ sở dữ liệu: `dieuhoa`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_users`
+-- Cấu trúc bảng cho bảng `admin_users`
 --
 
 CREATE TABLE `admin_users` (
@@ -41,16 +41,17 @@ CREATE TABLE `admin_users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin_users`
+-- Đang đổ dữ liệu cho bảng `admin_users`
 --
 
 INSERT INTO `admin_users` (`id`, `user_role_id`, `username`, `password`, `status`, `remember_token`, `login_token`, `token_expired_at`, `last_login_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 'webmaster', '$2y$10$9M/6ax5I7yMLd29X4h7X5O4whYQHv9k98wx5LNIrFV0KGtze5Ogni', 1, 'y058f5sx1JyoztWMReNfEMoUz7HzizQZtRCtMG77ai5idtXE0jUejb9QRtXX', '749f258446f1d3bc08c9b669b3bb1a0f', '2015-12-21 18:33:21', '2016-12-19 01:48:45', '2014-10-13 17:10:13', '2016-12-19 01:48:45');
+(1, 1, 'webmaster', '$2y$10$9M/6ax5I7yMLd29X4h7X5O4whYQHv9k98wx5LNIrFV0KGtze5Ogni', 1, '62F9ARjdaXyxiQkZJ3n8ZH1wzWbnwn7asCMFQmWpwS4hyUhZdRUpwx1K0iUP', '749f258446f1d3bc08c9b669b3bb1a0f', '2015-12-21 18:33:21', '2017-02-17 03:27:27', '2014-10-13 17:10:13', '2017-02-17 03:27:27'),
+(2, 2, 'admin', '$2y$10$8k9QLgdvKB6qO2dSfS7be.Hg7KQkFmsfrq0.IJZZwWh8IpCtF65De', 1, 'mjHJoIrkhh7ZXijQHHtOKDIwitGaz2NyD9wVTwQy0q5QSVbEmJhtIUoKUC1E', '', '0000-00-00 00:00:00', '2017-01-05 05:01:07', '2017-01-03 08:27:25', '2017-01-05 05:02:04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_user_roles`
+-- Cấu trúc bảng cho bảng `admin_user_roles`
 --
 
 CREATE TABLE `admin_user_roles` (
@@ -60,7 +61,7 @@ CREATE TABLE `admin_user_roles` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `admin_user_roles`
+-- Đang đổ dữ liệu cho bảng `admin_user_roles`
 --
 
 INSERT INTO `admin_user_roles` (`id`, `name`, `slug`) VALUES
@@ -71,7 +72,7 @@ INSERT INTO `admin_user_roles` (`id`, `name`, `slug`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands`
+-- Cấu trúc bảng cho bảng `brands`
 --
 
 CREATE TABLE `brands` (
@@ -85,16 +86,20 @@ CREATE TABLE `brands` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `brands`
+-- Đang đổ dữ liệu cho bảng `brands`
 --
 
 INSERT INTO `brands` (`id`, `name`, `link`, `thumbnail`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'CRKT', '', '/uploads/brands/crkt.png', 1, '2016-07-08 04:31:36', '2016-07-08 04:31:36');
+(1, 'Daikin', '#daikin', 'http://www.daikin.com/dg_common/images/logo_daikin.png', 1, '2016-07-08 04:31:36', '2017-02-17 07:30:08'),
+(2, 'LG ', '#lg', 'http://www.lg.com/lg4-common-gp/img/global/header-logo.png', 1, '2017-02-17 07:31:43', '2017-02-17 07:31:43'),
+(3, 'Toshiba', '#toshiba', 'https://www.toshiba.com.vn/Data/Sites/1/media/logo/logo2.png', 1, '2017-02-17 07:32:40', '2017-02-17 07:32:40'),
+(4, 'Electrolux', '#electrolux', 'http://www.electroluxgroup.com/en/wp-content/themes/electrolux_1_7/library/images/logo2x.png', 1, '2017-02-17 07:34:52', '2017-02-17 07:34:52'),
+(5, 'Panasonic', '#panasonic', 'http://www.panasonic.com/content/dam/panasonic/jp/corporate/brand/our-brand/history/pic_01.gif', 1, '2017-02-17 07:41:57', '2017-02-17 07:41:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brands_products`
+-- Cấu trúc bảng cho bảng `brands_products`
 --
 
 CREATE TABLE `brands_products` (
@@ -106,7 +111,7 @@ CREATE TABLE `brands_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Cấu trúc bảng cho bảng `categories`
 --
 
 CREATE TABLE `categories` (
@@ -127,7 +132,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `categories`
+-- Đang đổ dữ liệu cho bảng `categories`
 --
 
 INSERT INTO `categories` (`id`, `parent_id`, `title`, `slug`, `description`, `content`, `thumbnail`, `tags`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
@@ -138,7 +143,7 @@ INSERT INTO `categories` (`id`, `parent_id`, `title`, `slug`, `description`, `co
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories_posts`
+-- Cấu trúc bảng cho bảng `categories_posts`
 --
 
 CREATE TABLE `categories_posts` (
@@ -148,17 +153,21 @@ CREATE TABLE `categories_posts` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `categories_posts`
+-- Đang đổ dữ liệu cho bảng `categories_posts`
 --
 
 INSERT INTO `categories_posts` (`id`, `post_id`, `category_id`) VALUES
 (1, 4, 7),
-(2, 4, 4);
+(2, 4, 4),
+(3, 5, 4),
+(4, 6, 7),
+(5, 6, 4),
+(6, 6, 8);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category_metas`
+-- Cấu trúc bảng cho bảng `category_metas`
 --
 
 CREATE TABLE `category_metas` (
@@ -171,7 +180,7 @@ CREATE TABLE `category_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cities`
+-- Cấu trúc bảng cho bảng `cities`
 --
 
 CREATE TABLE `cities` (
@@ -183,7 +192,7 @@ CREATE TABLE `cities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cities`
+-- Đang đổ dữ liệu cho bảng `cities`
 --
 
 INSERT INTO `cities` (`id`, `country_id`, `city_name`, `latitude`, `longitude`) VALUES
@@ -4235,7 +4244,7 @@ INSERT INTO `cities` (`id`, `country_id`, `city_name`, `latitude`, `longitude`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Cấu trúc bảng cho bảng `comments`
 --
 
 CREATE TABLE `comments` (
@@ -4256,7 +4265,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Đang đổ dữ liệu cho bảng `comments`
 --
 
 INSERT INTO `comments` (`id`, `from_user_id`, `rating_id`, `related_id`, `comment_to`, `parent_id`, `status`, `name`, `email`, `phone`, `title`, `content`, `created_at`, `updated_at`) VALUES
@@ -4267,7 +4276,7 @@ INSERT INTO `comments` (`id`, `from_user_id`, `rating_id`, `related_id`, `commen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contacts`
+-- Cấu trúc bảng cho bảng `contacts`
 --
 
 CREATE TABLE `contacts` (
@@ -4283,10 +4292,38 @@ CREATE TABLE `contacts` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `subject`, `name`, `phone`, `email`, `content`, `attachment`, `status`, `created_at`, `updated_at`) VALUES
+(56, 'Lala', 'name', '0987657757', 'blala@gmail.com', 'Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello ', NULL, 0, '2016-12-29 07:54:39', '2016-12-29 07:58:04'),
+(57, 'cần mua hàng test', 'pham van my', '0905607377', 'vanmy2590@gmail.com', 'cần mua hàng test', NULL, 0, '2017-01-09 04:19:03', '2017-01-09 04:19:03'),
+(58, 'dsadas', 'asdasd', '0123456789', 'butrentron.man95@gmail.com', 'asd asdasd asdasd asdasdas dasdsad as sadas dasda sda asdasdas asdasd asdas das das dasdas dasd asd', NULL, 0, '2017-01-09 08:52:11', '2017-01-09 08:52:11'),
+(59, 'kakak', 'adsasd', '0905489776', 'butrentron.man95@gmail.com', 'asdasdasdasdasd', NULL, 0, '2017-01-09 09:01:25', '2017-01-09 09:01:25'),
+(60, 'blbla', 'asdas', '0123456789', 'butrentron.man95@gmail.com', 'asdasdasdasd', NULL, 0, '2017-01-09 09:11:07', '2017-01-09 09:11:07'),
+(61, 'asdasd', 'asdasdasd', '0905478956', 'butrentron123@gmail.com', 'asdasdasdasdasdasd', NULL, 0, '2017-01-09 09:13:06', '2017-01-09 09:13:06'),
+(62, 'balsdasd', 'asdasdasd', '0905483996', 'butrentron.man95@gmail.com', 'asdasdasdasdasdasd', NULL, 0, '2017-01-09 09:13:58', '2017-01-09 09:13:58'),
+(63, 'asdasd', 'asdasd', '0905482516', 'butrentron.man95@gmail.com', 'asdasdasdasdasdasdasdasd', NULL, 0, '2017-01-09 09:15:35', '2017-01-09 09:15:35'),
+(64, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:23:13', '2017-01-09 09:23:13'),
+(65, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:24:00', '2017-01-09 09:24:00'),
+(66, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:24:07', '2017-01-09 09:24:07'),
+(67, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:24:35', '2017-01-09 09:24:35'),
+(68, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:25:59', '2017-01-09 09:25:59'),
+(69, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:26:05', '2017-01-09 09:26:05'),
+(70, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:26:14', '2017-01-09 09:26:14'),
+(71, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:26:36', '2017-01-09 09:26:36'),
+(72, 'ádádád', 'ádasđá', '0905483996', 'butrentron123@gmail.com', 'ádasdasdasdasd', NULL, 0, '2017-01-09 09:26:39', '2017-01-09 09:26:39'),
+(73, 'asdasd', 'asdasdasd', '0123456789', 'Butac@gmail.com', 'asdasdads', NULL, 0, '2017-01-12 07:55:37', '2017-01-12 07:55:37'),
+(74, 'asdasd', 'asdasdasd', '0123456789', 'Butac@gmail.com', 'asdasdads', NULL, 0, '2017-01-12 07:55:42', '2017-01-12 07:55:42'),
+(75, 'asdasd', 'asdasdasd', '0123456789', 'Butac@gmail.com', 'asdasdads', NULL, 0, '2017-01-12 07:57:15', '2017-01-12 07:57:15'),
+(76, 'dsadasd', 'asdasdasd', '025879631', 'asdasd@gmail.com', 'dsadasd', NULL, 0, '2017-01-12 07:57:39', '2017-01-12 07:57:39'),
+(77, 'dsadasd', 'asdasdasd', '025879631', 'asdasd@gmail.com', 'dsadasd', NULL, 0, '2017-01-12 07:58:01', '2017-01-12 07:58:01');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `countries`
+-- Cấu trúc bảng cho bảng `countries`
 --
 
 CREATE TABLE `countries` (
@@ -4299,7 +4336,7 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `countries`
+-- Đang đổ dữ liệu cho bảng `countries`
 --
 
 INSERT INTO `countries` (`id`, `country_3_code`, `country_2_code`, `country_name`, `total_city`, `status`) VALUES
@@ -4553,7 +4590,7 @@ INSERT INTO `countries` (`id`, `country_3_code`, `country_2_code`, `country_name
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupons`
+-- Cấu trúc bảng cho bảng `coupons`
 --
 
 CREATE TABLE `coupons` (
@@ -4576,7 +4613,7 @@ CREATE TABLE `coupons` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `coupons`
+-- Đang đổ dữ liệu cho bảng `coupons`
 --
 
 INSERT INTO `coupons` (`id`, `language_id`, `coupon_code`, `title`, `type`, `value`, `each_user_can_use`, `total_quantity`, `total_used`, `apply_for_min_price`, `thumbnail`, `status`, `created_by`, `created_at`, `expired_at`, `updated_at`) VALUES
@@ -4585,7 +4622,7 @@ INSERT INTO `coupons` (`id`, `language_id`, `coupon_code`, `title`, `type`, `val
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupon_user_use`
+-- Cấu trúc bảng cho bảng `coupon_user_use`
 --
 
 CREATE TABLE `coupon_user_use` (
@@ -4599,7 +4636,7 @@ CREATE TABLE `coupon_user_use` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coupon_user_use_with_tracked_times`
+-- Cấu trúc bảng cho bảng `coupon_user_use_with_tracked_times`
 --
 
 CREATE TABLE `coupon_user_use_with_tracked_times` (
@@ -4612,7 +4649,7 @@ CREATE TABLE `coupon_user_use_with_tracked_times` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `field_groups`
+-- Cấu trúc bảng cho bảng `field_groups`
 --
 
 CREATE TABLE `field_groups` (
@@ -4626,17 +4663,18 @@ CREATE TABLE `field_groups` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `field_groups`
+-- Đang đổ dữ liệu cho bảng `field_groups`
 --
 
 INSERT INTO `field_groups` (`id`, `position`, `title`, `field_rules`, `status`, `created_at`, `updated_at`) VALUES
 (5, NULL, 'Product images', '[{"field_relation":"and","field_options":[{"rel_name":"model_name","rel_value":"Product","rel_type":"=="}]}]', 1, '2016-07-10 06:14:50', '2016-07-10 06:15:39'),
-(7, NULL, 'Slideshow', '[{"field_relation":"and","field_options":[{"rel_name":"page_template","rel_value":"Homepage","rel_type":"=="}]}]', 1, '2016-12-19 02:35:36', '2016-12-19 02:36:26');
+(7, NULL, 'Slideshow', '[{"field_relation":"and","field_options":[{"rel_name":"page_template","rel_value":"Homepage","rel_type":"=="}]}]', 1, '2016-12-19 02:35:36', '2016-12-19 02:36:26'),
+(8, NULL, 'Thuộc tính sản phẩm', '[{"field_relation":"and","field_options":[{"rel_name":"model_name","rel_value":"Product","rel_type":"=="}]}]', 1, '2016-12-20 09:06:42', '2016-12-20 09:07:31');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `field_items`
+-- Cấu trúc bảng cho bảng `field_items`
 --
 
 CREATE TABLE `field_items` (
@@ -4652,7 +4690,7 @@ CREATE TABLE `field_items` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `field_items`
+-- Đang đổ dữ liệu cho bảng `field_items`
 --
 
 INSERT INTO `field_items` (`id`, `field_group_id`, `parent_id`, `position`, `title`, `slug`, `field_type`, `instructions`, `options`) VALUES
@@ -4661,12 +4699,15 @@ INSERT INTO `field_items` (`id`, `field_group_id`, `parent_id`, `position`, `tit
 (19, 5, 0, 1, 'Images', '19_images', 'repeater', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":"Add image"}'),
 (27, 7, 25, 2, 'Link', '27_link', 'text', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}'),
 (26, 7, 25, 1, 'Image', '26_image', 'image', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}'),
-(25, 7, 0, 1, 'Slideshow', '25_slideshow', 'repeater', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}');
+(25, 7, 0, 1, 'Slideshow', '25_slideshow', 'repeater', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}'),
+(29, 8, 0, 1, 'Thuộc tính sản phẩm', '29_thuoc_tinh_san_pham', 'repeater', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}'),
+(30, 8, 29, 1, 'Tên thuộc tính', '30_ten_thuoc_tinh', 'text', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}'),
+(31, 8, 29, 2, 'Giá trị thuộc tính', '31_gia_tri_thuoc_tinh', 'text', '', '{"defaultvalue":"","placeholdertext":"","defaultvaluetextarea":"","wyswygtoolbar":"","selectchoices":"","buttonlabel":""}');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `languages`
+-- Cấu trúc bảng cho bảng `languages`
 --
 
 CREATE TABLE `languages` (
@@ -4683,7 +4724,7 @@ CREATE TABLE `languages` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `languages`
+-- Đang đổ dữ liệu cho bảng `languages`
 --
 
 INSERT INTO `languages` (`id`, `language_code`, `language_name`, `major`, `default_locale`, `tag`, `currency`, `status`, `created_at`, `updated_at`) VALUES
@@ -4755,7 +4796,7 @@ INSERT INTO `languages` (`id`, `language_code`, `language_name`, `major`, `defau
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menus`
+-- Cấu trúc bảng cho bảng `menus`
 --
 
 CREATE TABLE `menus` (
@@ -4768,18 +4809,21 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `menus`
+-- Đang đổ dữ liệu cho bảng `menus`
 --
 
 INSERT INTO `menus` (`id`, `title`, `slug`, `status`, `created_at`, `updated_at`) VALUES
 (2, 'Admin menu', 'admin-menu', 1, '2014-10-24 18:26:30', '2016-01-11 02:59:26'),
 (3, 'Main menu', 'main-menu', 1, '2016-05-26 16:21:28', '2016-05-26 16:21:28'),
-(4, 'Footer menu', 'footer-menu', 1, '2016-12-14 02:37:54', '2016-12-14 02:37:54');
+(4, 'Hỗ trợ mua hàng', 'ho-tro-mua-hang', 1, '2016-12-14 02:37:54', '2016-12-30 04:35:02'),
+(5, 'Danh mục sản phẩm', 'danh-muc-san-pham', 1, '2016-12-22 08:07:26', '2016-12-22 08:07:26'),
+(6, 'Cẩm nang sử dụng', 'cam-nang-su-dung', 1, '2016-12-30 04:35:20', '2016-12-30 04:35:20'),
+(7, 'VỀ CHÚNG TÔI', 've-chung-toi', 1, '2016-12-30 04:35:43', '2016-12-30 04:35:43');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `menu_nodes`
+-- Cấu trúc bảng cho bảng `menu_nodes`
 --
 
 CREATE TABLE `menu_nodes` (
@@ -4798,46 +4842,51 @@ CREATE TABLE `menu_nodes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `menu_nodes`
+-- Đang đổ dữ liệu cho bảng `menu_nodes`
 --
 
 INSERT INTO `menu_nodes` (`id`, `menu_id`, `parent_id`, `related_id`, `type`, `url`, `icon_font`, `position`, `title`, `css_class`, `created_at`, `updated_at`) VALUES
 (272, 2, 0, 0, 'custom-link', 'dashboard', 'fa fa-home', 0, 'Dashboard', 'start', '2015-01-09 07:34:11', '2015-01-26 15:08:30'),
 (273, 2, 301, 0, 'custom-link', 'categories', 'fa fa-sitemap', 1, 'Post Categories', '', '2015-01-09 07:34:11', '2016-01-18 03:43:37'),
 (280, 2, 403, 0, 'custom-link', 'custom-fields', 'fa fa-edit', 2, 'Custom fields', '', '2015-01-09 07:34:11', '2016-01-21 04:16:51'),
-(283, 2, 0, 0, 'custom-link', 'pages', 'fa fa-tasks', 3, 'Pages', '', '2015-01-09 07:34:11', '2015-12-22 11:30:12'),
-(291, 2, 403, 0, 'custom-link', 'settings', 'fa fa-gear', 1, 'Options', '', '2015-01-09 07:34:11', '2016-01-20 09:45:17'),
+(283, 2, 0, 0, 'custom-link', 'pages', 'fa fa-tasks', 4, 'Pages', '', '2015-01-09 07:34:11', '2016-12-29 13:42:32'),
+(291, 2, 403, 0, 'custom-link', 'setting-groups', 'fa fa-gear', 1, 'Options', '', '2015-01-09 07:34:11', '2017-02-13 14:15:11'),
 (297, 2, 403, 0, 'custom-link', 'menus', 'fa fa-bars', 0, 'Menus', '', '2015-01-09 07:34:11', '2015-12-22 11:30:12'),
 (300, 2, 301, 0, 'custom-link', 'posts', 'icon-layers', 0, 'Posts', '', '2015-03-14 16:47:08', '2016-01-18 03:43:37'),
 (301, 2, 0, 0, 'custom-link', 'post', 'icon-layers', 1, 'Posts', '', '2015-03-14 16:47:08', '2015-12-22 09:48:57'),
 (331, 2, 414, 0, 'custom-link', 'products', 'fa fa-cubes', 0, 'Products', '', '2015-04-02 15:54:31', '2016-01-18 12:22:11'),
 (332, 2, 414, 0, 'custom-link', 'product-categories', 'fa fa-sitemap', 1, 'Product categories', '', '2015-04-02 15:54:31', '2016-01-18 12:22:11'),
-(403, 2, 0, 0, 'custom-link', 'settings', 'fa fa-cogs', 5, 'Settings', '', '2015-09-13 01:22:25', '2016-01-20 09:45:17'),
-(414, 2, 0, 0, 'custom-link', 'orders', 'fa fa-shopping-cart', 2, 'Ecommerce', '', '2016-01-15 07:12:15', '2016-01-18 12:22:11'),
+(403, 2, 0, 0, 'custom-link', 'settings', 'fa fa-cogs', 6, 'Settings', '', '2015-09-13 01:22:25', '2016-12-29 13:42:32'),
+(414, 2, 0, 0, 'custom-link', 'ecommerces', 'fa fa-shopping-cart', 3, 'Ecommerces', '', '2016-01-15 07:12:15', '2016-12-29 13:42:32'),
 (415, 2, 438, 0, 'custom-link', 'admin-users', 'icon-users', 1, 'Admin users', '', '2016-01-19 06:50:46', '2016-01-24 14:05:00'),
-(438, 2, 0, 0, 'custom-link', 'users', 'icon-users', 4, 'Users', '', '2016-01-24 14:05:00', '2016-01-24 14:05:00'),
+(438, 2, 0, 0, 'custom-link', 'users', 'icon-users', 5, 'Users', '', '2016-01-24 14:05:00', '2016-12-29 13:42:32'),
 (439, 2, 438, 0, 'custom-link', 'users', 'icon-users', 0, 'Users', '', '2016-01-24 14:05:00', '2016-01-24 14:05:00'),
 (440, 2, 414, 0, 'custom-link', 'coupons', 'fa fa-code', 3, 'Coupons', '', '2016-01-27 09:23:56', '2016-07-08 15:48:10'),
-(441, 2, 0, 0, 'custom-link', 'contacts', 'fa fa-suitcase', 7, 'Contacts', '', '2016-01-28 10:14:54', '2016-06-03 19:36:11'),
+(441, 2, 0, 0, 'custom-link', 'contacts', 'fa fa-suitcase', 8, 'Contacts', '', '2016-01-28 10:14:54', '2016-12-29 13:42:32'),
 (503, 2, 414, 0, 'custom-link', 'brands', 'icon-umbrella', 4, 'Brands', '', '2016-05-29 01:38:13', '2016-07-08 15:48:10'),
-(516, 2, 0, 0, 'custom-link', 'comments', 'icon-bubbles', 6, 'Comments', '', '2016-06-03 19:36:11', '2016-06-03 19:36:11'),
+(516, 2, 0, 0, 'custom-link', 'comments', 'icon-bubbles', 7, 'Comments', '', '2016-06-03 19:36:11', '2016-12-29 13:42:32'),
 (517, 2, 414, 0, 'custom-link', 'product-attribute-sets', 'fa fa-bars', 2, 'Attributes', '', '2016-07-08 15:48:10', '2016-07-08 15:48:10'),
-(523, 2, 0, 0, 'custom-link', 'subscribed-emails', 'icon-envelope', 8, 'Subscribed Emails', '', '2016-12-14 09:32:20', '2016-12-14 09:35:01'),
-(524, 4, 0, 1, 'page', '', '', 0, 'Trang chủ', '', '2016-12-14 09:38:27', '2016-12-14 09:38:27'),
-(525, 4, 0, 2, 'page', '', '', 1, 'Liên hệ', '', '2016-12-14 09:39:01', '2016-12-14 09:39:01'),
-(526, 3, 0, 1, 'page', '/', '', 0, 'Trang chủ', '', '2016-12-14 09:39:26', '2016-12-17 10:27:44'),
-(527, 3, 0, 0, 'custom-link', 'gioi-thieu', '', 1, 'Giới thiệu', '', '2016-12-17 10:47:38', '2016-12-17 10:48:51'),
-(528, 3, 533, 0, 'custom-link', 'vong-deo-co', '', 0, 'Vòng đeo cổ', '', '2016-12-17 10:47:38', '2016-12-17 10:50:34'),
-(529, 3, 533, 0, 'custom-link', 'vong-deo-tay', '', 1, 'Vòng đeo tay', '', '2016-12-17 10:47:38', '2016-12-17 10:50:34'),
-(530, 3, 533, 0, 'custom-link', 'nhan', '', 2, 'Nhẫn', '', '2016-12-17 10:47:38', '2016-12-17 10:50:34'),
-(531, 3, 533, 0, 'custom-link', 'bong-tai', '', 3, 'Bông tai', '', '2016-12-17 10:47:38', '2016-12-17 10:50:34'),
-(532, 3, 0, 0, 'custom-link', 'lien-he', '', 3, 'Liên hệ', '', '2016-12-17 10:47:38', '2016-12-17 11:34:52'),
-(533, 3, 0, 0, 'custom-link', 'san-pham', '', 2, 'Sản phẩm', '', '2016-12-17 10:50:33', '2016-12-17 10:50:33');
+(523, 2, 0, 0, 'custom-link', 'subscribed-emails', 'icon-envelope', 9, 'Subscribed Emails', '', '2016-12-14 09:32:20', '2016-12-29 13:42:32'),
+(524, 4, 0, 1, 'page', '#', '', 0, 'Hướng dẫn mua hàng', '', '2016-12-14 09:38:27', '2016-12-30 11:35:02'),
+(534, 3, 0, 2, 'page', '', '', 3, 'Liên hệ', '', '2016-12-20 14:27:07', '2017-02-11 10:02:36'),
+(535, 3, 0, 3, 'page', '', '', 1, '', '', '2016-12-20 14:27:38', '2016-12-20 15:27:21'),
+(540, 5, 0, 10, 'product-category', '', '', 0, '', '', '2016-12-22 15:08:10', '2016-12-22 15:08:10'),
+(541, 5, 0, 11, 'product-category', '', '', 1, '', '', '2016-12-22 15:08:10', '2016-12-22 15:08:10'),
+(542, 5, 0, 12, 'product-category', '', '', 2, '', '', '2016-12-22 15:08:10', '2016-12-22 15:08:10'),
+(543, 5, 0, 13, 'product-category', '', '', 3, '', '', '2016-12-22 15:08:10', '2016-12-22 15:08:10'),
+(544, 5, 0, 14, 'product-category', '', '', 4, '', '', '2016-12-22 15:08:10', '2016-12-22 15:08:10'),
+(545, 2, 0, 0, 'custom-link', 'orders', 'icon-layers', 2, 'Đặt hàng', '', '2016-12-29 10:08:47', '2016-12-29 13:42:57'),
+(547, 6, 0, 0, 'custom-link', '#', '', 0, 'Hướng dẫn sử dụng trang sức', '', '2016-12-30 11:35:33', '2016-12-30 11:35:33'),
+(548, 7, 0, 0, 'custom-link', '#', '', 0, 'Tin tức', '', '2016-12-30 11:35:59', '2016-12-30 11:35:59'),
+(554, 3, 0, 1, 'page', '', '', 0, '', '', '2017-02-17 01:21:15', '2017-02-17 01:21:15'),
+(555, 3, 0, 0, 'custom-link', '#', '', 2, 'Sản phẩm', '', '2017-02-17 10:28:08', '2017-02-17 10:28:08'),
+(556, 3, 555, 12, 'product-category', '', '', 0, '', '', '2017-02-17 11:54:19', '2017-02-17 11:54:19'),
+(557, 3, 555, 13, 'product-category', '', '', 1, '', '', '2017-02-17 11:54:19', '2017-02-17 11:54:19');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Cấu trúc bảng cho bảng `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -4846,7 +4895,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Đang đổ dữ liệu cho bảng `migrations`
 --
 
 INSERT INTO `migrations` (`migration`, `batch`) VALUES
@@ -4855,7 +4904,25 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL,
+  `amount` decimal(15,0) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `data` text COLLATE utf8_unicode_ci NOT NULL,
+  `transaction_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `pages`
 --
 
 CREATE TABLE `pages` (
@@ -4875,17 +4942,19 @@ CREATE TABLE `pages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `pages`
+-- Đang đổ dữ liệu cho bảng `pages`
 --
 
 INSERT INTO `pages` (`id`, `title`, `slug`, `page_template`, `description`, `content`, `thumbnail`, `tags`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'Homepage', 'home', 'Homepage', 'Day la trang chu', '<p>Noi dung trang chu se khong duoc hien thi, ban chi co the cau hinh hoac tuy chinh tai trang nay</p>\r\n', '', '', 1, 0, 0, '2016-05-31 20:21:02', '2016-12-19 09:52:59'),
-(2, 'Contact us', 'contact-us', 'Contact Us', '', '', '', '', 0, 0, 0, '2016-05-31 20:21:37', '2016-12-17 10:31:59');
+(1, 'Trang chủ', 'home', 'Homepage', 'Day la trang chu', '<p>Noi dung trang chu se khong duoc hien thi, ban chi co the cau hinh hoac tuy chinh tai trang nay</p>\r\n', '', '', 1, 0, 0, '2016-05-31 20:21:02', '2017-01-02 13:11:02'),
+(2, 'Liên hệ', 'lien-he', 'Contact Us', '', '<p><iframe frameborder="0" height="350" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26081603.29442044!2d-95.677068!3d37.06250000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1483946847467" style="border:0" width="100%"></iframe></p>\r\n\r\n<h2>Li&ecirc;n hệ trực tiếp</h2>\r\n\r\n<p><strong>Emai:&nbsp;</strong>ngoctraiphuquocan@gmail.com</p>\r\n\r\n<p><strong>Số ĐT:&nbsp;</strong>0773.983.777 - 0918.320 576 - 0918.678 505</p>\r\n\r\n<p><strong>Địa chỉ:&nbsp;</strong>Ấp Đường B&agrave;o - X&atilde; Dương Tơ - Huyện Ph&uacute; Quốc - Tỉnh Ki&ecirc;n Giang</p>\r\n\r\n<p><strong>Skype:&nbsp;</strong>trandaodnvn</p>\r\n', '', '', 1, 0, 0, '2016-05-31 20:21:37', '2017-01-09 14:52:31'),
+(3, 'Giới thiệu', 'gioi-thieu', '', '', '', '', '', 1, 0, 1, '2016-12-20 14:27:21', '2016-12-20 14:27:21'),
+(4, 'Cam kết', 'cam-ket', '', '', '', '', '', 1, 0, 1, '2017-01-04 11:43:51', '2017-01-04 11:43:52');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page_metas`
+-- Cấu trúc bảng cho bảng `page_metas`
 --
 
 CREATE TABLE `page_metas` (
@@ -4896,22 +4965,16 @@ CREATE TABLE `page_metas` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `page_metas`
+-- Đang đổ dữ liệu cho bảng `page_metas`
 --
 
 INSERT INTO `page_metas` (`id`, `content_id`, `meta_key`, `meta_value`) VALUES
-(1, 1, '4_jumbotron_text', 'LaraWebEd'),
-(2, 1, '5_jumbotron_caption', 'A CMS built on Laravel'),
-(4, 2, '4_jumbotron_text', 'LaraWebEd'),
-(5, 2, '5_jumbotron_caption', 'Contact page template'),
-(8, 4, '4_jumbotron_text', 'LaraWebEd'),
-(9, 4, '5_jumbotron_caption', 'Contact page template'),
-(14, 1, '25_slideshow', '[[{"field_value":"\\/uploads\\/slider\\/1400x400-slider-hpv_1.png","field_type":"image","slug":"26_image"},{"field_value":"#link","field_type":"text","slug":"27_link"}],[{"field_value":"\\/uploads\\/slider\\/goi-pnj-1400x400.jpg","field_type":"image","slug":"26_image"},{"field_value":"#link","field_type":"text","slug":"27_link"}],[{"field_value":"\\/uploads\\/slider\\/home-melody-collection-1400x400_1.jpg","field_type":"image","slug":"26_image"},{"field_value":"#link","field_type":"text","slug":"27_link"}]]');
+(14, 1, '25_slideshow', '[[{"field_value":"\\/uploads\\/slide\\/banner-home-Rac.png","field_type":"image","slug":"26_image"},{"field_value":"#","field_type":"text","slug":"27_link"}],[{"field_value":"\\/uploads\\/slide\\/banner-quat-dieu-hoa.png","field_type":"image","slug":"26_image"},{"field_value":"#","field_type":"text","slug":"27_link"}],[{"field_value":"\\/uploads\\/slide\\/sua-dien-lanh-tai-tp-vinh.png","field_type":"image","slug":"26_image"},{"field_value":"","field_type":"text","slug":"27_link"}]]');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
+-- Cấu trúc bảng cho bảng `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -4923,7 +4986,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Cấu trúc bảng cho bảng `posts`
 --
 
 CREATE TABLE `posts` (
@@ -4944,21 +5007,23 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `posts`
+-- Đang đổ dữ liệu cho bảng `posts`
 --
 
 INSERT INTO `posts` (`id`, `is_popular`, `title`, `slug`, `description`, `content`, `thumbnail`, `tags`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
-(4, 0, 'Write in one', 'write-in-one', '', '', '', '', '', 0, 0, 1, '2016-12-14 14:37:44', '2016-12-14 15:17:17');
+(4, 1, 'Bảo quản nhẫn hiệu quả', 'bao-quan-nhan-hieu-qua', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '<p><strong>Bạn n&ecirc;n tham khảo một số lưu &yacute; quan trọng sau đ&acirc;y khi sử dụng v&agrave; bảo quản trang sức kim cương.</strong></p>\r\n\r\n<p><strong>Phương ph&aacute;p bảo quản trang sức kim cương đ&uacute;ng c&aacute;ch</strong></p>\r\n\r\n<p>&bull; Mặc d&ugrave; kim cương c&oacute; độ cứng cao nhưng độ gi&ograve;n chỉ ở mức tương đối (do cấu tr&uacute;c tinh thể tự nhi&ecirc;n) n&ecirc;n tr&aacute;nh sự va đập mạnh trang sức kim cương với c&aacute;c vật liệu cứng kh&aacute;c để kh&ocirc;ng bị sứt mẻ, trầy xướt hay bị vỡ. Hơn nữa, trang sức kim cương cũng c&oacute; thể bị xước bởi trang sức kim cương kh&aacute;c n&ecirc;n khi cất giữ ch&uacute;ng, bạn n&ecirc;n để t&aacute;ch biệt mỗi m&oacute;n trong&nbsp;<a href="http://vpec.vn/san-pham/hop-dung-do-vpec/hop-dung-trang-suc-vpec.html" name="Hộp đựng đồ trang sức cá nhân cao cấp Wrist" title="Hộp đựng đồ trang sức cá nhân cao cấp Wrist" type="Hộp đựng đồ trang sức cá nhân cao cấp Wrist"><strong>hộp đựng trang sức</strong></a>&nbsp;ri&ecirc;ng biệt.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" longdesc="http://vpec.vn/cach-bao-quan-va-ve-sinh-do-trang-suc/vpec.vn" src="http://vpec.vn/images/hop-dung-do-trang-suc-ca-nhan-wrist-hts-001-2.jpg" title="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&bull; Kh&ocirc;ng n&ecirc;n đeo trang sức kim cương khi l&agrave;m bếp v&igrave; kim cương c&oacute; đặc t&iacute;nh h&uacute;t dầu mỡ. Khi dầu mỡ b&aacute;m v&agrave;o sẽ l&agrave;m cho kim cương bị mờ, ảnh hưởng tới độ ph&aacute;t s&aacute;ng của n&oacute;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" longdesc="http://vpec.vn/cach-bao-quan-va-ve-sinh-do-trang-suc/vpec.vn" src="http://vpec.vn/images/cach-bao-quan-va-ve-sinh-trang-suc-kim-cuong-2.jpg" title="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&bull; Kh&ocirc;ng được đeo trang sức kim cương khi l&agrave;m việc trong c&aacute;c m&ocirc;i trường tiếp x&uacute;c với nhiều h&oacute;a chất hoặc bụi bẩn để tr&aacute;nh t&aacute;c động bởi yếu tố m&ocirc;i trường. Ngo&agrave;i ra, bạn cũng kh&ocirc;ng n&ecirc;n đeo ch&uacute;ng khi l&agrave;m việc, l&agrave;m vườn, qu&eacute;t dọn nh&agrave; cửa hay chơi thể thao v&igrave; sự vận động mạnh c&oacute; thể ảnh hưởng xấu đến vẻ đẹp của kim cương.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" longdesc="http://vpec.vn/cach-bao-quan-va-ve-sinh-do-trang-suc/vpec.vn" src="http://vpec.vn/images/cach-bao-quan-va-ve-sinh-trang-suc-kim-cuong-3.PNG" title="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&bull; Bạn cũng n&ecirc;n nhớ rằng chất tẩy trắng kh&ocirc;ng tốt cho kim cương, n&oacute; sẽ l&agrave;m cho kim cương mất đi độ s&aacute;ng b&oacute;ng. V&igrave; vậy, khi bạn giặt quần &aacute;o bằng tay với x&agrave; ph&ograve;ng c&oacute; chứa chất tẩy trắng cao th&igrave; n&ecirc;n th&aacute;o trang sức kim cương ra.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" longdesc="http://vpec.vn/cach-bao-quan-va-ve-sinh-do-trang-suc/vpec.vn" src="http://vpec.vn/images/cach-bao-quan-va-ve-sinh-trang-suc-kim-cuong-4.jpg" title="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&bull; N&ecirc;n để trang sức kim cương ri&ecirc;ng biệt với c&aacute;c m&oacute;n trang sức kh&aacute;c v&agrave; thường xuy&ecirc;n kiểm tra xem những chỗ đ&iacute;nh kim cương c&oacute; bị lỏng hay kh&ocirc;ng. Nếu c&oacute; dấu hiệu n&agrave;y, bạn n&ecirc;n đến thợ kim ho&agrave;n để khắc phục, tr&aacute;nh t&igrave;nh trạng vi&ecirc;n kim cương bị rơi trong khi đeo m&agrave; kh&ocirc;ng biết.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>C&aacute;ch vệ sinh l&agrave;m sạch nữ trang kim cương</strong></p>\r\n\r\n<p>&bull; Bạn c&oacute; thể l&agrave;m sạch trang sức kim cương bằng c&aacute;ch nh&uacute;ng ch&uacute;ng v&agrave;o nước ấm c&oacute; pha ch&uacute;t nước rửa ch&eacute;n, rồi d&ugrave;ng b&agrave;n chải đ&aacute;nh răng mềm ch&agrave; nhẹ nh&agrave;ng cho sạch. Sau đ&oacute; rửa lại trang sức kim cương dưới nước chảy ấm rồi lau kh&ocirc; ch&uacute;ng với khăn lau bằng vải mịn. Bạn h&atilde;y kiểm tra xem trong chậu nước c&ograve;n s&oacute;t lại g&igrave; kh&ocirc;ng rồi mới đổ nước đi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" longdesc="http://vpec.vn/cach-bao-quan-va-ve-sinh-do-trang-suc/vpec.vn" src="http://vpec.vn/images/cach-bao-quan-va-ve-sinh-trang-suc-kim-cuong-5.png" title="Cách bảo quản &amp; vệ sinh trang sức kim cương đúng khoa học nhất" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&bull;&nbsp;Th&ecirc;m v&agrave;o đ&oacute;, bạn cũng c&oacute; thể d&ugrave;ng cồn sạch c&oacute; b&aacute;n tại c&aacute;c tiệm thuốc t&acirc;y để l&agrave;m sạch trang sức kim cương một c&aacute;ch an to&agrave;n. Chỉ cần cho đồ trang sức kim cương v&agrave;o cốc thủy tinh c&oacute; khoảng 0,1 l&iacute;t cồn v&agrave; ch&agrave; nhẹ nh&agrave;ng bằng b&agrave;n chải đ&aacute;nh răng mềm, sau đ&oacute; lau kh&ocirc; bằng vải mịn. Ngo&agrave;i ra, bạn c&oacute; thể đến tiệm trang sức để l&agrave;m sạch kim cương bằng s&oacute;ng &acirc;m. Đ&acirc;y l&agrave; phương ph&aacute;p l&agrave;m sạch kim cương rất chuy&ecirc;n nhiệp.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Đến đ&acirc;y, bạn đ&atilde; thật sự y&ecirc;n t&acirc;m về m&oacute;n đồ trang sức kim cương qu&yacute; gi&aacute; của m&igrave;nh lu&ocirc;n s&aacute;ng b&oacute;ng như mới &amp; bảo to&agrave;n nguy&ecirc;n vẹn gi&aacute; trị của n&oacute; với c&aacute;ch bảo quản, cất giữ &amp; vệ sinh l&agrave;m sạch kim cương đ&uacute;ng khoa học &amp; tốt nhất hiện nay.</p>\r\n', 'https://www.lowes.com/projects/images/buying-guides/Heating-Cooling/window-air-conditioner-buying-guide-hero.jpg', '', '', 1, 0, 1, '2016-12-14 14:37:44', '2017-02-16 08:56:36'),
+(5, 1, 'Những chiếc nhẫn vàng & nhẫn bạc đẹp nhất khiến bạn ngạc nhiên', 'nhung-chiec-nhan-vang-nhan-bac-dep-nhat-khien-ban-ngac-nhien', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '<p>Phụ kiện trang sức đặc biệt l&agrave; chiếc nhẫn v&agrave;ng hay bạc lu&ocirc;n c&oacute; sức h&uacute;t m&atilde;nh liệt với những ai y&ecirc;u c&aacute;i đẹp, kh&ocirc;ng ph&acirc;n biệt bạn l&agrave; ai, l&agrave; người như thế n&agrave;o th&igrave; vẻ đẹp ngời s&aacute;ng ấy lu&ocirc;n chiếm một phần trong t&acirc;m tr&iacute;. Những mẫu nhẫn v&agrave;ng v&agrave; bạc đẹp dưới đ&acirc;y sẽ chỉ l&agrave;m bạn th&ecirc;m y&ecirc;u vẻ đẹp ấy.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-dep-nhat-0.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Những chiếc nhẫn bạc đep hiện nay</strong></p>\r\n\r\n<p>Trang sức bạc một khi ai đ&atilde; đem l&ograve;ng y&ecirc;u thương th&igrave; kh&oacute; c&oacute; thể n&oacute;i lời chia tay, l&agrave;m sao c&oacute; thể chối từ trước vẻ đẹp hiện đại, trẻ trung đầy m&agrave;u sắc đ&oacute; được. Xu hướng thời trang đến v&agrave; đi ch&oacute;ng v&aacute;nh v&igrave; thế nếu ta cứ m&atilde;i theo đuổi th&igrave; rất dễ rơi v&agrave;o khủng hoảng, hơn hết h&atilde;y tạo dựng cho m&igrave;nh một phong c&aacute;ch thời trang ri&ecirc;ng. V&agrave; những chiếc nhẫn bạc đẹp ch&iacute;nh l&agrave; người bạn đồn h&agrave;nh bạn đang kỳ c&ocirc;ng t&igrave;m kiếm để ho&agrave;n thiện phong c&aacute;ch c&aacute; nh&acirc;n của m&igrave;nh.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Top 5 mẫu nhẫn bạc nam đẹp nhất</strong></p>\r\n\r\n<p>Đ&agrave;n &ocirc;ng lu&ocirc;n được biết đến l&agrave; những người kh&ocirc; khan, kh&ocirc;ng quan t&acirc;m nhiều đến vẻ bề ngo&agrave;i đ&ocirc;i khi ch&iacute;nh điều đ&oacute; khiến bạn mất điểm trong lần đầu gặp gỡ với người đẹp. C&oacute; một điều c&oacute; lẽ ph&aacute;i mạnh chưa biết phụ nữ rất dễ c&oacute; cảm t&igrave;nh với những ch&agrave;ng trai đeo nhẫn bạc nam thời trang v&igrave; họ cảm thấy rằng đ&oacute; l&agrave; người đ&agrave;n &ocirc;ng biết chăm s&oacute;c bản th&acirc;n v&agrave; họ biết d&agrave;nh t&igrave;nh cảm,thời gian quan t&acirc;m đến những người xung quanh. Th&ecirc;m một chi tiết nhỏ nữa ch&uacute;ng t&ocirc;i muốn chia sẻ đến c&aacute;nh m&agrave;y r&acirc;u khi đeo nhẫn bạc bạn sẽ nhận được nhiều hơn sự ngưỡng mộ, những &aacute;nh mắt tr&igrave;u mến, sự t&ocirc;n trọng từ đồng nghiệp hay đối t&aacute;c v&igrave; họ thấy h&igrave;nh ảnh của một người đ&agrave;n &ocirc;ng lịch l&atilde;m, sang trọng, chỉn chu trong c&ocirc;ng việc nhưng lu&ocirc;n c&oacute; x&uacute;c cảm với cuộc sống. C&aacute;c mẫu nhẫn bạc đẹp c&oacute; thiết kế g&oacute;c cạnh, đường n&eacute;t mạnh mẽ, to&aacute;t l&ecirc;n vẻ nam t&iacute;nh, mạnh mẽ dưới đ&acirc;y sẽ mang đến cho bạn th&ecirc;m nhiều sự lựa chọn.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u><strong>Mẫu 1</strong></u></p>\r\n\r\n<p>Chiếc nhẫn bạc nam sở hữu lối thiết kế nổi bật với thiết kế mặt nhẫn h&igrave;nh chữ nhật. Trong khu&ocirc;n h&igrave;nh ấy được chia th&agrave;nh bốn &ocirc; nhỏ hai h&igrave;nh vu&ocirc;ng, hai h&iacute;nh chữ nhật được sắp xếp đ&ocirc;i xứng được nạm đ&aacute; ch&oacute;i s&aacute;ng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-1.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>H&igrave;nh chữ nhật mang &yacute; nghĩa về sự thay đổi v&agrave; ph&aacute;t triển. Theo quan niệm phương Đ&ocirc;ng h&igrave;nh vu&ocirc;ng tượng trưng cho sự ho&agrave;n hảo với bốn g&oacute;c đều nhau. Mẫu nhẫn bạc nam đẹp l&agrave; sự kết hợp tuyệt vời, một thiết kế sử dụng c&aacute;c chi tiết h&igrave;nh học nhưng kh&ocirc;ng hề cứng nhắc.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u><strong>Mẫu 2</strong></u></p>\r\n\r\n<p>Chiếc nhẫn bạc nam c&oacute; đ&aacute;, mặt nhẫn được thiết kế vu&ocirc;ng vắn, chỉn chu v&agrave; tr&ecirc;n h&igrave;nh vu&ocirc;ng được nạm đ&aacute; ấy l&agrave; những lối đi dọc ngang.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-2.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Điều đ&oacute; cũng giống như trong cuộc sống lu&ocirc;n bắt ta phải lựa chọn lối đi, d&ugrave; kết quả đ&uacute;ng hay sai đều để lại cho ri&ecirc;ng bản th&acirc;n ta những điều đ&aacute;ng phải ghi nhớ, đ&oacute; l&agrave; b&agrave;i học khắc cốt ghi t&acirc;m.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u><strong>Mẫu 3</strong></u></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-3.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một thiết kế to&aacute;t l&ecirc;n sự mạnh mẽ, nam t&iacute;nh, phong độ tr&agrave;n đ&acirc;y của người đ&agrave;n &ocirc;ng</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><u>Mẫu 4</u></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-4.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nhẫn bạc thời trang phụ kiện l&agrave;m n&ecirc;n một người đ&agrave;n &ocirc;ng hiện đại, phong c&aacute;ch</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><u>Mẫu 5</u></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-5.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Một người đ&agrave;n &ocirc;ng s&agrave;nh điệu lu&ocirc;n cần c&oacute; một chiếc nhẫn bạc đẹp để nhấn nh&aacute; cho tổng thể bộ trang phục</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>3 kiểu nhẫn bạc nữ đẹp nhất</strong></p>\r\n\r\n<p>N&oacute;i đến phụ nữ l&agrave; n&oacute;i đến c&aacute;i đẹp, họ đam m&ecirc; v&agrave; c&oacute; c&aacute;i nh&igrave;n s&acirc;u rộng về thời trang, phụ kiện trang sức. Họ c&oacute; đam m&ecirc; m&atilde;nh liệu với c&aacute;c kiểu nhẫn bạc đẹp v&igrave; họ biết rằng đ&ocirc;i tay cũng cần được quan t&acirc;m, chăm s&oacute;c, l&agrave;m đẹp.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><u>Mẫu 1</u></strong></p>\r\n\r\n<p>Mẫu thiết kế mang hơi thở của sự s&aacute;ng tạo, mới mẻ, trẻ trung v&agrave; hiện đại</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-6.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Bạn đ&atilde; bao giờ nghĩ rằng, chỉ với một phụ kiện nhỏ b&eacute; nhữ chiếc nhẫn bạc nữ với thiết kế c&oacute; đ&aacute; cũng đủ khiến bạn trở l&ecirc;n nổi bật v&agrave; thu h&uacute;t mọi &aacute;nh mắt nh&igrave;n. Mẫu nhẫn bạc đẹp n&agrave;y chắc chắn sẽ đem đến những điều th&uacute; vị cho bạn.&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><u><strong>Mẫu 2</strong></u></p>\r\n\r\n<p>Mọi xu hướng thời trang c&oacute; tr&ocirc;i qua th&igrave; nhẫn bạc dạng mảnh với một vi&ecirc;n đ&aacute; lu&ocirc;n l&agrave; biểu tượng c&ograve;n m&atilde;i</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-7.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thiết kế nhẫn mảnh gắn một vi&ecirc;n đ&aacute; lớn lu&ocirc;n l&agrave; một trong c&aacute;c kiểu nhẫn bạc đẹp, được ưa chuộng nhất tr&ecirc;n khắp thế giới. N&oacute; t&ocirc;n vinh n&eacute;t đẹp đ&ocirc;i tay của người phụ nữ.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong><u>Mẫu 3</u></strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-8.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Nhẫn bạc gắn ngọc trai mang đến cho bạn g&aacute;i vẻ ngo&agrave;i ki&ecirc;u sa, đẳng cấp, s&agrave;nh điệu</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Những chiếc nhẫn v&agrave;ng đẹp &amp; độc đ&aacute;o nhất tr&ecirc;n thế giới</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-9.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em>Chiếc nhẫn h&igrave;nh ảnh th&agrave;nh phố t&igrave;nh y&ecirc;u Venice của &Yacute;</em></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-10.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em>H&igrave;nh tượng Paris hoa lệ</em></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-11.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em>M&ocirc; phỏng New York sầm uất</em></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" longdesc="http://vpec.vn/do-trang-suc-dep-va-dat-nhat-the-gioi/vpec.vn" src="http://vpec.vn/images/nhung-chiec-nhan-vang-bac-dep-nhat-12.jpg" title="Những chiếc nhẫn vàng &amp; nhẫn bạc đẹp nhất khiến bạn ngạc nhiên" /></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em>H&igrave;nh ảnh 1 Trung quốc cổ k&iacute;nh</em></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Tr&ecirc;n đ&acirc;y l&agrave; h&igrave;nh ảnh những chiếc nhẫn v&agrave;ng v&agrave; bạc đẹp nhất cho nam &amp; nữ giới với nhiều phong c&aacute;ch độc đ&aacute;o kh&aacute;c nhau đến từ nhiều quốc gia tr&ecirc;n thế giới.</p>\r\n', 'https://i.ytimg.com/vi/e8bJ4mFiGH4/maxresdefault.jpg', '', '', 1, 0, 1, '2016-12-30 09:36:10', '2017-02-16 08:56:49'),
+(6, 1, 'What is an ECOClean for your Air Conditioner?', 'what-is-an-ecoclean-for-your-air-conditioner', 'Did you know that the dirtiest components of your air conditioner also happen to be the system’s key elements? The EcoClean program is designed to help protect the two most important components of your air conditioning system...', '<p>Did you know that the dirtiest components of your air conditioner also happen to be the system&rsquo;s key elements? The EcoClean program is designed to help protect the two most important components of your air conditioning system: the cooling coil and compressor. Your cooling coil attracts dust, pet dander, mold, mildew, and debris through regular operation. Over time, these pollutants create additional stress on your system as it works harder to cool your home. Unique Air offers our EcoClean service for homes and business in the Bradenton and Sarasota, FL areas.</p>\r\n\r\n<p><img alt="" src="http://www.uniqueservices.com/uploads/Image/Eco-Clean-Before-After1.jpg" /></p>\r\n\r\n<h2>What Are the Benefits of EcoClean?</h2>\r\n\r\n<p>Unique Air Services EcoClean program restores your air conditioning system to &ldquo;factory fresh&rdquo; condition using our unique cleaning process to improve the indoor air quality of your home or business, providing the following benefits:</p>\r\n\r\n<ul>\r\n	<li>Improved indoor air quality</li>\r\n	<li>Fewer health problems and allergy symptoms</li>\r\n	<li>More efficient air conditioning</li>\r\n	<li>Lower utility bills</li>\r\n</ul>\r\n\r\n<p>To keep your air conditioning system running smoothly and efficiently for years to come, our Unique Savings Agreement provides regular inspections and&nbsp;preventive maintenance, as well as discounts and priority dispatching. Take care of your new air conditioning system and it will provide you with great comfort, increased savings, and peace of mind.</p>\r\n\r\n<h2>Expect a Unique Experience with Unique Air</h2>\r\n\r\n<p>Unique Air Services has been serving Bradenton, FL and Sarasota, FL homeowners and businesses for over 60 years. Recognized for excellence in customer service, Unique Air&rsquo;s award-winning experts are specially trained and licensed to care for your entire property, providing prompt and courteous service along the way.</p>\r\n', 'http://www.uniqueservices.com/files/air-conditioner-unit.jpg', '', '', 1, 0, 1, '2017-02-16 09:10:25', '2017-02-16 09:10:50');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_metas`
+-- Cấu trúc bảng cho bảng `post_metas`
 --
 
 CREATE TABLE `post_metas` (
   `id` int(11) UNSIGNED NOT NULL,
-  `post_id` int(11) DEFAULT NULL,
+  `content_id` int(11) DEFAULT NULL,
   `meta_key` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `meta_value` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -4966,12 +5031,13 @@ CREATE TABLE `post_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
   `id` int(11) UNSIGNED NOT NULL,
   `is_popular` tinyint(1) NOT NULL DEFAULT '0',
+  `is_like` tinyint(1) NOT NULL DEFAULT '0',
   `brand_id` int(11) NOT NULL DEFAULT '0',
   `global_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `sku` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -4984,25 +5050,25 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `is_popular`, `brand_id`, `global_title`, `sku`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
-(6, 1, 0, 'Nhẫn CZ vàng 18K', 'GNDRYA82427.102', '', 1, 0, 1, '2016-12-19 10:59:08', '2016-12-19 11:12:01'),
-(7, 0, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82349.106', '', 1, 0, 1, '2016-12-19 11:04:16', '2016-12-19 11:06:20'),
-(9, 1, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82177.106', '', 1, 0, 1, '2016-12-19 11:07:01', '2016-12-19 11:12:01'),
-(10, 1, 0, 'Nhẫn ECZ vàng 10K', 'GNDRXB81209.106', '', 1, 0, 1, '2016-12-19 11:08:53', '2016-12-19 11:12:01'),
-(12, 1, 0, 'Nhẫn ECZ vàng trắng 10K', 'GNDRWB82295.106', '', 1, 0, 1, '2016-12-19 11:11:25', '2016-12-19 11:12:01'),
-(13, 1, 0, 'Dây cổ vàng Mystery', 'GCDRCB81483.106', '', 1, 0, 1, '2016-12-19 11:15:58', '2016-12-19 11:23:11'),
-(14, 1, 0, 'Dây cổ vàng trắng 10K', 'GCDRWB82446.406', '', 1, 0, 1, '2016-12-19 11:17:21', '2016-12-19 11:23:11'),
-(15, 1, 0, 'Dây cổ ECZ vàng 10K', 'GCDRXB78725.106', '', 1, 0, 1, '2016-12-19 11:19:06', '2016-12-19 11:23:11'),
-(16, 1, 0, 'Dây cổ ECZ vàng trắng 10K', 'GCDRWB77770.106', '', 1, 0, 1, '2016-12-19 11:20:31', '2016-12-19 14:04:12'),
-(18, 0, 0, 'Dây cổ ECZ vàng trắng 10K', 'GCDRWB78725.106', '', 1, 0, 1, '2016-12-19 11:22:06', '2016-12-19 11:22:06');
+INSERT INTO `products` (`id`, `is_popular`, `is_like`, `brand_id`, `global_title`, `sku`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
+(6, 1, 1, 5, 'Điều hòa Panasonic 1 chiều 18000BTU N18TKH-8', '18000BTU N18TKH-8', '', 1, 0, 1, '2016-12-19 10:59:08', '2017-02-17 14:42:22'),
+(7, 1, 0, 5, 'Điều Hòa Panasonic Inverter CU/CS-E9RKH-8 2 Chiều 9000btu', 'GNDRWB82349.106', '', 1, 0, 1, '2016-12-19 11:04:16', '2017-02-17 14:42:37'),
+(9, 1, 0, 2, 'Điều hòa Sharp 1 chiều AH-A9SEW', 'GNDRWB82177.106', '', 1, 0, 1, '2016-12-19 11:07:01', '2017-02-17 14:42:53'),
+(10, 1, 0, 1, 'Điều hoà 1 chiều Daikin FTNE50MV1V/RNE50MV1V', 'GNDRXB81209.106', '', 1, 0, 1, '2016-12-19 11:08:53', '2017-02-17 14:43:05'),
+(12, 1, 0, 2, 'Điều hòa CASSETTE âm trần đa hướng thổi DAIKIN 2 chiều 24.200 BTU FCQ71KAVEA/RQ71MV1', 'GNDRWB82295.106', '', 1, 0, 1, '2016-12-19 11:11:25', '2017-02-17 14:43:17'),
+(13, 1, 1, 1, 'Điều hòa Daikin tủ đứng 1 chiều 28000 BTU FVRN71AXV1/RR71CGXY1', 'GCDRCB81483.106', '', 1, 0, 1, '2016-12-19 11:15:58', '2017-02-17 14:43:26'),
+(14, 1, 0, 4, 'Máy lạnh Electrolux 1 HP ESM09CRM-A4', 'GCDRCB81482.106', '', 1, 0, 1, '2016-12-19 11:17:21', '2017-02-17 14:43:36'),
+(15, 1, 0, 4, 'Máy lạnh Mitsubishi Heavy 1 HP SRK09CMP-5', 'GCDRXB78725.106', '', 1, 0, 1, '2016-12-19 11:19:06', '2017-02-17 14:43:49'),
+(16, 1, 0, 3, 'Máy lạnh Samsung 1.0 HP AR10MVFHGWKNSV', 'GCDRWB77770.106', '', 1, 0, 1, '2016-12-19 11:20:31', '2017-02-17 14:44:10'),
+(18, 0, 1, 1, 'Máy lạnh Daikin 1.5 HP FTV35BXV1s', 'GCDRWB78725.106', '', 1, 0, 1, '2016-12-19 11:22:06', '2017-02-17 14:44:20');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_attributes`
+-- Cấu trúc bảng cho bảng `product_attributes`
 --
 
 CREATE TABLE `product_attributes` (
@@ -5015,7 +5081,7 @@ CREATE TABLE `product_attributes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product_attributes`
+-- Đang đổ dữ liệu cho bảng `product_attributes`
 --
 
 INSERT INTO `product_attributes` (`id`, `attribute_set_id`, `name`, `slug`, `value`, `order`) VALUES
@@ -5031,7 +5097,7 @@ INSERT INTO `product_attributes` (`id`, `attribute_set_id`, `name`, `slug`, `val
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_attributes_products`
+-- Cấu trúc bảng cho bảng `product_attributes_products`
 --
 
 CREATE TABLE `product_attributes_products` (
@@ -5045,7 +5111,7 @@ CREATE TABLE `product_attributes_products` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_attribute_sets`
+-- Cấu trúc bảng cho bảng `product_attribute_sets`
 --
 
 CREATE TABLE `product_attribute_sets` (
@@ -5057,7 +5123,7 @@ CREATE TABLE `product_attribute_sets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product_attribute_sets`
+-- Đang đổ dữ liệu cho bảng `product_attribute_sets`
 --
 
 INSERT INTO `product_attribute_sets` (`id`, `title`, `slug`, `status`, `order`) VALUES
@@ -5068,7 +5134,7 @@ INSERT INTO `product_attribute_sets` (`id`, `title`, `slug`, `status`, `order`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_attribute_sets_product_categories`
+-- Cấu trúc bảng cho bảng `product_attribute_sets_product_categories`
 --
 
 CREATE TABLE `product_attribute_sets_product_categories` (
@@ -5078,7 +5144,7 @@ CREATE TABLE `product_attribute_sets_product_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product_attribute_sets_product_categories`
+-- Đang đổ dữ liệu cho bảng `product_attribute_sets_product_categories`
 --
 
 INSERT INTO `product_attribute_sets_product_categories` (`id`, `attribute_set_id`, `category_id`) VALUES
@@ -5097,7 +5163,7 @@ INSERT INTO `product_attribute_sets_product_categories` (`id`, `attribute_set_id
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_categories`
+-- Cấu trúc bảng cho bảng `product_categories`
 --
 
 CREATE TABLE `product_categories` (
@@ -5119,20 +5185,22 @@ CREATE TABLE `product_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `product_categories`
+-- Đang đổ dữ liệu cho bảng `product_categories`
 --
 
 INSERT INTO `product_categories` (`id`, `parent_id`, `title`, `slug`, `description`, `content`, `thumbnail`, `icon_font`, `tags`, `page_template`, `status`, `order`, `created_by`, `created_at`, `updated_at`) VALUES
-(10, 0, 'Đồng hồ', 'dong-ho', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:42:57', '2016-12-19 10:42:57'),
-(11, 0, 'Vòng đeo tay', 'vong-deo-tay', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:43:36', '2016-12-19 11:22:48'),
-(12, 0, 'Vòng đeo cổ', 'vong-deo-co', '', '', '', '', '', '', 1, 2, 0, '2016-12-19 10:43:59', '2016-12-19 10:47:53'),
-(13, 0, 'Nhẫn', 'nhan', '', '', '', '', '', '', 1, 1, 0, '2016-12-19 10:44:18', '2016-12-19 10:47:39'),
-(14, 0, 'Bông tai', 'bong-tai', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:44:29', '2016-12-19 10:49:57');
+(10, 0, 'Đồng hồ', 'dong-ho', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:42:57', '2016-12-26 00:16:19'),
+(11, 0, 'Vòng tay', 'vong-tay', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:43:36', '2017-01-04 11:50:17'),
+(12, 0, 'Điều hòa dân dụng', 'dieu-hoa-dan-dung', '', '', '', '', '', '', 1, 2, 0, '2016-12-19 10:43:59', '2017-02-15 13:57:20'),
+(13, 0, 'Điều hòa thương mại', 'dieu-hoa-thuong-mai', '', '', '', '', '', '', 1, 1, 0, '2016-12-19 10:44:18', '2017-02-15 13:57:51'),
+(14, 0, 'Bông tai', 'bong-tai', '', '', '', '', '', '', 1, 0, 0, '2016-12-19 10:44:29', '2016-12-26 00:16:19'),
+(15, 0, 'Mặt dây chuyền', 'mat-day-chuyen', '', '', '', '', '', '', 1, 0, 0, '2017-01-04 11:48:45', '2017-01-04 11:48:45'),
+(16, 0, 'Sản phẩm khác', 'san-pham-khac', '', '', '', '', '', '', 1, 0, 0, '2017-01-04 11:49:04', '2017-01-04 11:49:04');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_categories_products`
+-- Cấu trúc bảng cho bảng `product_categories_products`
 --
 
 CREATE TABLE `product_categories_products` (
@@ -5142,7 +5210,7 @@ CREATE TABLE `product_categories_products` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product_categories_products`
+-- Đang đổ dữ liệu cho bảng `product_categories_products`
 --
 
 INSERT INTO `product_categories_products` (`id`, `product_id`, `category_id`) VALUES
@@ -5153,12 +5221,20 @@ INSERT INTO `product_categories_products` (`id`, `product_id`, `category_id`) VA
 (17, 7, 13),
 (22, 14, 12),
 (15, 6, 13),
-(20, 12, 13);
+(20, 12, 13),
+(28, 18, 12),
+(34, 9, 12),
+(35, 9, 13),
+(36, 6, 12),
+(37, 10, 12),
+(38, 12, 12),
+(39, 7, 12),
+(40, 18, 13);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_category_metas`
+-- Cấu trúc bảng cho bảng `product_category_metas`
 --
 
 CREATE TABLE `product_category_metas` (
@@ -5171,21 +5247,21 @@ CREATE TABLE `product_category_metas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_contents`
+-- Cấu trúc bảng cho bảng `product_contents`
 --
 
 CREATE TABLE `product_contents` (
   `id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) NOT NULL DEFAULT '0',
   `is_out_of_stock` tinyint(1) DEFAULT '0',
-  `title` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `slug` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `title` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `content` text COLLATE utf8_unicode_ci,
   `status` tinyint(1) NOT NULL DEFAULT '1',
-  `thumbnail` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `tags` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `label` varchar(100) DEFAULT NULL,
+  `thumbnail` text COLLATE utf8_unicode_ci,
+  `tags` text COLLATE utf8_unicode_ci,
+  `label` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
   `price` double NOT NULL DEFAULT '0',
   `old_price` double NOT NULL DEFAULT '0',
   `sale_status` tinyint(1) DEFAULT '0',
@@ -5194,30 +5270,28 @@ CREATE TABLE `product_contents` (
   `created_by` int(11) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `product_contents`
+-- Đang đổ dữ liệu cho bảng `product_contents`
 --
 
 INSERT INTO `product_contents` (`id`, `product_id`, `is_out_of_stock`, `title`, `slug`, `description`, `content`, `status`, `thumbnail`, `tags`, `label`, `price`, `old_price`, `sale_status`, `sale_from`, `sale_to`, `created_by`, `created_at`, `updated_at`) VALUES
-(2, 3, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0, '2016-12-14 16:44:00', '2016-12-14 16:44:00', 0, '2016-12-14 16:44:00', '2016-12-14 16:44:00'),
-(3, 4, 0, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 0, 0, 0, '2016-12-14 16:45:18', '2016-12-14 16:45:18', 0, '2016-12-14 16:45:18', '2016-12-14 16:45:18'),
-(5, 6, 0, 'Nhẫn CZ vàng 18K', 'nhan-cz-vang-18k', '', '<p>Gi&aacute; b&aacute;n sản phẩm chỉ mang t&iacute;nh chất tham khảo phụ thuộc v&agrave;o trọng lượng v&agrave;ng v&agrave; thuộc t&iacute;nh của đ&aacute;. Khi Đơn H&agrave;ng th&agrave;nh c&ocirc;ng, PNJ sẽ x&aacute;c nhận v&agrave; lấy sản phẩm với gi&aacute; b&aacute;n thực tế tại cửa h&agrave;ng tương ứng trọng lượng v&agrave;ng cụ thể b&aacute;o lại cho kh&aacute;ch h&agrave;ng v&agrave; hưởng ch&iacute;nh s&aacute;ch ưu đ&atilde;i tr&ecirc;n online.</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN CZ V&Agrave;NG 18K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRYA82427.102</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>14K (585)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u v&agrave;ng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>CZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', 1, 'nhan-cz-vang-18k-gndrya82427.102.png', '', '', 5783000, 0, 0, '2016-12-19 10:59:09', '2016-12-19 10:59:09', 0, '2016-12-19 10:59:09', '2016-12-19 10:59:09'),
-(6, 7, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRWB82349.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n', 1, 'nhan-ecz-vang-trang-10k-gndrwb82349.106_1.png', '', '', 4261000, 0, 0, '2016-12-19 11:04:16', '2016-12-19 11:04:16', 0, '2016-12-19 11:04:16', '2016-12-19 11:04:17'),
-(8, 9, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k-9364', '', '', 1, 'nhan-ecz-vang-trang-10k-gndrwb82177.106_3.png', '', '', 3114000, 0, 0, '2016-12-19 11:07:01', '2016-12-19 11:07:01', 0, '2016-12-19 11:07:01', '2016-12-19 11:07:01'),
-(9, 10, 0, 'Nhẫn ECZ vàng 10K', 'nhan-ecz-vang-10k', '', '<p>Nhẫn, chất liệu v&agrave;ng 10K, Gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRXB81209.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Ghi ch&uacute;</th>\r\n			<td>kh&ocirc;ng tồn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Nhẫn ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-ecz-vang-hong-10k.png" style="height:560px; width:560px" title=" Nhẫn ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'nhan-ecz-vang-hong-10k.png', '', '', 4098000, 0, 0, '2016-12-19 11:08:53', '2016-12-19 11:08:53', 0, '2016-12-19 11:08:53', '2016-12-19 11:08:53'),
-(11, 12, 0, 'Nhẫn ECZ vàng trắng 10K', 'nhan-ecz-vang-trang-10k-9365', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRWB82295.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ SWAROVSKI GEMTM .Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng</p>\r\n', 1, 'nhan-ecz-vang-trang-10k-gndrwb82295.106_2.png', '', '', 4557000, 0, 0, '2016-12-19 11:11:25', '2016-12-19 11:11:25', 0, '2016-12-19 11:11:25', '2016-12-19 11:11:25'),
-(12, 13, 0, 'Dây cổ vàng Mystery', 'day-co-vang-mystery', '', '<p>D&acirc;y cổ v&agrave;ng Mystery</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ V&Agrave;NG MYSTERY</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRCB81483.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>Hai m&agrave;u</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mystery Collection,&nbsp;bộ sưu tập l&agrave; hiện th&acirc;n của vẻ đẹp huyền b&iacute; đầy nữ t&iacute;nh, khơi nguồn cảm hứng để ph&aacute;i đẹp tỏa s&aacute;ng, chinh phục th&agrave;nh c&ocirc;ng c&ugrave;ng nguyện ước ch&acirc;n th&agrave;nh cho những điều tốt đẹp nhất trong cuộc sống</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/trang-suc-laurel-nguyet-que.html" target="_blank"><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-vang-mystery_5.jpg" title="Dây cổ vàng Mystery" /></a></p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/p/n/pnj_brochure_mystery_2015_2-1_3.jpg" style="height:570px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n\r\n<p>Mystery Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ&nbsp;SWAROVSKI GEM<sup>TM</sup>&nbsp;.Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/d/_/d_y-c_-mysterygcdrcb81483_1.jpg" style="height:594px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n', 1, 'd_y-c_-mysterygcdrcb81483_1.jpg', '', '', 14197000, 0, 0, '2016-12-19 11:15:59', '2016-12-19 11:15:59', 0, '2016-12-19 11:15:59', '2016-12-19 11:15:59'),
-(13, 14, 0, 'Dây cổ vàng trắng 10K', 'day-co-vang-trang-10k', '', '<p>D&acirc;y cổ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB82446.406</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>Synthetic</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Oval</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại đ&aacute; phụ</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Đỏ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; phụ</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p>ECZ - ROYAL l&agrave; d&ograve;ng trang sức hội tụ vẻ đẹp lấp l&aacute;nh của những vi&ecirc;n đ&aacute; ECZ - Excellence Cubic Zirconia - mang sắc xanh huyền b&iacute;, sắc đỏ rực rỡ hay sắc ngọc lục bảo quyến rũ với gi&aacute;c cắt ho&agrave;n hảo tựa kim cương, thể hiện trọn vẹn vẻ đẹp đa chiều ở người phụ nữ - vừa thanh lịch, qu&yacute; ph&aacute;i vừa rực lửa đam m&ecirc; - th&agrave;nh c&ocirc;ng.</p>\r\n\r\n<p>Bộ sản phẩm l&agrave;m từ chất liệu v&agrave;ng trắng 10K gắn đ&aacute; ECZ đỏ.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-da-ecz-royal-vang-trang-10k.html" target="_blank"><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/e/c/ecz-royal-2-do.jpg" style="height:1000px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&acirc;y cổ v&agrave;ng trắng 10K, gắn đ&aacute; ECZ cao cấp: 1 vi&ecirc;n Oval đỏ 9*11mm + 5 vi&ecirc;n Oval đỏ 7*9mm + 3 vi&ecirc;n 3.0 ly + 92 vi&ecirc;n 2.5 ly + 36 vi&ecirc;n 2.0 ly + 88 vi&ecirc;n 1.5 ly.</p>\r\n\r\n<p><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb82446.406_1.jpg" style="height:1266px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></p>\r\n', 1, 'day-co-da-ecz-vang-trang-10k.jpg', '', '', 23482000, 0, 0, '2016-12-19 11:17:21', '2016-12-19 11:17:21', 0, '2016-12-19 11:17:21', '2016-12-19 11:17:21'),
-(14, 15, 0, 'Dây cổ ECZ vàng 10K', 'day-co-ecz-vang-10k', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n kh&ocirc;ng mang t&iacute;nh tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRXB78725.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-ecz-vang-trang-10k-7756.html" target="_blank"><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/S/P/SPBECZ01.ROSE.jpg" style="height:577px; width:600px" title=" Dây cổ ECZ vàng 10K " /></a></p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRXB78725.106.jpg" style="height:582px; width:600px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/1/1/11021101_1037513036260361_6252307144123743164_n.jpg" style="height:960px; width:960px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'day-co-ecz-vang-trang-10k-1_1.jpg', '', '', 3520000, 0, 0, '2016-12-19 11:19:06', '2016-12-19 11:19:06', 0, '2016-12-19 11:19:06', '2016-12-19 11:19:06'),
-(15, 16, 0, 'Dây cổ ECZ vàng trắng 10K', 'day-co-ecz-vang-trang-10k', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB77770.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="" src="http://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb77770.106.jpg" style="height:800px; width:800px" /></p>\r\n\r\n<p>D&acirc;y cổ, Thiết kế mặt Hoa Hồng, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ</p>\r\n', 1, 'day-co-ecz-vang-trang-10k_4.jpg', '', '', 24974000, 0, 0, '2016-12-19 11:20:31', '2016-12-19 11:20:31', 0, '2016-12-19 11:20:31', '2016-12-19 11:20:31'),
-(17, 18, 0, 'Dây cổ ECZ vàng trắng 10K', 'day-co-ecz-vang-trang-10k-9310', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB78725.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng trắng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRWB78725.106.jpg" style="height:595px; width:600px" title=" Dây cổ ECZ vàng trắng 10K " /></p>\r\n\r\n<p>D&acirc;y Cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly.</p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, 'day-co-ecz-vang-trang-10k_3.jpg', '', '', 3576000, 0, 0, '2016-12-19 11:22:06', '2016-12-19 11:22:06', 0, '2016-12-19 11:22:06', '2016-12-19 11:22:06');
+(5, 6, 0, 'Điều hòa Panasonic 1 chiều 18000BTU N18TKH-8', 'dieu-hoa-panasonic-1-chieu-18000btu-n18tkh-8', '', '<p>Gi&aacute; b&aacute;n sản phẩm chỉ mang t&iacute;nh chất tham khảo phụ thuộc v&agrave;o trọng lượng v&agrave;ng v&agrave; thuộc t&iacute;nh của đ&aacute;. Khi Đơn H&agrave;ng th&agrave;nh c&ocirc;ng, PNJ sẽ x&aacute;c nhận v&agrave; lấy sản phẩm với gi&aacute; b&aacute;n thực tế tại cửa h&agrave;ng tương ứng trọng lượng v&agrave;ng cụ thể b&aacute;o lại cho kh&aacute;ch h&agrave;ng v&agrave; hưởng ch&iacute;nh s&aacute;ch ưu đ&atilde;i tr&ecirc;n online.</p>\r\n', 1, 'http://dieuhoabonmua.vn/wp-content/uploads/2016/11/dieu-hoa-panasonic-2017-1.jpg', '', '', 16150000, 14400000, 0, '2016-12-19 10:59:09', '2016-12-19 10:59:09', 0, '2016-12-19 10:59:09', '2017-02-13 13:40:45'),
+(6, 7, 0, 'Điều Hòa Panasonic Inverter CU/CS-E9RKH-8 2 Chiều 9000btu', 'dieu-hoa-panasonic-inverter-cucs-e9rkh-8-2-chieu-9000btu', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n', 1, 'http://dongsapa.com.vn/vnt_upload/File/Image/1313912413ftke25gv1_l_2731.jpg', '', '', 4261000, 0, 0, '2016-12-19 11:04:16', '2016-12-19 11:04:16', 0, '2016-12-19 11:04:16', '2017-02-17 11:00:39'),
+(8, 9, 0, 'Điều hòa Sharp 1 chiều AH-A9SEW', 'dieu-hoa-sharp-1-chieu-ah-a9sew', '', '', 1, 'https://hc.com.vn/media/catalog/product/cache/4/image/9df78eab33525d08d6e5fb8d27136e95/d/i/dieu-hoa-sharp-1-chieu-ah-a9sew.jpg', '', '', 3114000, 0, 0, '2016-12-19 11:07:01', '2016-12-19 11:07:01', 0, '2016-12-19 11:07:01', '2017-02-17 11:04:49'),
+(9, 10, 0, 'Điều hoà 1 chiều Daikin FTNE50MV1V/RNE50MV1V', 'dieu-hoa-1-chieu-daikin-ftne50mv1vrne50mv1v', '', '<p>Nhẫn, chất liệu v&agrave;ng 10K, Gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<p><br />\r\n<strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Nhẫn ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-ecz-vang-hong-10k.png" style="height:560px; width:560px" title=" Nhẫn ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'http://www.tcxd.vn/Uploads/Image/Be-phot/lap-dieu-hoa-1.png', '', '', 4098000, 0, 0, '2016-12-19 11:08:53', '2016-12-19 11:08:53', 0, '2016-12-19 11:08:53', '2017-02-17 11:06:17'),
+(11, 12, 0, 'Điều hòa CASSETTE âm trần đa hướng thổi DAIKIN 2 chiều 24.200 BTU FCQ71KAVEA/RQ71MV1', 'dieu-hoa-cassette-am-tran-da-huong-thoi-daikin-2-chieu-24200-btu-fcq71kavearq71mv1', '', '<p>Nhẫn ECZ v&agrave;ng trắng 10K</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">NHẪN ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GNDRWB82295.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>Nhẫn</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ SWAROVSKI GEMTM .Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng</p>\r\n', 1, 'http://dieuhoabonmua.vn/wp-content/uploads/2016/11/dieu-hoa-panasonic-2017-1.jpg', '', '', 4557000, 0, 0, '2016-12-19 11:11:25', '2016-12-19 11:11:25', 0, '2016-12-19 11:11:25', '2017-02-17 11:15:27'),
+(12, 13, 0, 'Điều hòa Daikin tủ đứng 1 chiều 28000 BTU FVRN71AXV1/RR71CGXY1', 'dieu-hoa-daikin-tu-dung-1-chieu-28000-btu-fvrn71axv1rr71cgxy1', '', '<p><br />\r\nMystery Collection,&nbsp;bộ sưu tập l&agrave; hiện th&acirc;n của vẻ đẹp huyền b&iacute; đầy nữ t&iacute;nh, khơi nguồn cảm hứng để ph&aacute;i đẹp tỏa s&aacute;ng, chinh phục th&agrave;nh c&ocirc;ng c&ugrave;ng nguyện ước ch&acirc;n th&agrave;nh cho những điều tốt đẹp nhất trong cuộc sống</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/trang-suc-laurel-nguyet-que.html" target="_blank"><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/n/h/nhan-vang-mystery_5.jpg" title="Dây cổ vàng Mystery" /></a></p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/p/n/pnj_brochure_mystery_2015_2-1_3.jpg" style="height:570px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n\r\n<p>Mystery Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K (41,6% v&agrave;ng nguy&ecirc;n chất) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh từ&nbsp;SWAROVSKI GEM<sup>TM</sup>&nbsp;.Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><img alt="Dây cổ vàng Mystery" src="https://shopping.pnj.com.vn/media/catalog/product/d/_/d_y-c_-mysterygcdrcb81483_1.jpg" style="height:594px; width:560px" title="Dây cổ vàng Mystery" /></p>\r\n', 1, 'http://hopphat.com/media/product/307_1.jpg', '', '', 14197000, 0, 0, '2016-12-19 11:15:59', '2016-12-19 11:15:59', 0, '2016-12-19 11:15:59', '2017-02-17 11:16:00'),
+(13, 14, 0, 'Máy lạnh Electrolux 1 HP ESM09CRM-A4', 'may-lanh-electrolux-1-hp-esm09crm-a4', '', '<p><span style="font-size:13px">ECZ - ROYAL l&agrave; d&ograve;ng trang sức hội tụ vẻ đẹp lấp l&aacute;nh của những vi&ecirc;n đ&aacute; ECZ - Excellence Cubic Zirconia - mang sắc xanh huyền b&iacute;, sắc đỏ rực rỡ hay sắc ngọc lục bảo quyến rũ với gi&aacute;c cắt ho&agrave;n hảo tựa kim cương, thể hiện trọn vẹn vẻ đẹp đa chiều ở người phụ nữ - vừa thanh lịch, qu&yacute; ph&aacute;i vừa rực lửa đam m&ecirc; - th&agrave;nh c&ocirc;ng.</span></p>\r\n\r\n<p>Bộ sản phẩm l&agrave;m từ chất liệu v&agrave;ng trắng 10K gắn đ&aacute; ECZ đỏ.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-da-ecz-royal-vang-trang-10k.html" target="_blank"><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/e/c/ecz-royal-2-do.jpg" style="height:1000px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></a></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>D&acirc;y cổ v&agrave;ng trắng 10K, gắn đ&aacute; ECZ cao cấp: 1 vi&ecirc;n Oval đỏ 9*11mm + 5 vi&ecirc;n Oval đỏ 7*9mm + 3 vi&ecirc;n 3.0 ly + 92 vi&ecirc;n 2.5 ly + 36 vi&ecirc;n 2.0 ly + 88 vi&ecirc;n 1.5 ly.</p>\r\n\r\n<p><img alt="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" src="https://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb82446.406_1.jpg" style="height:1266px; width:1000px" title="DÂY CỔ ĐÁ ECZ VÀNG TRẮNG 10K" /></p>\r\n', 1, 'https://cdn.tgdd.vn/Products/Images/2002/91740/dieu-hoa-electrolux-1-hp-esm09crm-a4-550x160.png', '', '', 23482000, 0, 0, '2016-12-19 11:17:21', '2016-12-19 11:17:21', 0, '2016-12-19 11:17:21', '2017-02-17 11:21:03'),
+(14, 15, 0, 'Máy lạnh Mitsubishi Heavy 1 HP SRK09CMP-5', 'may-lanh-mitsubishi-heavy-1-hp-srk09cmp-5', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n kh&ocirc;ng mang t&iacute;nh tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRXB78725.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p><a href="https://shopping.pnj.com.vn/bo-san-pham-ecz-vang-trang-10k-7756.html" target="_blank"><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/S/P/SPBECZ01.ROSE.jpg" style="height:577px; width:600px" title=" Dây cổ ECZ vàng 10K " /></a></p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRXB78725.106.jpg" style="height:582px; width:600px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>D&acirc;y cổ, chất liệu v&agrave;ng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/1/1/11021101_1037513036260361_6252307144123743164_n.jpg" style="height:960px; width:960px" title=" Dây cổ ECZ vàng 10K " /></p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p><iframe frameborder="0" height="315" src="https://www.youtube.com/embed/FFdAvow2UAQ" width="560"></iframe></p>\r\n', 1, 'https://cdn2.tgdd.vn/Products/Images/2002/70102/mitsubishi-heavy-srk09cmp-5-5-550x160-550x160.jpg', '', '', 3520000, 0, 0, '2016-12-19 11:19:06', '2016-12-19 11:19:06', 0, '2016-12-19 11:19:06', '2017-02-17 11:24:31'),
+(15, 16, 0, 'Máy lạnh Samsung 1.0 HP AR10MVFHGWKNSV', 'may-lanh-samsung-10-hp-ar10mvfhgwknsv', '', '<p>D&acirc;y cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ. Gi&aacute; b&aacute;n mang t&iacute;nh chất tham khảo</p>\r\n\r\n<table>\r\n	<tbody>\r\n		<tr>\r\n			<td colspan="2">D&Acirc;Y CỔ ECZ V&Agrave;NG TRẮNG 10K</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&atilde; sản phẩm</th>\r\n			<td>GCDRWB77770.106</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Chủng loại</th>\r\n			<td>D&acirc;y cổ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Tuổi V&agrave;ng</th>\r\n			<td>10K (416)</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u chất liệu</th>\r\n			<td>M&agrave;u trắng</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Giới t&iacute;nh</th>\r\n			<td>Nữ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Loại Đ&aacute; Ch&iacute;nh</th>\r\n			<td>ECZ</td>\r\n		</tr>\r\n		<tr>\r\n			<th>H&igrave;nh d&aacute;ng đ&aacute;</th>\r\n			<td>Tr&ograve;n</td>\r\n		</tr>\r\n		<tr>\r\n			<th>Gi&aacute;c cắt đ&aacute;</th>\r\n			<td>Facet</td>\r\n		</tr>\r\n		<tr>\r\n			<th>M&agrave;u đ&aacute; ch&iacute;nh</th>\r\n			<td>Trắng</td>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<h2>&nbsp;</h2>\r\n\r\n<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt="" src="http://shopping.pnj.com.vn/media/catalog/product/g/c/gcdrwb77770.106.jpg" style="height:800px; width:800px" /></p>\r\n\r\n<p>D&acirc;y cổ, Thiết kế mặt Hoa Hồng, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ</p>\r\n', 1, 'https://cdn3.tgdd.vn/Products/Images/2002/91668/may-lanh-samsung-ar10mvfhgwknsv-550x160.png', '', '', 24974000, 0, 0, '2016-12-19 11:20:31', '2016-12-19 11:20:31', 0, '2016-12-19 11:20:31', '2017-02-17 11:28:01'),
+(17, 18, 0, 'Máy lạnh Daikin 1.5 HP FTV35BXV1s', 'may-lanh-daikin-15-hp-ftv35bxv1', '', '<p><strong>ROSE COLLECTION</strong></p>\r\n\r\n<p>Vẻ đẹp của hoa hồng nồng n&agrave;n, ki&ecirc;u sa, lu&ocirc;n toả ng&aacute;t hương thơm cũng giống như nhan sắc tuyệt vời của người phụ nữ, tạo n&ecirc;n những khoảnh khắc thăng hoa l&agrave;m đẹp cho đời.</p>\r\n\r\n<p>Rose Collection thuộc d&ograve;ng trang sức ECZ - Excellent Cubic Zirconia của PNJ được l&agrave;m từ v&agrave;ng 10K ( 41,6% v&agrave;ng nguy&ecirc;n chất ) v&agrave; đ&aacute; Swarovski Zirconia nhập khẩu ch&iacute;nh thức từ SWAROVSKI GEM<sup>TM</sup>. Những vi&ecirc;n đ&aacute; Swarovski Zirconia c&oacute; độ trong suốt, cắt m&agrave;i ho&agrave;n hảo v&agrave; t&aacute;n sắc rực rỡ như kim cương sẽ mang đến một vẻ đẹp cuốn h&uacute;t, hiện đại v&agrave; sang trọng.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><img alt=" Dây cổ ECZ vàng trắng 10K " src="http://shopping.pnj.com.vn/media/catalog/product/G/C/GCDRWB78725.106.jpg" style="height:595px; width:600px" title=" Dây cổ ECZ vàng trắng 10K " /></p>\r\n\r\n<p>D&acirc;y Cổ, chất liệu v&agrave;ng trắng 10K, gắn đ&aacute; ECZ: 1 vi&ecirc;n 5.5 ly + 3 vi&ecirc;n 1.75 ly + 3 vi&ecirc;n 1.5 ly + 3 vi&ecirc;n 1.25 ly.</p>\r\n\r\n<p>Thuần khiết v&agrave; dịu d&agrave;ng, quyến rũ v&agrave; ki&ecirc;u sa, họa tiết hoa hồng đang được c&aacute;c t&iacute;n đồ thời trang tận dụng triệt để trong mỗi phong c&aacute;ch mix &amp; match. V&agrave; tất nhi&ecirc;n, trang sức l&agrave; một điểm nhấn kh&ocirc;ng thể thiếu. H&atilde;y c&ugrave;ng PNJ tỏa s&aacute;ng phong c&aacute;ch với Rose collection nh&eacute;!</p>\r\n\r\n<p>&nbsp;</p>\r\n', 1, 'https://cdn2.tgdd.vn/Products/Images/2002/77502/may-lanh-daikin-ftv35bxv1-550x160.jpg', '', '', 3576000, 0, 0, '2016-12-19 11:22:06', '2016-12-19 11:22:06', 0, '2016-12-19 11:22:06', '2017-02-17 11:29:43');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_metas`
+-- Cấu trúc bảng cho bảng `product_metas`
 --
 
 CREATE TABLE `product_metas` (
@@ -5227,10 +5301,26 @@ CREATE TABLE `product_metas` (
   `meta_value` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `product_metas`
+--
+
+INSERT INTO `product_metas` (`id`, `content_id`, `meta_key`, `meta_value`) VALUES
+(9, 14, '29_thuoc_tinh_san_pham', '[[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 HP - 8.530 BTU","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u0110i\\u1ec1u ho\\u00e0 1 chi\\u1ec1u (ch\\u1ec9 l\\u00e0m l\\u1ea1nh)","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Ti\\u1ec7n \\u00edch","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Ch\\u1ebf \\u0111\\u1ed9 v\\u1eadn h\\u00e0nh khi ng\\u1ee7, H\\u1eb9n gi\\u1edd b\\u1eadt t\\u1eaft m\\u00e1y","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"L\\u00e0m l\\u1ea1nh nhanh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Ch\\u1ebf \\u0111\\u1ed9 HI Power","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(2, 13, '29_thuoc_tinh_san_pham', '[[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 chi\\u1ec1u l\\u1ea1nh","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u1ed1c \\u0111\\u1ed9 l\\u00e0m l\\u1ea1nh (BTU\\/h)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"0","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u1ed1c \\u0111\\u1ed9 l\\u00e0m n\\u00f3ng (BTU\\/h)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"0","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Ki\\u1ec3u \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u00c2m t\\u01b0\\u1eddng","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Xu\\u1ea5t x\\u1ee9","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Th\\u00e1i Lan","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(3, 5, '29_thuoc_tinh_san_pham', '[[{"field_value":"Lo\\u1ea1i \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 chi\\u1ec1u","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u00ednh n\\u0103ng","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Gas (M\\u00f4i ch\\u1ea5t l\\u1ea1nh)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"R32","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Ti\\u00eau chu\\u1ea9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (BTU)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"11.900","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (KW)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"3.5","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"B\\u1ea3o h\\u00e0nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 n\\u0103m cho thi\\u1ebft b\\u1ecb, 5 n\\u0103m cho m\\u00e1y n\\u00e9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(4, 6, '29_thuoc_tinh_san_pham', '[[{"field_value":"Lo\\u1ea1i \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 chi\\u1ec1u","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u00ednh n\\u0103ng","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"M\\u00e1y n\\u00e9n Dual Inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Gas (M\\u00f4i ch\\u1ea5t l\\u1ea1nh)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Ti\\u00eau chu\\u1ea9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"R32","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (BTU)\\t ","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"11.900 ","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (KW)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"3.5","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"B\\u1ea3o h\\u00e0nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 n\\u0103m cho thi\\u1ebft b\\u1ecb, 5 n\\u0103m cho m\\u00e1y n\\u00e9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(5, 11, '29_thuoc_tinh_san_pham', '[[{"field_value":"Lo\\u1ea1i \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 chi\\u1ec1u","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u00ednh n\\u0103ng","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Non-Inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Gas (M\\u00f4i ch\\u1ea5t l\\u1ea1nh)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"R22","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Xu\\u1ea5t x\\u1ee9\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Th\\u00e1i Lan","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i \\u0111i\\u1ec1u khi\\u1ec3n\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u0110i\\u1ec1u khi\\u1ec3n d\\u00e2y","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (BTU)\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"26.600","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"B\\u1ea3o h\\u00e0nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 n\\u0103m cho thi\\u1ebft b\\u1ecb, 5 n\\u0103m cho m\\u00e1y n\\u00e9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(6, 12, '29_thuoc_tinh_san_pham', '[[{"field_value":"T\\u00ednh n\\u0103ng\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Kh\\u00f4ng Inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Gas (M\\u00f4i ch\\u1ea5t l\\u1ea1nh)\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"R410a","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Xu\\u1ea5t x\\u1ee9\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Malaysia","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i \\u0111i\\u1ec1u khi\\u1ec3n\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u0110i\\u1ec1u khi\\u1ec3n kh\\u00f4ng d\\u00e2y","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (BTU)\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"28.000","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh (KW)\\t","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"8.21","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"B\\u1ea3o h\\u00e0nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"2 n\\u0103m cho thi\\u1ebft b\\u1ecb, 5 n\\u0103m cho m\\u00e1y n\\u00e9n","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(7, 8, '29_thuoc_tinh_san_pham', '[[{"field_value":"Ki\\u1ec3u \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 chi\\u1ec1u","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"9.000 BTU","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Gas","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"R410a th\\u00e2n thi\\u1ec7n v\\u1edbi m\\u00f4i tr\\u01b0\\u1eddng","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(8, 9, '29_thuoc_tinh_san_pham', '[[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 chi\\u1ec1u l\\u1ea1nh","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u1ed1c \\u0111\\u1ed9 l\\u00e0m l\\u1ea1nh (BTU\\/h)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"0","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Ki\\u1ec3u \\u0111i\\u1ec1u h\\u00f2a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u00c2m t\\u01b0\\u1eddng","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"T\\u1ed1c \\u0111\\u1ed9 l\\u00e0m n\\u00f3ng (BTU\\/h)","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"0","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Xu\\u1ea5t x\\u1ee9","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"Th\\u00e1i Lan","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(10, 15, '29_thuoc_tinh_san_pham', '[[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1 HP - 9.300 BTU","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u0110i\\u1ec1u ho\\u00e0 1 chi\\u1ec1u (ch\\u1ec9 l\\u00e0m l\\u1ea1nh)","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng ngh\\u1ec7 inverter","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"M\\u00e1y l\\u1ea1nh kh\\u00f4ng inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t ti\\u00eau th\\u1ee5 \\u0111i\\u1ec7n t\\u1ed1i \\u0111a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"0.91 kW\\/h","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]'),
+(11, 17, '29_thuoc_tinh_san_pham', '[[{"field_value":"C\\u00f4ng su\\u1ea5t l\\u1ea1nh","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1.5 HP - 12.000 BTU","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"Lo\\u1ea1i m\\u00e1y","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"\\u0110i\\u1ec1u ho\\u00e0 1 chi\\u1ec1u (ch\\u1ec9 l\\u00e0m l\\u1ea1nh)","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng ngh\\u1ec7 inverter","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"M\\u00e1y l\\u1ea1nh kh\\u00f4ng inverter","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}],[{"field_value":"C\\u00f4ng su\\u1ea5t ti\\u00eau th\\u1ee5 \\u0111i\\u1ec7n t\\u1ed1i \\u0111a","field_type":"text","slug":"30_ten_thuoc_tinh"},{"field_value":"1.17 kW\\/h","field_type":"text","slug":"31_gia_tri_thuoc_tinh"}]]');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Cấu trúc bảng cho bảng `ratings`
 --
 
 CREATE TABLE `ratings` (
@@ -5246,11 +5336,12 @@ CREATE TABLE `ratings` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `settings`
+-- Cấu trúc bảng cho bảng `settings`
 --
 
 CREATE TABLE `settings` (
   `id` int(11) UNSIGNED NOT NULL,
+  `group_id` int(11) NOT NULL DEFAULT '0',
   `display_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `option_key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `option_value` text COLLATE utf8_unicode_ci,
@@ -5262,27 +5353,67 @@ CREATE TABLE `settings` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `settings`
+-- Đang đổ dữ liệu cho bảng `settings`
 --
 
-INSERT INTO `settings` (`id`, `display_name`, `option_key`, `option_value`, `type`, `order`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'email', 'email_receives_feedback', 'webadmin@gmail.com', 'text', 0, '', '2015-11-24 16:31:17', '2016-12-19 00:29:37'),
-(2, 'title', 'site_title', 'Working hsop', 'text', 0, '', '2015-12-17 07:51:37', '2016-12-17 10:43:01'),
-(3, 'logo', 'site_logo', '/uploads/root/logo.png', 'image', 0, '', '2015-12-17 07:51:52', '2016-12-17 10:43:01'),
-(6, '', 'google_analytics', '<script></script>', 'textarea', 0, '', '2015-11-24 16:35:03', '2015-11-25 00:07:38'),
-(7, '', 'construction_mode', '0', '', 0, '', '2015-11-24 16:36:20', '2016-01-26 10:04:50'),
-(8, 'Description', 'site_description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'text_area', 0, '', '2016-01-21 01:40:32', '2016-01-21 01:52:35'),
-(9, '', 'default_homepage', '1', '', 0, '', '2016-01-21 14:11:32', '2016-01-21 14:11:34'),
-(10, '', 'show_admin_bar', '1', '', 0, '', '2016-01-26 10:00:54', '2016-06-11 00:10:23'),
-(34, 'Site keywords', 'site_keywords', 'Working shop', 'keywords', 0, '', '2016-12-19 00:35:02', '2016-12-19 00:36:45'),
-(40, 'Ảnh lớn', 'large_image', '768x450', 'resize', 0, '', '2016-12-19 01:35:28', '2016-12-19 01:40:13'),
-(41, 'Ản Vừa', 'normal_image', '440x440', 'resize', 0, '', '2016-12-19 01:35:54', '2016-12-19 11:01:26'),
-(42, 'Ảnh nhỏ', 'small_image', '283x283', 'resize', 0, '', '2016-12-19 01:36:11', '2016-12-19 11:01:26');
+INSERT INTO `settings` (`id`, `group_id`, `display_name`, `option_key`, `option_value`, `type`, `order`, `details`, `created_at`, `updated_at`) VALUES
+(1, 1, 'email', 'email_receives_feedback', 'butrentron.man95@gmail.com', 'text', 0, '', '2015-11-24 16:31:17', '2017-01-09 15:16:04'),
+(2, 1, 'title', 'site_title', 'Máy điều hòa Daikin', 'text', 0, '', '2015-12-17 07:51:37', '2017-02-17 01:20:45'),
+(3, 1, 'logo', 'site_logo', '/uploads/root/quoc-an-logo.png', 'image', 0, '', '2015-12-17 07:51:52', '2017-01-03 14:48:14'),
+(6, 1, '', 'google_analytics', '', 'textarea', 0, '', '2015-11-24 16:35:03', '2017-02-13 10:44:08'),
+(7, 1, 'Construction mode', 'construction_mode', '0', 'root', 0, '', '2015-11-24 16:36:20', '2016-01-26 10:04:50'),
+(8, 1, 'Description', 'site_description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'text_area', 0, '', '2016-01-21 01:40:32', '2016-01-21 01:52:35'),
+(9, 1, 'Home page', 'default_homepage', '1', 'homepage', 0, '', '2016-01-21 14:11:32', '2016-01-21 14:11:34'),
+(10, 1, 'Show admin bar', 'show_admin_bar', '0', 'root', 0, '', '2016-01-26 10:00:54', '2017-02-17 10:34:24'),
+(34, 1, 'Site keywords', 'site_keywords', '', 'keywords', 0, '', '2016-12-19 00:35:02', '2017-02-13 10:44:08'),
+(43, 1, 'Fanpage', 'fanpage', '', 'text_area', 0, '', '2016-12-30 11:42:38', '2017-02-13 10:44:08'),
+(44, 1, 'Fb_app_id', 'fb_app_id', '1647393925578689', 'text', 0, '', '2016-12-30 14:08:17', '2016-12-30 14:09:03'),
+(45, 1, 'Fb_admin_id', 'fb_admin_id', '100007035581602', 'text', 0, '', '2016-12-30 14:08:29', '2016-12-30 14:09:03'),
+(46, 1, 'script_fb_sdk', 'script_fb_sdk', '<div id="fb-root"></div>\r\n<script>(function(d, s, id) {\r\n  var js, fjs = d.getElementsByTagName(s)[0];\r\n  if (d.getElementById(id)) return;\r\n  js = d.createElement(s); js.id = id;\r\n  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=142393062773477";\r\n  fjs.parentNode.insertBefore(js, fjs);\r\n}(document, \'script\', \'facebook-jssdk\'));</script>', 'text_area', 0, '', '2016-12-30 14:19:37', '2016-12-30 14:19:44'),
+(47, 1, 'Code tripadvisor', 'tripadvisor', '', 'text_area', 0, '', '2017-01-02 12:42:21', '2017-02-13 10:44:08'),
+(58, 1, 'Google analytics', 'google_analytics', '', 'text_area', 0, '', '2017-01-04 11:56:05', '2017-02-13 10:44:08'),
+(49, 1, 'Code Script ', 'code_script', '', 'text_area', 0, '', '2017-01-03 16:52:44', '2017-01-03 17:18:31'),
+(50, 1, 'Số điện thoại', 'phone', '0773.983.777 - 0918.320 576 - 0918.678 505', 'text', 0, '', '2017-01-03 17:18:03', '2017-01-09 09:47:29'),
+(51, 1, 'Địa chỉ', 'address', 'Ấp Đường Bào - Xã Dương Tơ - Huyện Phú Quốc - Tỉnh Kiên Giang ', 'text', 0, '', '2017-01-03 17:21:13', '2017-01-08 20:10:12'),
+(52, 1, 'Facebook link', 'fb_link', 'https://www.facebook.com/ngoctraiphuquocan', 'text', 0, '', '2017-01-03 17:22:54', '2017-01-08 20:10:12'),
+(57, 1, 'Skype', 'skype', '', 'text', 0, '', '2017-01-03 17:24:47', '2017-02-13 10:43:33'),
+(63, 2, 'Icon sữa chửa bảo hành', 'icon_sua_chua_bao_hanh', '/uploads/icon/i_cog.png', 'image', 0, '', '2017-02-15 14:51:43', '2017-02-15 14:56:00'),
+(62, 2, 'Banner bottom', 'banner_bottom', '/uploads/banner/bb.png', 'image', 0, '', '2017-02-15 14:47:37', '2017-02-15 14:48:28'),
+(64, 2, 'Icon hỗ trợ trực tuyến', 'icon_ho_tro_truc_tuyen', '/uploads/icon/i_phone.png', 'image', 0, '', '2017-02-15 14:54:49', '2017-02-15 16:22:11'),
+(65, 2, 'Icon liên hệ', 'icon_lien_he', '/uploads/icon/i_place.png', 'image', 0, '', '2017-02-15 14:55:14', '2017-02-15 16:22:11'),
+(66, 2, 'Tiêu đề cột 1', 'title_col_one', 'Bảo hành - sửa chữa', 'text', 0, '', '2017-02-15 14:57:15', '2017-02-15 14:57:43'),
+(67, 2, 'Tiêu đề cột 2', 'title_col_two', 'Hỗ trợ trực tuyến', 'text', 0, '', '2017-02-15 14:58:01', '2017-02-15 14:58:49'),
+(68, 2, 'Tiêu đề cột 3', 'title_col_three', 'Liên hệ với Daikin', 'text', 0, '', '2017-02-15 14:58:19', '2017-02-15 14:58:49'),
+(69, 2, 'Nội dung cột 1', 'content_col_one', '<p>Xin qu&yacute; kh&aacute;ch kiểm tra h&agrave;ng kỹ khi nhận h&agrave;ng. H&agrave;ng được giao ho&agrave;n to&agrave;n mới 100% v&agrave; c&oacute; d&aacute;n tem bảo h&agrave;nh của C&ocirc;ng ty. Tr&ecirc;n tem c&oacute; ghi r&otilde; ng&agrave;y th&aacute;ng năm v&agrave; thời hạn bảo h&agrave;nh theo đ&uacute;ng quy định bảo h&agrave;nh của nh&agrave; sản xuất.</p>\r\n', 'editor', 0, '', '2017-02-15 14:59:24', '2017-02-15 16:29:26'),
+(70, 2, 'Nội dung cột 1', 'content_col_two', '<p>Xin qu&yacute; kh&aacute;ch vui l&ograve;ng li&ecirc;n hệ với ch&uacute;ng t&ocirc;i để nhận được sự tư vấn v&agrave; hỗ trợ tốt nhất.</p>\r\n\r\n<p>HOTLINE: 05113.689.400</p>\r\n\r\n<p>Email: daikin@gmail.com</p>\r\n\r\n<p>Ph&ograve;ng kinh doanh: Ms.Sương -091834855</p>\r\n\r\n<p>Mr.T&agrave;i -0942011625 - Ms.Thảo -0942011640</p>\r\n\r\n<p>Ms.Th&uacute;y -0942011628 - Ms.Thủy -0942011627</p>\r\n\r\n<p>Ph&ograve;ng bảo h&agrave;nh: Mr.Nguy&ecirc;n -0942011627</p>\r\n\r\n<p>Ph&ograve;ng Kỹ thuật: Mr.T&ugrave;ng - 0935415161</p>\r\n', 'editor', 0, '', '2017-02-15 15:00:14', '2017-02-15 16:29:26'),
+(71, 2, 'Nội dung cột 3', 'content_col_three', '<p>C&Ocirc;NG TY TNHH DAIKIN</p>\r\n\r\n<p>Địa chỉ: 130 H&agrave;m Nghi, Thanh Kh&ecirc; - Tp.Đ&agrave; Nẵng</p>\r\n\r\n<p>Điện thoại: 05113.689.300</p>\r\n\r\n<p>Fax: 05113656880</p>\r\n\r\n<p>Email: daikin@gmail.com</p>\r\n', 'editor', 0, '', '2017-02-15 15:08:34', '2017-02-15 16:31:08'),
+(72, 2, 'Liên kết trang bảo hành', 'url_page_col_one', '#', 'text', 0, '', '2017-02-15 16:31:41', '2017-02-15 16:31:48');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subscribed_emails`
+-- Cấu trúc bảng cho bảng `setting_groups`
+--
+
+CREATE TABLE `setting_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `setting_groups`
+--
+
+INSERT INTO `setting_groups` (`id`, `name`, `slug`) VALUES
+(1, 'Generator', 'generator'),
+(2, 'Home', 'home'),
+(3, 'Basic', 'basic');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `subscribed_emails`
 --
 
 CREATE TABLE `subscribed_emails` (
@@ -5295,7 +5426,27 @@ CREATE TABLE `subscribed_emails` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `messages` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `amount` decimal(15,0) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `viewed` bigint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -5325,107 +5476,107 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin_users`
+-- Chỉ mục cho bảng `admin_users`
 --
 ALTER TABLE `admin_users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `admin_user_roles`
+-- Chỉ mục cho bảng `admin_user_roles`
 --
 ALTER TABLE `admin_user_roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `brands`
+-- Chỉ mục cho bảng `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `brands_products`
+-- Chỉ mục cho bảng `brands_products`
 --
 ALTER TABLE `brands_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `categories`
+-- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `categories_posts`
+-- Chỉ mục cho bảng `categories_posts`
 --
 ALTER TABLE `categories_posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `category_metas`
+-- Chỉ mục cho bảng `category_metas`
 --
 ALTER TABLE `category_metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `cities`
+-- Chỉ mục cho bảng `cities`
 --
 ALTER TABLE `cities`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comments`
+-- Chỉ mục cho bảng `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `contacts`
+-- Chỉ mục cho bảng `contacts`
 --
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `countries`
+-- Chỉ mục cho bảng `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `coupons`
+-- Chỉ mục cho bảng `coupons`
 --
 ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `coupon_user_use`
+-- Chỉ mục cho bảng `coupon_user_use`
 --
 ALTER TABLE `coupon_user_use`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `coupon_user_use_with_tracked_times`
+-- Chỉ mục cho bảng `coupon_user_use_with_tracked_times`
 --
 ALTER TABLE `coupon_user_use_with_tracked_times`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `field_groups`
+-- Chỉ mục cho bảng `field_groups`
 --
 ALTER TABLE `field_groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `field_items`
+-- Chỉ mục cho bảng `field_items`
 --
 ALTER TABLE `field_items`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `languages`
+-- Chỉ mục cho bảng `languages`
 --
 ALTER TABLE `languages`
   ADD PRIMARY KEY (`id`),
@@ -5433,321 +5584,370 @@ ALTER TABLE `languages`
   ADD UNIQUE KEY `english_name` (`language_name`);
 
 --
--- Indexes for table `menus`
+-- Chỉ mục cho bảng `menus`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `menu_nodes`
+-- Chỉ mục cho bảng `menu_nodes`
 --
 ALTER TABLE `menu_nodes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pages`
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_product_id_foreign` (`product_id`),
+  ADD KEY `orders_transaction_id_foreign` (`transaction_id`);
+
+--
+-- Chỉ mục cho bảng `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
+ALTER TABLE `pages` ADD FULLTEXT KEY `search` (`title`,`description`,`tags`);
 
 --
--- Indexes for table `page_metas`
+-- Chỉ mục cho bảng `page_metas`
 --
 ALTER TABLE `page_metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
+-- Chỉ mục cho bảng `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`),
   ADD KEY `password_resets_token_index` (`token`);
 
 --
--- Indexes for table `posts`
+-- Chỉ mục cho bảng `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
+ALTER TABLE `posts` ADD FULLTEXT KEY `search` (`title`,`description`,`tags`);
 
 --
--- Indexes for table `post_metas`
+-- Chỉ mục cho bảng `post_metas`
 --
 ALTER TABLE `post_metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_attributes`
+-- Chỉ mục cho bảng `product_attributes`
 --
 ALTER TABLE `product_attributes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_attributes_products`
+-- Chỉ mục cho bảng `product_attributes_products`
 --
 ALTER TABLE `product_attributes_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_attribute_sets`
+-- Chỉ mục cho bảng `product_attribute_sets`
 --
 ALTER TABLE `product_attribute_sets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_attribute_sets_product_categories`
+-- Chỉ mục cho bảng `product_attribute_sets_product_categories`
 --
 ALTER TABLE `product_attribute_sets_product_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_categories`
+-- Chỉ mục cho bảng `product_categories`
 --
 ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_categories_products`
+-- Chỉ mục cho bảng `product_categories_products`
 --
 ALTER TABLE `product_categories_products`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_category_metas`
+-- Chỉ mục cho bảng `product_category_metas`
 --
 ALTER TABLE `product_category_metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product_contents`
+-- Chỉ mục cho bảng `product_contents`
 --
 ALTER TABLE `product_contents`
   ADD PRIMARY KEY (`id`);
+ALTER TABLE `product_contents` ADD FULLTEXT KEY `search` (`title`,`tags`,`description`);
 
 --
--- Indexes for table `product_metas`
+-- Chỉ mục cho bảng `product_metas`
 --
 ALTER TABLE `product_metas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ratings`
+-- Chỉ mục cho bảng `ratings`
 --
 ALTER TABLE `ratings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `settings`
+-- Chỉ mục cho bảng `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `subscribed_emails`
+-- Chỉ mục cho bảng `setting_groups`
+--
+ALTER TABLE `setting_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `subscribed_emails`
 --
 ALTER TABLE `subscribed_emails`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admin_users`
+-- AUTO_INCREMENT cho bảng `admin_users`
 --
 ALTER TABLE `admin_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `admin_user_roles`
+-- AUTO_INCREMENT cho bảng `admin_user_roles`
 --
 ALTER TABLE `admin_user_roles`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `brands`
+-- AUTO_INCREMENT cho bảng `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `brands_products`
+-- AUTO_INCREMENT cho bảng `brands_products`
 --
 ALTER TABLE `brands_products`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `categories_posts`
+-- AUTO_INCREMENT cho bảng `categories_posts`
 --
 ALTER TABLE `categories_posts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `category_metas`
+-- AUTO_INCREMENT cho bảng `category_metas`
 --
 ALTER TABLE `category_metas`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT for table `cities`
+-- AUTO_INCREMENT cho bảng `cities`
 --
 ALTER TABLE `cities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4064;
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `contacts`
+-- AUTO_INCREMENT cho bảng `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 --
--- AUTO_INCREMENT for table `countries`
+-- AUTO_INCREMENT cho bảng `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
 --
--- AUTO_INCREMENT for table `coupons`
+-- AUTO_INCREMENT cho bảng `coupons`
 --
 ALTER TABLE `coupons`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `coupon_user_use`
+-- AUTO_INCREMENT cho bảng `coupon_user_use`
 --
 ALTER TABLE `coupon_user_use`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `coupon_user_use_with_tracked_times`
+-- AUTO_INCREMENT cho bảng `coupon_user_use_with_tracked_times`
 --
 ALTER TABLE `coupon_user_use_with_tracked_times`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `field_groups`
+-- AUTO_INCREMENT cho bảng `field_groups`
 --
 ALTER TABLE `field_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT for table `field_items`
+-- AUTO_INCREMENT cho bảng `field_items`
 --
 ALTER TABLE `field_items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
--- AUTO_INCREMENT for table `languages`
+-- AUTO_INCREMENT cho bảng `languages`
 --
 ALTER TABLE `languages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
--- AUTO_INCREMENT for table `menus`
+-- AUTO_INCREMENT cho bảng `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `menu_nodes`
+-- AUTO_INCREMENT cho bảng `menu_nodes`
 --
 ALTER TABLE `menu_nodes`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=534;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=558;
 --
--- AUTO_INCREMENT for table `pages`
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `page_metas`
---
-ALTER TABLE `page_metas`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `post_metas`
+-- AUTO_INCREMENT cho bảng `page_metas`
+--
+ALTER TABLE `page_metas`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT cho bảng `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT cho bảng `post_metas`
 --
 ALTER TABLE `post_metas`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
--- AUTO_INCREMENT for table `product_attributes`
+-- AUTO_INCREMENT cho bảng `product_attributes`
 --
 ALTER TABLE `product_attributes`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT for table `product_attributes_products`
+-- AUTO_INCREMENT cho bảng `product_attributes_products`
 --
 ALTER TABLE `product_attributes_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `product_attribute_sets`
+-- AUTO_INCREMENT cho bảng `product_attribute_sets`
 --
 ALTER TABLE `product_attribute_sets`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `product_attribute_sets_product_categories`
+-- AUTO_INCREMENT cho bảng `product_attribute_sets_product_categories`
 --
 ALTER TABLE `product_attribute_sets_product_categories`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT for table `product_categories`
+-- AUTO_INCREMENT cho bảng `product_categories`
 --
 ALTER TABLE `product_categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT for table `product_categories_products`
+-- AUTO_INCREMENT cho bảng `product_categories_products`
 --
 ALTER TABLE `product_categories_products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
--- AUTO_INCREMENT for table `product_category_metas`
+-- AUTO_INCREMENT cho bảng `product_category_metas`
 --
 ALTER TABLE `product_category_metas`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `product_contents`
+-- AUTO_INCREMENT cho bảng `product_contents`
 --
 ALTER TABLE `product_contents`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
--- AUTO_INCREMENT for table `product_metas`
+-- AUTO_INCREMENT cho bảng `product_metas`
 --
 ALTER TABLE `product_metas`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT for table `ratings`
+-- AUTO_INCREMENT cho bảng `ratings`
 --
 ALTER TABLE `ratings`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `settings`
+-- AUTO_INCREMENT cho bảng `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
--- AUTO_INCREMENT for table `subscribed_emails`
+-- AUTO_INCREMENT cho bảng `setting_groups`
+--
+ALTER TABLE `setting_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT cho bảng `subscribed_emails`
 --
 ALTER TABLE `subscribed_emails`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
