@@ -21,23 +21,25 @@ class SettingController extends BaseAdminController
         $this->_loadAdminMenu($this->routeLink);
     }
 
-    public function index()
+    public function index($group_id)
     {
-        $settings = Models\Setting::orderBy('order', 'ASC')->get();
+        $settings = Models\Setting::where('group_id', $group_id)->orderBy('order', 'ASC')->get();
 
         $pages = Models\Page::getBy([
             'status' => 1,
         ], ['title' => 'ASC'], true);
 
-        return $this->_viewAdmin('settings.index', compact('settings', 'pages'));
+        return $this->_viewAdmin('settings.index', compact('settings', 'pages', 'group_id'));
     }
 
-    public function create(Request $request, Models\Setting $setting)
+    public function create(Request $request, Models\Setting $setting, $group_id)
     {
-        $setting->createItem($request->all());
+        $data = $request->all();
+        $data['group_id'] = $group_id;
+        $setting->createItem($data);
 
         $this->_setFlashMessage('Successfully Created New Setting', 'success');
-       
+
         $this->_showFlashMessages();
         return redirect()->back();
     }
@@ -47,7 +49,7 @@ class SettingController extends BaseAdminController
         Models\Setting::destroy($id);
 
         $this->_setFlashMessage('Successfully Deleted Setting', 'success');
-       
+
         $this->_showFlashMessages();
         return redirect()->back();
     }
@@ -97,7 +99,7 @@ class SettingController extends BaseAdminController
 
         return redirect()->back();
     }
-    
+
     private function getContentBasedOnType(Request $request, $slug, $row)
     {
         $content = null;

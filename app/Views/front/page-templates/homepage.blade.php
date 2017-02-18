@@ -29,48 +29,42 @@
     <div class="products_grid p_block_home_top">
         <h2 class="group_title"><span>Sản Phẩm mới nhất</span></h2>
         <!--<div class="banner-group"><img src=""></div>-->
-
-        <div class="row">
-            @if(isset($new_product) && !empty($new_product))
-                @forelse($new_product as $p)
-                    <?php $row = $p->productContent[0]; ?>
-                    <div class="col-md-4">
-                        <div class="grid">
-                            <div class="item">
-                                <div class="thumb">
-                                    <a class="product-image" href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">
-                                        <img class="product-img" src="/uploads/small/{{ $row->thumbnail }}" alt="{{ $row->title }}" />
-                                    </a>
-                                </div>
-                                <h3>
-                                    <a href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">{{ $row->title }}</a>
-                                </h3>
-                                <p class="sku">Mã SP: {{ $p->sku }}</p>
-                                <div class="price-box">
-                                    <span class="regular-price">
-                                        @if($row->old_price != 0)
-                                        <span class="old-price">{{ _formatPrice($row->old_price) }}</span>
-                                        @endif
-                                        <span class="price">{{ _formatPrice($row->price) }}</span>
-                                    </span>
-                                </div>
-
-
-                                <a class="linkdetail" href="{{ _getAddToCartLink($row->id) }}">Đặt hàng</a>
-                                <div class="icon" id="icon_online">
-                                    <span>Chỉ Bán Online</span>
-                                </div>
-                            </div>
+        <div class="prbx">
+        @if(isset($new_product) && !empty($new_product))
+            @forelse($new_product as $p)
+                <?php $row = $p->productContent[0]; ?>
+                <div class="col-md-3 grid">
+                    <div class="item">
+                        <div class="thumb">
+                            <a class="product-image" href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">
+                                <img class="product-img" src="{{ $row->thumbnail }}" alt="{{ $row->title }}" />
+                            </a>
+                        </div>
+                        <h3>
+                            <a href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">{{ $row->title }}</a>
+                        </h3>
+                        <div class="price-box">
+                            <span class="regular-price">
+                                @if($row->old_price != 0)
+                                <span class="old-price">{{ _formatPrice($row->old_price) }}</span>
+                                @endif
+                                <span class="price">{{ _formatPrice($row->price) }}</span>
+                            </span>
+                        </div>
+                        <div align="left" class="bgr">
+                            <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p['product_content_id']) }}">Đặt hàng</a>
+                            <a class="detail btn btn-info btn-sm" href="{{ _getAddToCartLink($p['product_content_id']) }}">Xem chi tiết</a>
                         </div>
                     </div>
-                @empty
-                    <p>Hiện tại chưa có sản phẩm nào</p>
-                @endforelse
-            @endif
+                </div>
+            @empty
+                <p>Hiện tại chưa có sản phẩm nào</p>
+            @endforelse
+        @endif
+            <div class="clearfix"></div>
         </div>
     </div>
 
-    <div class="clearfix"></div>
 
     <!--div class="banner-group">
         <p>
@@ -86,41 +80,40 @@
             <h2 class="group_title">
                 <a href="{{ _getProductCategoryLink($group['slug']) }}"><span>{{ $key }}</span></a>
             </h2>
-            <div class="row">
-                @if(!empty($group))
-                    @foreach($group as $p)
-                        @if(is_array($p))
-                        <div class="col-md-4">
-                            <div class="grid">
-                                <div class="item">
-                                    <div class="thumb">
-                                        <a class="product-image" href="{{ _getProductLink($p['slug']) }}" title="{{ $p['title'] }}">
-                                            <img class="product-img" src="/uploads/small/{{ $p['thumbnail'] }}" alt="{{ $p['title'] }}" title="{{ $p['title'] }}"/>
-                                        </a>
-                                    </div>
-                                    <h3>
-                                        <a href="{{ _getProductLink($p['slug']) }}" title="{{ $p['title'] }}">{{ $p['title'] }}</a>
-                                    </h3>
-                                    <p class="sku">Mã SP: {{ $p['sku'] }}</p>
+            @if(!empty($group))
+                @foreach($group as $p)
+                    @if(is_array($p))
+                    <div class="col-md-3 grid">
+                        <div class="item">
+                            <div class="thumb">
+                                <a class="product-image" href="{{ _getProductLink($p['slug']) }}" title="{{ $p['title'] }}">
+                                    <img class="product-img" src="{{ $p['thumbnail'] }}" alt="{{ $p['title'] }}" title="{{ $p['title'] }}"/>
+                                </a>
+                            </div>
+                            <h3>
+                                <a href="{{ _getProductLink($p['slug']) }}" title="{{ $p['title'] }}">{{ $p['title'] }}</a>
+                            </h3>
+                            <!-- <p class="sku">Mã SP: {{-- $p['sku'] --}}</p> -->
 
-                                    <div class="price-box">
-                                        <span class="regular-price">
-                                            @if($p['old_price'] != 0)
-                                            <span class="old-price">{{ _formatPrice($p['old_price']) }}</span>
-                                            @endif
-                                            <span class="price">{{ _formatPrice($p['price']) }}</span>
-                                        </span>
-                                    </div>
-
-                                    <a class="linkdetail" href="{{ _getAddToCartLink($p['product_content_id']) }}">Đặt hàng</a>
-                                </div>
+                            <div class="price-box">
+                                <span class="regular-price">
+                                    @if($p['old_price'] != 0)
+                                    <span class="old-price">{{ _formatPrice($p['old_price']) }}</span>
+                                    @endif
+                                    <span class="price">{{ _formatPrice($p['price']) }}</span>
+                                </span>
+                            </div>
+                            <div align="left" class="bgr">
+                                <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p['product_content_id']) }}">Đặt hàng</a>
+                                <a class="detail btn btn-info btn-sm" href="">Xem chi tiết</a>
                             </div>
                         </div>
-                        @endif
-                    @endforeach
-                @endif
-            </div>
+                    </div>
+                    @endif
+                @endforeach
+            @endif
         </div>
+        <div class="clearfix"></div>
         @endforeach
     @endif
 @endsection

@@ -8,8 +8,8 @@ use Illuminate\Pagination\Paginator;
 
 class PageController extends BaseFrontController
 {
-    private $_setVariableHome = [ 'home', 'homepage', 'home-page', 'trang-chu' ];
-    
+    private $_setVariableHome = [ 'home', 'homepage', 'home-page', 'trang-chu', '/' ];
+
     public function __construct()
     {
         parent::__construct();
@@ -26,9 +26,10 @@ class PageController extends BaseFrontController
             $this->_loadFrontMenu($item->id, 'page');
             $this->_loadFrontMenu($item->id, 'product-category', 'danh-muc-san-pham', null);
             $this->_getAllCustomFields($objectMeta, $item->id, 'page');
+
             return $this->_page_Homepage($item);
         }
-        
+
         // return redirect()->to($item->slug);
     }
 
@@ -49,7 +50,7 @@ class PageController extends BaseFrontController
         $this->dis['object'] = $item;
         $this->_getAllCustomFields($objectMeta, $item->id, 'page');
         // dd($this->dis['currentObjectCustomFields']);
-        
+
         return $this->_showItem($item);
     }
 
@@ -74,6 +75,7 @@ class PageController extends BaseFrontController
     /* Template Name: Homepage*/
     private function _page_Homepage(Page $object)
     {
+        // dd($this->dis['currentObjectCustomFields']);
         $this->_setBodyClass($this->bodyClass . ' page-homepage');
 
         $slideshows = json_decode($this->dis['currentObjectCustomFields']['25_slideshow']);
@@ -90,9 +92,9 @@ class PageController extends BaseFrontController
 
         $product_category = Models\ProductCategory::where('order', '>', 0)->get();
         $pushItem = [];
-        
+
         $offset = 0;
-        $limit = 3;
+        $limit = 4;
         $paged = ($offset + $limit) / $limit;
         Paginator::currentPageResolver(function () use ($paged) {
             return $paged;
@@ -119,8 +121,12 @@ class PageController extends BaseFrontController
         }
         $this->dis['groups'] =  $pushItem;
 
-        $new_product = Models\Product::getAll(null, ['id' => 'DESC'], 3 );
+        /**
+         * Get new product
+         */
+        $new_product = Models\Product::getAll(null, ['id' => 'DESC'], 4 );
         $this->dis['new_product'] = (object) $new_product;
+
         return $this->_viewFront('page-templates.homepage', $this->dis);
     }
 

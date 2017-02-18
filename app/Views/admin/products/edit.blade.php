@@ -148,6 +148,9 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12">
+            <div class="note note-warning">
+                <p><label class="label label-warning">Lưu ý</label> Khi edit sản phẩm, Vì các tab là không liên kết với nhau nên lưu trước khi sửa chữa tab mới.</p>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="clearfix">
@@ -170,7 +173,7 @@
                                     ?>
                                     <ul class="nav nav-tabs tab-change-url">
                                         <li class="{{ $currentTab == 'tab_general' ? 'active' : '' }}">
-                                            <a href="?tab=tab_general" data-target="#tab_general" data-toggle="tab">General</a>
+                                            <a href="?tab=tab_general" data-target="#tab_general" data-toggle="tab">Tổng quan</a>
                                         </li>
                                         @if($currentId != 0)
                                             @if(isset($attributeSet) && $attributeSet->count())
@@ -179,12 +182,9 @@
                                                        data-toggle="tab">Attributes</a>
                                                 </li>
                                             @endif
-                                            <li class="{{ $currentTab == 'tab_reviews' ? 'active' : '' }}">
-                                                <a href="?tab=tab_reviews" data-target="#tab_reviews" data-toggle="tab">Reviews</a>
-                                            </li>
                                             <li class="{{ $currentTab == 'tab_customfields' ? 'active' : '' }}">
                                                 <a href="?tab=tab_customfields" data-target="#tab_customfields"
-                                                   data-toggle="tab">Custom fields</a>
+                                                   data-toggle="tab">Hình ảnh, thuộc tính sản phẩm</a>
                                             </li>
                                         @endif
                                     </ul>
@@ -416,7 +416,7 @@
                                                                 </button>
                                                                 <div class="clearfix"></div>
                                                                 <a title="" class="show-add-media-popup">
-                                                                    <img src="{{ (isset($object) && trim($object->thumbnail != '')) ? '/uploads/normal/'.$object->thumbnail : '/admin/images/no-image.png' }}"
+                                                                    <img src="{{ (isset($object) && trim($object->thumbnail != '')) ? $object->thumbnail : '/admin/images/no-image.png' }}"
                                                                          alt="Thumbnail" class="img-responsive">
                                                                 </a>
                                                                 <input type="hidden" name="thumbnail"
@@ -537,8 +537,7 @@
                                                     </form>
                                                 </div>
                                             @endif
-                                            <div class="tab-pane {{ $currentTab == 'tab_reviews' ? 'active' : '' }}"
-                                                 id="tab_reviews"></div>
+
                                             <div class="tab-pane {{ $currentTab == 'tab_customfields' ? 'active' : '' }}"
                                                  id="tab_customfields">
                                                 @if(isset($customFieldBoxes) && $customFieldBoxes)

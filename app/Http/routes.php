@@ -86,12 +86,15 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->controller('orders', 'OrderController');
 
         /*Setting gernerate*/
-		Route::get('settings', 'SettingController@index')->name('web.settings');
-		Route::post('settings', 'SettingController@save');
-		Route::post('settings/create', 'SettingController@create')->name('web.settings.create');
-		Route::delete('settings/{id?}', 'SettingController@delete')->name('web.settings.delete');
+		Route::get('settings/{group_id}', 'SettingController@index')->name('web.settings');
+		Route::post('settings/{group_id}', 'SettingController@save');
+		Route::post('settings/create/{group_id}', 'SettingController@create')->name('web.settings.create');
+		Route::delete('settings/delete/{id?}', 'SettingController@delete')->name('web.settings.delete');
 		Route::get('settings/delete_value/{id}', 'SettingController@delete_value')->name('web.settings.delete_value');
 
+
+        /*Order*/
+        $router->controller('setting-groups', 'SettingGroupsController');
 
         /*Developer*/
         Route::group(['namespace' => 'Dev', 'prefix' => Config::get('laraedit.uri')], function()
@@ -128,23 +131,23 @@ $router->group(['middleware' => ['web']], function ($router) {
      */
 
     $router->group(['namespace' => 'Front'], function ($router) {
-        
+
         /* Authenticate disable default */
         /*$router->controller('auth', 'AuthController');
         $router->controller('password', 'PasswordController');*/
 
         //To use cart functions, uncomment this line
-        
+
         $router->controller('cart', 'CartController');
 
         $router->controller('global-actions', 'GlobalActionsController');
-        
+
         $router->get('tim-kiem', 'SearchController@searchlable')->name('search');
 
         $router->get('dat-hang', 'CheckoutController@getCheckout')->name('checkout');
         $router->post('dat-hang', 'CheckoutController@postCheckout')->name('post.checkout');
         $router->get('dat-hang-thanh-cong/{id}', 'CheckoutController@getOrder')->name('show.order');
-        
+
         $router->get('/', 'PageController@index')->name('home');
         $router->get('/{slug_1}', 'PageController@_handle');
 
@@ -159,7 +162,7 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->get('/danh-muc-san-pham/{slug_1}', 'ProductCategoryController@_handle')->name('productcategory.link');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}', 'ProductCategoryController@_handle');
         $router->get('/danh-muc-san-pham/{slug_1}/{slug_2}/{slug_3}', 'ProductCategoryController@_handle');
-    
+
     });
     /*
 |--------------------------------------------------------------------------

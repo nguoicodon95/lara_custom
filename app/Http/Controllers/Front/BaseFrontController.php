@@ -25,6 +25,7 @@ abstract class BaseFrontController extends BaseController
         $this->_getCart();
         $this->_loadFrontMenu('', 'page');
         $this->_loadFrontMenu('', 'product-category', 'danh-muc-san-pham', null);
+        $this->blogPopular();
     }
 
     protected function _loadFrontMenu($menuActive = '', $type = 'custom-link', $menu_name = 'main-menu', $menu_class = "nav navbar-nav")
@@ -96,6 +97,20 @@ abstract class BaseFrontController extends BaseController
         }
         view()->share([
             'metaSEO' => $data,
+        ]);
+    }
+
+    protected function blogPopular() {
+        $limit = 3;
+        $orderType = 'desc';
+        $orderBy = 'id';
+
+        $getByFields['is_popular'] = ['compare' => '=', 'value' => 1];
+        $getByFields['status'] = ['compare' => '=', 'value' => 1];
+        $object = new Models\Post();
+        $items = $object->searchBy($getByFields, [$orderBy => $orderType], true, $limit);
+        return view()->share([
+            'blog_popular' => $items
         ]);
     }
 }

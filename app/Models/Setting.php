@@ -13,12 +13,20 @@ class Setting extends AbstractModel
         'type',
         'order',
         'details',
+        'group_id'
     ];
     protected $table = 'settings';
+
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+
+    public function settingGroup()
+    {
+        return $this->belongsTo('App\Models\SettingGroup');
     }
 
     /**
@@ -85,5 +93,5 @@ class Setting extends AbstractModel
         $result = $this->fastEdit($data, true, $justUpdateSomeFields);
         return $result;
     }
-    
+
 }

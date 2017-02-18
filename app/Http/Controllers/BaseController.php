@@ -94,6 +94,7 @@ abstract class BaseController extends Controller
     {
         $showHeaderAdminBar = false;
         $setting = (int) $this->_getSetting('show_admin_bar');
+        // dd($setting);
         if ($this->_getLoggedInAdminUser(new Models\AdminUser()) && $setting == 1) {
             $showHeaderAdminBar = true;
         }

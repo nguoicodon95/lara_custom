@@ -149,6 +149,9 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
         if (isset($data['page_template'])) {
             $post->page_template = $data['page_template'];
         }
+        if (isset($data['title'])) {
+            $post->global_title = $data['title'];
+        }
         $post->save();
 
         /*Update post content*/
@@ -558,7 +561,7 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
         }
         return $obj->first();
     }
-    
+
     /*
     * Title: Search fulltextsearch on product table
     * Author: Kin

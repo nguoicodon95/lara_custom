@@ -53,7 +53,7 @@ class PageController extends BaseAdminController
         /*Group actions*/
         if ($request->get('customActionType', null) == 'group_action') {
             \DB::beginTransaction();
-            
+
             $records["customActionStatus"] = "danger";
             $records["customActionMessage"] = "Group action did not completed. Some error occurred.";
             $ids = (array) $request->get('id', []);
@@ -188,7 +188,7 @@ class PageController extends BaseAdminController
             $item = $object->getById($id, [
                 'global_status' => null,
             ]);
-            
+
             /*Create new if not exists*/
             if (!$item) {
                 $item = new Page();
@@ -224,13 +224,6 @@ class PageController extends BaseAdminController
             $data['slug'] = str_slug($data['title']);
         }
 
-        $image = $request->thumbnail_path;
-        $name = $request->thumbnail;
-        if($image != '') {
-            _resizeImage($image, $name);
-        }
-
-        
         \DB::beginTransaction();
 
         if ($id == 0) {

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Front;
 
+use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductCategoryMeta;
@@ -16,16 +17,15 @@ class ProductCategoryController extends BaseFrontController
     {
         parent::__construct();
         $this->bodyClass = 'product-category';
-        
+
     }
-    
+
     public function index () {
         // dd(1);
     }
 
     public function _handle(Request $request, ProductCategory $object, ProductCategoryMeta $objectMeta)
     {
-        // print_r($request->query());
         $segments = $request->segments();
         $slug = end($segments);
 
@@ -49,7 +49,7 @@ class ProductCategoryController extends BaseFrontController
         $child = $item->child()->get();
 
         $ps = $products = $products_in_subcate = $product_in_cate = [];
-        
+
         /* Lấy ra các sản phẩm trong danh mục con nếu có */
         if(!empty($child)) {
             foreach($child as $sub_cate) {
@@ -59,23 +59,28 @@ class ProductCategoryController extends BaseFrontController
 
         /* Lấy ra các sản phẩm các sản phẩm trong danh mục hiện tại */
         $product_in_cate[] = Product::getNoContentByCategory($item->id, $getByFields, [], null, 0);
-        
+
         /* Gộp các sản phẩm của con và cha lại */
         $products = collect($products_in_subcate)->merge($product_in_cate);
         $sort_by_el = [ 'asc', 'desc' ];
-        
+        $brands = [];
         foreach($products as $product) {
             foreach($product as $p) {
                 $ps[] = $p;
+                if(!in_array($p->brand, $brands))
+                  $brands = array_prepend($brands, $p->brand);
             }
         }
+        // Get nha san xuat
+        $this->dis['brands'] = $brands;
+
         /* Convert to collection */
         $ps = collect($ps);
         $ps_sort_filter = null;
-        
+
         /* Tạo tìm kiếm theo giá */
         $max = $ps->max('price');
-        if($max != 0) { 
+        if($max != 0) {
             switch ($max) {
                 case (int) $max < 10000000 :
                     $step = $max/2;
@@ -102,36 +107,43 @@ class ProductCategoryController extends BaseFrontController
             $this->dis['rangePrice'] = $this->createRange($betweenPrice);
         }
 
+        /* Tìm kiếm theo khoảng giá */
+        if($_getPrice = $request->get('price')) {
+            $this->dis['price_filter'] = (string) $_getPrice;
+            if($_getPrice == 'default') $ps_sort_filter = $ps;
+            else {
+                $price_convert_array = explode('-', $_getPrice);
+                $ps_sort_filter = $ps->filter(function ($value, $key) use ($price_convert_array) {
+                    if($value->price >= (double) $price_convert_array[0] && $value->price <= (double) $price_convert_array[1] ) {
+                        return true;
+                    }
+                    return false;
+                });
+            }
+        }
+
         /* Sắp xếp */
         /* Nếu có request get sortby thì sắp xếp theo request */
         if( $sortBy = $request->get('sortby') ) {
             $this->dis['sort_by'] = $sortBy;
             switch ($sortBy) {
-                case 'asc': 
+                case 'asc':
                     $ps_sort_filter = $ps->sortBy('price');
                     break;
 
-                case 'desc': 
+                case 'desc':
                     $ps_sort_filter = $ps->sortByDesc('price');
-                    break;
-                default :
-                    $ps_sort_filter = $ps->sortByDesc('id');
                     break;
             }
         } else {
             $ps_sort_filter = $ps->sortByDesc('id');
         }
 
-        /* Tìm kiếm theo khoảng giá */
-        if($_getPrice = $request->get('price')) {
-            $this->dis['price_filter'] = (string) $_getPrice;
-            $price_convert_array = explode('-', $_getPrice);
-            $ps_sort_filter = $ps->filter(function ($value, $key) use ($price_convert_array) {
-                if($value->price >= (double) $price_convert_array[0] && $value->price <= (double) $price_convert_array[1] ) {
-                    return true;                    
-                }
-                return false;
-            });
+        /* Tìm theo nhà sản xuất */
+        if($f_brand = $request->brands) {
+            $f_brand = explode(',', $f_brand);
+            $this->dis['f_brand'] = (array)$f_brand;
+            $ps_sort_filter = $ps->whereInLoose('brand_id', $f_brand);
         }
 
         /* Mặc định sắp xếp thep id giảm dần (Mới nhất) */
@@ -140,10 +152,9 @@ class ProductCategoryController extends BaseFrontController
         /*Tạo phân trang */
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $total = new Collection($all_product);
-        $perPage = 20;
+        $perPage = 15;
         $currentPageSearchResults = $total->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $this->dis['all_product'] = new LengthAwarePaginator($currentPageSearchResults, count($total), $perPage);
-
 
         /* Trả lại kết quả*/
         $this->dis['object'] = $item;
@@ -177,7 +188,7 @@ class ProductCategoryController extends BaseFrontController
         sort($array);
 
         $rangeLimits = $array;
-       
+
         $ranges = array();
 
         for($i = 0; $i < count($rangeLimits); $i++){

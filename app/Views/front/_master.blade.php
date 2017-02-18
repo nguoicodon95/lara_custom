@@ -24,7 +24,7 @@
     <!-- END THEME LAYOUT STYLES -->
 
     <link rel="stylesheet"href="//codeorigin.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-        
+
     <link rel="stylesheet" href="/css/responsive.css">
     @if($showHeaderAdminBar)
         <link rel="stylesheet" href="/admin/css/admin-bar.css">
@@ -46,7 +46,7 @@
     @include('admin/_shared/_admin-bar')
 @endif
 
-<div class="container">
+<div class="wrap">
     <noscript>
         <div class="global-site-notice noscript">
             <div class="notice-inner">
@@ -62,38 +62,64 @@
             @include('front/_shared/_header')
         </header>
         <div class="clearfix"></div>
-        <div id="maincontain" class="container col1-layout">
+        <div id="maincontain" class="col1-layout">
             <div class="main">
                 <div class="col-main">
                     @hasSection ('slideshow')
                         @yield('slideshow')
                     @else
-                        {!! _breadcrumb() !!}
-                    @endif
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="catalog">
-                                <h2 class="group_title"><span>Danh mục sản phẩm</span></h2>
-                                <a class="toggle">-</a>
-                                <div class="product-category">
-                                    {!! $danh_muc_san_pham or '' !!}
-                                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                {!! _breadcrumb() !!}
                             </div>
-                            @hasSection ('sort-a-filter')
-                                @yield('sort-a-filter')
-                            @else
-                                
-                            @endif
                         </div>
-                        <div class="col-md-9">
-                            @yield('content')
+                    </div>
+                    @endif
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                @yield('content')
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        @if(isset($blog_popular) && !empty($blog_popular))
+        <section class="blog">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        @foreach($blog_popular as $b)
+                        <div class="col-md-4 grid-blog">
+                            <div class="item">
+                                <div class="thumb">
+                                    <a class="product-image" href="" title="">
+                                        <img class="product-img" src="{{ $b->thumbnail }}" alt="{{ $b->title }}" title="{{ $b->title }}" />
+                                    </a>
+                                </div>
+                                <h3>
+                                    <a href="" title="{{ $b->title }}">{{ $b->title }}</a>
+                                </h3>
+                                <div class="sumary">
+                                    {{ $b->description }}
+                                </div>
+                                <a class="detail btn btn-info btn-sm pull-right" href="">Xem chi tiết</a>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+        @endif
         <footer class="footer">
+            @if(isset($CMSSettings['banner_bottom']))
+            <div class="banner-group">
+                <a><img src="{{ $CMSSettings['banner_bottom'] }}" /></a>
+            </div>
+            @endif
             @include('front/_shared/_footer')
         </footer>
     </div>
@@ -123,7 +149,7 @@
 <script src="/dist/app.min.js"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 <script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
-    
+
 <!-- JS INIT -->
 @yield('js-init')
 <!-- JS INIT -->

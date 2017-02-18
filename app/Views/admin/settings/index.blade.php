@@ -95,6 +95,9 @@
 @section('js')
     <script src="/admin/js/jsonarea.min.js"></script>
     <script type="text/javascript" src="/admin/core/third_party/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="/admin/core/third_party/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/admin/core/third_party/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="/admin/core/third_party/ckeditor/config.js"></script>
 @endsection
 
 @section('js-init')
@@ -175,7 +178,7 @@
     <script>
         $('document').ready(function () {
             $('.icon-trash').click(function () {
-                var action = '{{ route('web.settings') }}/' + $(this).data('id'),
+                var action = '{{ route('web.settings.delete') }}/' + $(this).data('id'),
                     display = $(this).data('display-name') + '/' + $(this).data('display-key');
 
                 $('#delete_setting_title').text(display);
@@ -188,7 +191,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('web.settings') }}" novalidate method="POST" enctype="multipart/form-data" class="js-validate-form">
+    <form action="{{ route('web.settings',$group_id) }}" novalidate method="POST" enctype="multipart/form-data" class="js-validate-form">
         {{ csrf_field() }}
         <div class="portlet light form-fit bordered">
             <div class="portlet-title">
@@ -207,6 +210,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">
                                         {{ $setting->display_name }}
+                                        <span class="help-block">Key: {{ $setting->option_key }}</span>
                                     </label>
                                     <div class="col-md-7">
                                         <select name="default_homepage" class="form-control">
@@ -214,13 +218,13 @@
                                                 <option value="{{ $row->id }}" {{ $setting->option_value == $row->id ? 'selected' : '' }}>{{ $row->title }}</option>
                                             @endforeach
                                         </select>
-                                        <span class="help-block">Homepage of this website</span>
                                     </div>
                                 </div>
                             @elseif ($setting->type == "text")
                             <div class="form-group">
                                 <label class="control-label col-md-3">
                                     {{ $setting->display_name }}
+                                    <span class="help-block">Key: {{ $setting->option_key }}</span>
                                 </label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}"/>
@@ -236,18 +240,35 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">
                                         {{ $setting->display_name }}
+                                        <span class="help-block">Key: {{ $setting->option_key }}</span>
                                     </label>
                                     <div class="col-md-6">
                                         <textarea class="form-control" name="{{ $setting->option_key }}">@if(isset($setting->option_value)){{ $setting->option_value }}@endif</textarea>
                                     </div>
                                 </div>
-                            @elseif($setting->type == "rich_text_box")
-                                <textarea class="form-control richTextBox" name="{{ $setting->option_key }}">
-                                    @if(isset($setting->option_value)){{ $setting->option_value }}@endif
-                                </textarea>
+                            @elseif($setting->type == "editor")
+                                <script>
+                                    $(document).ready(function () {
+                                        CKEDITOR.replace("wyswyg_editor_field_{{ $setting->option_key }}", {
+                                            toolbar: [['mode', 'Source', 'Image', 'TextColor', 'BGColor', 'Styles', 'Format', 'Font', 'FontSize', 'CreateDiv', 'PageBreak', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat']]
+                                        });
+                                    });
+                                </script>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">
+                                        {{ $setting->display_name }}
+                                        <span class="help-block">Key: {{ $setting->option_key }}</span>
+                                    </label>
+                                    <div class="col-md-7">
+                                        <textarea rows="3" name="{{ $setting->option_key }}" id="wyswyg_editor_field_{{ $setting->option_key }}"
+                                                data-fieldtype="wyswyg"
+                                                class="form-control wyswyg-editor">{!! $setting->option_value !!}</textarea>
+                                    </div>
+                                  </div>
                             @elseif($setting->type == "image" || $setting->type == "file")
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">{{ $setting->display_name }}</label>
+                                    <label class="control-label col-md-3">{{ $setting->display_name }}
+                                    <span class="help-block">Key: {{ $setting->option_key }}</span></label>
                                     <div class="col-md-7">
                                         <div class="select-media-box">
                                             <button type="button" class="btn blue show-add-media-popup">Choose image</button>
@@ -301,17 +322,23 @@
                                         <input type="text" class="form-control js-tags-editor" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}"/>
                                     </div>
                                 </div>
-                            @elseif($setting->type == "resize")
+                            @elseif($setting->type == "root")
                                 <div class="form-group">
                                     <label class="control-label col-md-3">{{ $setting->display_name }}</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}" placeholder="Chiều rộng x Chiều cao"/>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <i class="icon-trash"
-                                            data-id="{{ $setting->id }}"
-                                            data-display-key="{{ $setting->option_key }}"
-                                            data-display-name="{{ $setting->display_name }}"></i>
+                                    <div class="col-md-7">
+                                        <div class="md-checkbox">
+                                            <input type="checkbox"
+                                                    value="1"
+                                                    id="{{ $setting->option_key }}"
+                                                    name="{{ $setting->option_key }}"
+                                                    {{ (int)$setting->option_value == 1 ? 'checked' : '' }}
+                                                    class="md-radiobtn">
+                                            <label for="{{ $setting->option_key }}" style="margin-bottom: 0;">
+                                                <span></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span> In construction mode
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -319,46 +346,7 @@
                                 <hr>
                             @endif--}}
                         @endforeach
-                        
-                        
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Construction mode</label>
-                            <div class="col-md-7">
-                                <div class="md-checkbox">
-                                    <input type="checkbox"
-                                            value="1"
-                                            id="construction_mode"
-                                            name="construction_mode"
-                                            {{ (isset($settings['construction_mode']) && (int)$settings['construction_mode'] == 1) ? 'checked' : '' }}
-                                            class="md-radiobtn">
-                                    <label for="construction_mode" style="margin-bottom: 0;">
-                                        <span></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span> In construction mode
-                                    </label>
-                                </div>
-                                <span class="help-block">Make the site is on construction mode.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Show admin bar</label>
-                            <div class="col-md-7">
-                                <div class="md-checkbox">
-                                    <input type="checkbox"
-                                            value="1"
-                                            id="show_admin_bar"
-                                            name="show_admin_bar"
-                                            {{ (isset($settings['show_admin_bar']) && (int)$settings['show_admin_bar'] == 1) ? 'checked' : '' }}
-                                            class="md-radiobtn">
-                                    <label for="show_admin_bar" style="margin-bottom: 0;">
-                                        <span></span>
-                                        <span class="check"></span>
-                                        <span class="box"></span> Show admin bar
-                                    </label>
-                                </div>
-                                <span class="help-block">When admin logged in, still show admin bar in website.</span>
-                            </div>
-                        </div>
+
                         <div class="text-right" style="padding: 15px;">
                             <button type="submit" class="btn btn-circle green font-white btn-default">
                                 <i class="fa fa-check"></i> Update
@@ -372,11 +360,11 @@
         </div>
         <div class="clearfix"></div>
     </form>
-    
+
     <div class="row">
         <div class="col-md-12">
             <div class="portlet light form-fit">
-                
+
 
                 <div style="clear:both"></div>
 
@@ -388,7 +376,7 @@
                         </label>
                     </div>
                     <div class="panel-body">
-                        <form action="{{ route('web.settings.create') }}" method="POST">
+                        <form action="{{ route('web.settings.create', $group_id) }}" method="POST">
                             {{ csrf_field() }}
                             <div class="col-md-4">
                                 <label for="display_name">Name</label>
@@ -403,13 +391,12 @@
                                 <select name="type" class="form-control">
                                     <option value="text">Text Box</option>
                                     <option value="text_area">Text Area</option>
-                                    <option value="rich_text_box">Rich Textbox</option>
+                                    <option value="editor">Editor</option>
                                     <option value="checkbox">Check Box</option>
                                     <option value="radio_btn">Radio Button</option>
                                     <option value="select_dropdown">Select Dropdown</option>
                                     <option value="file">File</option>
                                     <option value="image">Image</option>
-                                    <option value="resize">Resize</option>
                                 </select>
                             </div>
                             <div class="col-md-12">
@@ -424,7 +411,7 @@
                                     <div id="invalid_options" class="alert-danger alert" style="display:none">Invalid Json</div>
                                 </div>
                             </div>
-                            
+
                             <div style="clear:both"></div>
                             <button type="submit" class="btn btn-primary pull-right new-setting-btn">
                                 <i class="voyager-plus"></i> Add New Setting
@@ -436,7 +423,7 @@
             </div>
         </div>
     </div>
-      
+
     <div class="modal modal-danger fade" tabindex="-1" id="delete_modal" role="dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -456,5 +443,5 @@
             </div>
         </div><!-- /.modal-content -->
     </div>
-    
+
 @endsection
