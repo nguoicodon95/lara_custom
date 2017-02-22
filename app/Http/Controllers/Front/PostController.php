@@ -25,6 +25,7 @@ class PostController extends BaseFrontController
         $this->_setCurrentEditLink('Edit this post', 'posts/edit/' . $item->id );
 
         $relatedCategoryIds = $item->category()->getRelatedIds();
+
         if($relatedCategoryIds) {
             $relatedCategoryIds = $relatedCategoryIds->toArray();
         }
@@ -35,6 +36,17 @@ class PostController extends BaseFrontController
         $this->_setMetaSEO($item->tags, $item->description, $item->thumbnail);
 
         $this->dis['object'] = $item;
+
+        $getByFields['posts.status'] = ['compare' => '=', 'value' => 1];
+        $getByFields['posts.id'] = ['compare' => '!=', 'value' => $item->id];
+        $post_in_category = [];
+        foreach ($relatedCategoryIds as $k => $v) {
+            $post_in_category[] = $item->getNoContentByCategory($v, $getByFields, ['posts.id' => 'desc'], ['posts.*'], 0);
+        }
+        $post_same_category = collect($post_in_category)->collapse();
+
+        $this->dis['post_same_category'] = _unique_multidim_array($post_same_category, 'id');
+
         $this->_getAllCustomFields($objectMeta, $item->content_id);
 
         return $this->_showItem($item);

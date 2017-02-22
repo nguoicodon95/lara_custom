@@ -1,6 +1,11 @@
 @extends('front._master')
 
 @section('css')
+  <style>
+      .main-wrapper {
+          margin-bottom: 10px;
+      }
+  </style>
 @endsection
 
 @section('js')
@@ -9,7 +14,7 @@
 
 @section('js-init')
 <script>
-	$.validator.addMethod("regx", function(value, element, regexpr) {          
+	$.validator.addMethod("regx", function(value, element, regexpr) {
 	    return regexpr.test(value);
 	}, "Số điện thoại không hợp lệ.");
 	$(function() {
@@ -60,7 +65,7 @@
       		@if(Session::has('errors'))
 				<div class="alert alert-danger">Đã có sự cố trong quá trình đặt hàng của bạn. Hãy thử lại!</div>
       		@endif
-            <h4 class="group_title">GIỎ HÀNG</h4>
+            <h4 class="group_title"><span>GIỎ HÀNG</span></h4>
             <div class="order">
                 <style>
                     table.cart-item {
@@ -98,11 +103,11 @@
                         </tr>
                     @foreach($shoppingCart['cartItems'] as $item)
                         <tr>
-                            <td>
-                                <img src="{{ asset('uploads/small/'.$item->thumbnail) }}" alt="{{ $item->title }}" width="75">
+                            <td class="text-center">
+                                <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" width="75">
                             </td>
                             <td>
-                                <a href="{{ _getProductLink($item) }}">{{ $item->title }}</a>
+                                <a href="{{ _getProductLink($item->slug) }}">{{ $item->title }}</a>
                             </td>
                             <td>
                                 <strong>{{ _formatPrice($item->price) }}</strong>
@@ -119,13 +124,13 @@
                         </tr>
                     @endforeach
                         <tr>
-                            <td><strong>Tổng cộng: </strong></td>
+                            <td class="text-center"><strong>Tổng cộng: </strong></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td>
                                 <strong>{{ _formatPrice($shoppingCart['cartSubTotal']) }}</strong>
-                                <input type="hidden" name="amount" value="{{ $shoppingCart['cartSubTotal'] }}">    
+                                <input type="hidden" name="amount" value="{{ $shoppingCart['cartSubTotal'] }}">
                             </td>
                             <td></td>
                         </tr>
@@ -139,7 +144,7 @@
                         <div class="ovl"></div>
                     </div>
                     <div class="clearfix"></div>
-                    <h4 class="group_title">THÔNG TIN ĐẶT HÀNG</h4>
+                    <h4 class="group_title"><span>THÔNG TIN ĐẶT HÀNG</span></h4>
                     <div class="row">
                         <div class="form-group col-md-6">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên" required>

@@ -15,8 +15,6 @@ use App\Http\Controllers\Controller;
 class SearchController extends BaseFrontController
 {
     public function searchlable (Request $request) {
-        // print('Chức năng đang cập nhật. <a href="/"><u>Quay lại</u></a>');die;
-        // $search = [];
         $q = $request->q;
         if(!$q) return redirect('/');
         $this->dis['products'] = ProductContent::SearchByKeyword($q)->get();

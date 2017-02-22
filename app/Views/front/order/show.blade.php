@@ -37,7 +37,7 @@
 </style>
   	<section class="main-wrapper">
       <div class="order">
-        <h4 class="group_title">ĐẶT HÀNG THÀNH CÔNG</h4>
+        <h4 class="group_title"><span>ĐẶT HÀNG THÀNH CÔNG</span></h4>
         <table class="cart-item">
             <tr>
                 <th colspan=2>Sản phẩm</th>
@@ -50,7 +50,7 @@
             <?php $item = $product->productContent[0]; ?>
             <tr>
                 <td>
-                    <img src="{{ asset('uploads/small/'.$item->thumbnail) }}" alt="{{ $item->title }}" width="75">
+                    <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" width="75">
                 </td>
                 <td>
                     <a href="{{ _getProductLink($item->slug) }}">{{ $item->title }}</a>
@@ -72,12 +72,12 @@
                 </td>
             </tr>
         </table>
-        
-        
+
+
         <h4 class="group_title"></h4>
         <div class="row">
             <div class="col-md-12">
-                <p>Cảm ơn bạn {{ $transaction->name }} đã đặt hàng tại <a href="http://ngoctraiphuquocan.com">ngoctraiphuquocan.com</a>!</p>
+                <p>Cảm ơn bạn {{ $transaction->name }} đã đặt hàng tại <a href="{{ URL::to('/') }}">cửa hàng chúng tôi</a>!</p>
                 <p>Đơn hàng của bạn đã được gửi đến chúng tôi.</p>
                 <p>Chúng tôi liên hệ lại với bạn để xác nhận thông tin đặt hàng.</p>
             </div>

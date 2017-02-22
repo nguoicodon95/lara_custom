@@ -38,7 +38,7 @@ class ProductController extends BaseFrontController
         $getByFields['products.status'] = ['compare' => '=', 'value' => 1];
         $getByFields['products.id'] = ['compare' => '!=', 'value' => $item->id];
         $pr_sm = $products = $products_in_subcate = $product_in_cate = [];
-       
+
         foreach($relatedCategoryIds as $cateId) {
             $_getcate = ProductCategory::getById($cateId);
             $child = $_getcate->child()->get();
@@ -59,8 +59,25 @@ class ProductController extends BaseFrontController
         $all_product = _unique_multidim_array($pr_sm, 'id');
         $this->dis['same_product'] = $all_product;
 
+        // Product of brand
+        $getByFieldswithBrand['status'] = ['compare' => '=', 'value' => 1];
+        $getByFieldswithBrand['brand_id'] = ['compare' => '=', 'value' => $item->brand_id];
+        $product_s_brand = $object->searchBy($getByFieldswithBrand, ['id' => 'desc'], true, 8);
+        $p_of_brand = [];
+        foreach ($product_s_brand as $r) {
+            $r = $r->productContent[0];
+            $p_of_brand[] = [
+              'title' => $r->title,
+              'slug' => $r->slug,
+              'thumbnail' => $r->thumbnail,
+              'price' => $r->price,
+              'old_price' => $r->old_price,
+            ];
+        }
+        $this->dis['product_s_brand'] = collect($p_of_brand);
+
         $this->_getAllCustomFields($objectMeta, $item->content_id);
-        
+
         return $this->_showItem($item);
     }
 

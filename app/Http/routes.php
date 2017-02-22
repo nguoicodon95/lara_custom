@@ -151,7 +151,7 @@ $router->group(['middleware' => ['web']], function ($router) {
         $router->get('/', 'PageController@index')->name('home');
         $router->get('/{slug_1}', 'PageController@_handle');
 
-        $router->get('/bai-viet/{slug_1}', 'PostController@_handle');
+        $router->get('/bai-viet/{slug_1}', 'PostController@_handle')->name('post.link');
 
         $router->get('/danh-muc/{slug_1}', 'CategoryController@_handle')->name('category.link');
         $router->get('/danh-muc/{slug_1}/{slug_2}', 'CategoryController@_handle');

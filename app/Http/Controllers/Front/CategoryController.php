@@ -3,7 +3,11 @@
 use App\Models\Category;
 use App\Models\CategoryMeta;
 use App\Models\Post;
+use App\Models\Product;
 use Illuminate\Http\Request;
+
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CategoryController extends BaseFrontController
 {
@@ -11,14 +15,32 @@ class CategoryController extends BaseFrontController
     {
         parent::__construct();
         $this->bodyClass = 'category';
+        $this->dis['show_blog'] = false;
     }
 
     public function _handle(Request $request, Category $object, CategoryMeta $objectMeta)
     {
         $segments = $request->segments();
         $slug = end($segments);
-
         $item = $object->getBySlug($slug);
+
+        $getByFields_pr['is_popular'] = ['compare' => '=', 'value' => 1];
+        $getByFields_pr['status'] = ['compare' => '=', 'value' => 1];
+        $popular_pr = Product::searchBy($getByFields_pr, ['id' => 'desc'], true, 5);
+        $pr_ar = [];
+        foreach($popular_pr as $row) {
+            $pr_ar[] = [
+                'title' => $row->productContent[0]->title,
+                'slug' => $row->productContent[0]->slug,
+                'description' => $row->productContent[0]->description,
+                'thumbnail' => $row->productContent[0]->thumbnail,
+                'price' => $row->productContent[0]->price,
+                'old_price' => $row->productContent[0]->old_price,
+            ];
+        }
+
+        $this->dis['pr_popular'] = $pr_ar;
+
 
         if (!$item) {
             return $this->_showErrorPage(404, 'Page not found');
@@ -29,6 +51,17 @@ class CategoryController extends BaseFrontController
         $this->_loadFrontMenu($item->id, 'category');
         $this->_setPageTitle($item->title);
         $this->_setMetaSEO($item->tags, $item->description, $item->thumbnail);
+
+        /* GET POSTS IN CATEGORY WHERE STATUS ACTIVE */
+        $getByFields['posts.status'] = ['compare' => '=', 'value' => 1];
+        $relatedPosts = Post::getNoContentByCategory($item->id, $getByFields, ['id' => 'desc'], ['posts.*'], 0);
+        // $this->dis['relatedPosts'] = $relatedPosts;
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $total = new Collection($relatedPosts);
+        $perPage = 12;
+        $currentPageSearchResults = $total->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $this->dis['relatedPosts'] = new LengthAwarePaginator($currentPageSearchResults, count($total), $perPage);
 
         $this->dis['object'] = $item;
         $this->_getAllCustomFields($objectMeta, $item->content_id);

@@ -5,6 +5,7 @@ use App\Models;
 use App\Models\AbstractModel;
 use App\Models\Category;
 use App\Models\Contracts;
+use Carbon\Carbon;
 
 class Post extends AbstractModel implements Contracts\MultiLanguageInterface
 {
@@ -315,7 +316,7 @@ class Post extends AbstractModel implements Contracts\MultiLanguageInterface
     }
 
 
-    public static function getByCategory($id, $languageId, $otherFields = [], $order = null, $select = null, $perPage = 0)
+    public static function getByCategory($id, $otherFields = [], $order = null, $select = null, $perPage = 0)
     {
         $items = Post::join('categories_posts', 'categories_posts.post_id', '=', 'posts.id')
             ->join('categories', 'categories.id', '=', 'categories_posts.category_id')
@@ -398,6 +399,9 @@ class Post extends AbstractModel implements Contracts\MultiLanguageInterface
         return $items->get();
     }
 
+    public function getCreatedAtAttribute($value) {
+    	return Carbon::parse($value)->format('d/m/Y H:i');
+    }
 
     /*
     * Title: Search fulltextsearch on posts table

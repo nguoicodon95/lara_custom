@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="/admin/css/admin-bar.css">
     @endif
 
-    <link rel="shortcut icon" href="/images/logo/favicon.png"/>
+    <link rel="shortcut icon" href="{{ $CMSSettings['favicon'] or '' }}"/>
 
     {!! $CMSSettings['google_analytics'] or '' !!}
     <script>
@@ -38,6 +38,10 @@
         var upUrl = "{{ asset('/').'/cart/update-cart-quantity/' }}";
     </script>
     @stack('style')
+
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="/dist/core.min.js"></script>
+    <!-- END CORE PLUGINS -->
 </head>
 
 <body class="cms-index-index cms-home">
@@ -86,7 +90,7 @@
                 </div>
             </div>
         </div>
-        @if(isset($blog_popular) && !empty($blog_popular))
+        @if(isset($blog_popular) && isset($show_blog) && !empty($blog_popular) && $show_blog == true)
         <section class="blog">
             <div class="container">
                 <div class="row">
@@ -95,12 +99,12 @@
                         <div class="col-md-4 grid-blog">
                             <div class="item">
                                 <div class="thumb">
-                                    <a class="product-image" href="" title="">
+                                    <a class="product-image" href="{{ _getPostLink($b->slug) }}" title="{{ $b->title }}">
                                         <img class="product-img" src="{{ $b->thumbnail }}" alt="{{ $b->title }}" title="{{ $b->title }}" />
                                     </a>
                                 </div>
                                 <h3>
-                                    <a href="" title="{{ $b->title }}">{{ $b->title }}</a>
+                                    <a href="{{ _getPostLink($b->slug) }}" title="{{ $b->title }}">{{ $b->title }}</a>
                                 </h3>
                                 <div class="sumary">
                                     {{ $b->description }}
@@ -117,7 +121,7 @@
         <footer class="footer">
             @if(isset($CMSSettings['banner_bottom']))
             <div class="banner-group">
-                <a><img src="{{ $CMSSettings['banner_bottom'] }}" /></a>
+                <a><img src="{{ $CMSSettings['banner_bottom'] or '' }}" /></a>
             </div>
             @endif
             @include('front/_shared/_footer')
@@ -137,10 +141,6 @@
 @include('front/_shared/_google-captcha')
 <!--Google captcha-->
 
-<!-- BEGIN CORE PLUGINS -->
-<script src="/dist/core.min.js"></script>
-<!-- END CORE PLUGINS -->
-
 <!-- OTHER PLUGINS -->
 @yield('js')
 <!-- END OTHER PLUGINS -->
@@ -148,7 +148,6 @@
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="/dist/app.min.js"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
-<script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
 
 <!-- JS INIT -->
 @yield('js-init')
@@ -213,22 +212,21 @@
     })(jQuery);
 
     $('.quantity').change(function(event) {
-	    var value = $(this).val();
-	    var id = $(this).attr('pid');
-	    $.ajax({
-	      	url: upUrl + id + '/' + value,
-	      	type: 'GET',
-		 	beforeSend: function(){
-		    	$('.loading').css('display', 'block');
-		  	},
-		  	complete: function(){
-	        	location.reload()
-		   	}
-	    });
-	});
+  	    var value = $(this).val();
+  	    var id = $(this).attr('pid');
+  	    $.ajax({
+  	      	url: upUrl + id + '/' + value,
+  	      	type: 'GET',
+  		 	beforeSend: function(){
+  		    	$('.loading').css('display', 'block');
+  		  	},
+  		  	complete: function(){
+  	        	location.reload()
+  		   	}
+  	    });
+  	});
 
 	/*Delete item*/
-
     $('.deteteElem').click(function(event) {
         var id = $(this).attr('id');
         $.ajax({
@@ -262,15 +260,12 @@
         });
     })(jQuery);
 
-    (function($) {
-       /* $("#search").autocomplete({
-            source: '{{ route('search') }}',
-            minLength: 1,
-            select: function( event, ui ) {
-                $('#search').val(ui.item.id);
-            }
-        });*/
-    })(jQuery);
+    $('.header').css({
+        'background-image': "url({{ $CMSSettings['bg_header'] }})",
+        'background-repeat': "no-repeat",
+        'background-position': '0px 25%',
+        'background-size': '100%'
+    })
 </script>
 
 @include('front/_shared/_flash-messages')

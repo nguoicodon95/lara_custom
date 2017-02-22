@@ -4,7 +4,7 @@
             <!--logo-->
             <div id="logo" class="pull-left">
                 <a href="/" title="" class="logo">
-                    <img src="/images/logo/logo.png" alt="{{ $CMSSettings['site_title'] or '' }}" />
+                    <img src="{{ $CMSSettings['site_logo'] or '/images/logo/logo.png' }}" alt="{{ $CMSSettings['site_title'] or '' }}" />
                 </a>
             </div>
             <!--end logo-->
@@ -27,8 +27,8 @@
              <ul class="cd-cart-items">
                     @foreach($shoppingCart['cartItems'] as $item)
                     <li>
-                        <div class="thumb pull-left">
-                            <img src="{{ asset('uploads/small/'.$item->thumbnail) }}" alt="{{ $item->title }}" width="55">
+                        <div class="thumb pull-left" style="line-height: 45px;">
+                            <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" width="55">
                         </div>
                         <div class="general pull-left">{{ $item->title }}
                             <div class="cd-price">

@@ -20,7 +20,7 @@ class CheckoutController extends BaseFrontController
         return view('front.order.index');
     }
 
-    public function postCheckout(Request $request)
+    public function postCheckout(Request $request, Models\Transaction $obj)
     {
         // print('Chức năng đang cập nhật. <a href="/"><u>Quay lại</u></a>');die;
         $validator = \Validator::make($request->all(), [
@@ -34,8 +34,7 @@ class CheckoutController extends BaseFrontController
             return redirect()->back()->withErrors($validator)->withInput();
         }
         // dd($request->all());
-        $transaction = Models\Transaction::create([
-            'gender' => $request->gender,
+        $transaction = $obj->createItem([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -43,10 +42,9 @@ class CheckoutController extends BaseFrontController
             'messages' => $request->note,
             'amount' => $request->amount ? $request->amount : $this->cart['cartSubTotal'],
         ]);
-
         foreach ($this->cart['cartItems'] as $product) {
             Models\Order::create([
-                'transaction_id' => $transaction->id,
+                'transaction_id' => $transaction['object']->id,
                 'product_id' => $product->product_id,
                 'qty' => $product->quantity,
                 'amount' => $product->quantity*$product->price,
@@ -55,7 +53,7 @@ class CheckoutController extends BaseFrontController
 
         $this->_unsetCart();
         $request->session()->put('view_order', '1');
-        return redirect()->route('show.order', $transaction->id);
+        return redirect()->route('show.order', $transaction['object']->id);
     }
 
     public function getOrder(Request $request, $id) {
@@ -63,12 +61,12 @@ class CheckoutController extends BaseFrontController
         $this->dis['transaction'] = Models\Transaction::find($id);
         if(!$this->dis['transaction']) return redirect('/');
 
-        if ($request->session()->has('view_order')) {
-            $request->session()->forget('view_order');
+        // if ($request->session()->has('view_order')) {
+            // $request->session()->forget('view_order');
             return view('front.order.show', $this->dis);
-        } else {
-            return redirect('/');
-        }
+        // } else {
+            // return redirect('/');
+        // }
 
     }
 }

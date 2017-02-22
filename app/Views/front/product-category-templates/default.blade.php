@@ -87,14 +87,14 @@
                         <div class="price-box">
                             <span class="regular-price">
                                 @if($p->old_price != 0)
-                                <span class="old-price">{{ _formatPrice($p->old_price) }}</span>
+                                <span class="old-price"><s>{{ _formatPrice($p->old_price) }}</s></span>
                                 @endif
                                 <span class="price">{{ _formatPrice($p->price) }}</span>
                             </span>
                         </div>
                         <div align="left" class="bgr">
-                            <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p['product_content_id']) }}">Đặt hàng</a>
-                            <a class="detail btn btn-info btn-sm" href="{{ _getAddToCartLink($p['product_content_id']) }}">Xem chi tiết</a>
+                            <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p->id) }}">Đặt hàng</a>
+                            <a class="detail btn btn-info btn-sm" href="{{ _getProductLink($p->slug) }}">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>

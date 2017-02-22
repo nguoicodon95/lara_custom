@@ -274,7 +274,7 @@ class CategoryController extends BaseAdminController
                 $status,
                 $row->order,
                 $popular,
-                $row->created_at->toDateTimeString(),
+                $row->created_at,
                 '<a class="fast-edit" title="Fast edit">Fast edit</a>',
                 '<a href="' . $link . '" class="btn btn-outline green btn-sm"><i class="icon-pencil"></i></a>' .
                 '<button type="button" data-ajax="' . $removeLink . '" data-method="DELETE" data-toggle="confirmation" class="btn btn-outline red-sunglo btn-sm ajax-link"><i class="fa fa-trash"></i></button>',
@@ -360,7 +360,7 @@ class CategoryController extends BaseAdminController
         if($image != '') {
             _resizeImage($image, $name);
         }
-        
+
         \DB::beginTransaction();
 
         if ($id == 0) {

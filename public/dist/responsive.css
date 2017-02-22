@@ -47,6 +47,9 @@
             border: 1px solid #dcdbdb;
             margin-top: -1px;
         }
+        .header_container {
+            height: 0;
+        }
     }
 
     @media screen and (min-width: 320px) and (max-width: 493px) {

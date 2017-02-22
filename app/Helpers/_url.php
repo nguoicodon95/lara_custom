@@ -12,13 +12,9 @@ if (!function_exists('_getPageLink')) {
 }
 
 if (!function_exists('_getPostLink')) {
-    function _getPostLink($post)
+    function _getPostLink($slug)
     {
-        if (!is_string($post)) {
-            $post = $post->slug;
-        }
-
-        return '/bai-viet/' . $post;
+        return route('post.link', $slug);
     }
 }
 
@@ -86,7 +82,7 @@ if (!function_exists('_getCategoryLinkWithParentSlugs')) {
 if (!function_exists('_getProductCategoryLinkWithParentSlugs')) {
     function _getProductCategoryLinkWithParentSlugs($categoryId)
     {
-       
+
         return '/danh-muc-san-pham/' . _getCategorySlugs('productCategory', $categoryId);
     }
 }

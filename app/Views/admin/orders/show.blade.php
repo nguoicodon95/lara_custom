@@ -70,7 +70,7 @@
                                                          Order #:
                                                     </div>
                                                     <div class="col-md-7 value">
-                                                        {{ $transaction->id }} 
+                                                        {{ $transaction->id }}
                                                     </div>
                                                 </div>
                                                 <div class="row static-info">
@@ -148,7 +148,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="portlet grey-cascade box">
@@ -186,14 +186,14 @@
                                                     <?php $row = $p->productContent[0]; ?>
                                                     <tr>
                                                         <td>
-                                                            <a href="javascript:;">
+                                                            <a href="{{ _getProductLink($row->slug) }}" target="_blank">
                                                             {{ $row->title }} 1 </a>
                                                         </td>
                                                         <td>
                                                             <span class="label label-sm label-success">
                                                             {{ _formatPrice($row->price) }}
                                                         </td>
-                                                        
+
                                                         <td>
                                                             {{ $order->qty }}
                                                         </td>

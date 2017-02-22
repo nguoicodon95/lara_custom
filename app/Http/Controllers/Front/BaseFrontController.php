@@ -26,6 +26,7 @@ abstract class BaseFrontController extends BaseController
         $this->_loadFrontMenu('', 'page');
         $this->_loadFrontMenu('', 'product-category', 'danh-muc-san-pham', null);
         $this->blogPopular();
+        $this->dis['show_blog'] = true;
     }
 
     protected function _loadFrontMenu($menuActive = '', $type = 'custom-link', $menu_name = 'main-menu', $menu_class = "nav navbar-nav")
@@ -88,7 +89,7 @@ abstract class BaseFrontController extends BaseController
         if ($description) {
             $data['description'] = $description;
         } else {
-            $data['description'] = $this->_getSetting('site_keywords');
+            $data['description'] = $this->_getSetting('site_description');
         }
         if ($image) {
             $data['image'] = asset($image);

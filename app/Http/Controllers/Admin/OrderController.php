@@ -168,11 +168,12 @@ class OrderController extends BaseAdminController
         return response()->json($records);
     }
 
-    public function getDetail($id) {
-        $trans = Transaction::find($id);
-        $trans->update([
+    public function getDetail($id, Transaction $object) {
+        $data = [
             'viewed' => 1
-        ]);
+        ];
+        $result = $object->updateItemContent($id, $data);
+        $trans = $object->getById($id);
         $this->dis['transaction'] = $trans;
         return $this->_viewAdmin('orders.show', $this->dis);
     }

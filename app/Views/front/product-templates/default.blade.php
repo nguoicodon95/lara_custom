@@ -2,6 +2,73 @@
 
 @section('css')
     <link href="/css/ubislider.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .detail-post h1 {
+            font-size: 18px;
+        }
+
+        .post.excerpt, .pr.excerpt {
+          clear: both;
+          margin-bottom: 30px;
+          background-color: #fff;
+          padding: 20px;
+          border: 1px solid #cdcdcd;
+        }
+        .corner:before {
+          content: "";
+          position: absolute;
+          left: -10px;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 0 10px 10px;
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0);
+      }
+      .post-date-ribbon {
+          text-align: center;
+          line-height: 25px;
+          color: #fff;
+          font-size: 12px;
+          margin-top: -30px;
+          position: relative;
+          padding: 0 7px;
+          float: left;
+          background-color: #0182c6;
+      }
+      article header {
+          margin-bottom: 0;
+          float: left;
+      }
+      .title {
+          margin-bottom: 5px;
+          margin-top: 10px;
+          font-size: 15px;
+          line-height: 18px;
+          display: inline;
+      }
+      .featured-thumbnail {
+          float: left;
+          max-width: 150px;
+          width: 27.2%;
+          margin-right: 10px;
+          line-height: 2;
+      }
+
+      .popular_pr {
+          display: block;
+          background: #fff;
+          padding: 10px;
+      }
+      .popular_pr .thumb {
+          width: 30%;
+          float: left;
+          padding-right: 5px;
+      }
+      .popular_pr h2 {
+          font-size: 15px;
+          line-height: 18px;
+      }
+    </style>
 @endsection
 
 @section('js')
@@ -18,12 +85,12 @@
             autoSlideOnLastClick: true,
             modalOnClick: true,
             position: 'vertical'
-        }); 
+        });
 
         (function(){
 
             $('#itemslider').carousel({ interval: 3000 });
-            
+
             $('.carousel-showmanymoveone .item').each(function(){
                 var itemToClone = $(this);
 
@@ -56,15 +123,15 @@
                 <ul id="gal1" class="ubislider-inner">
                     <li>
                         <a>
-                            <img src="{{ '/uploads/normal/'.$object->thumbnail }}" alt="">
+                            <img src="{{ $object->thumbnail }}" alt="">
                         </a>
                     </li>
                     @if(!empty($thumbs) && isset($thumbs))
                         @foreach($thumbs as $thumb)
-                        <li> 
-                            <a> 
-                                <img class="product-v-img" src="{{ $thumb['src'] }}"> 
-                            </a> 
+                        <li>
+                            <a>
+                                <img class="product-v-img" src="{{ $thumb['src'] }}">
+                            </a>
                         </li>
                         @endforeach
                     @endif
@@ -111,7 +178,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+    </div>
+    <div class="row">
+        <div class="col-md-8">
             <h2 class="group_title">
                 <span>Thông tin chi chiết</span>
             </h2>
@@ -119,8 +188,32 @@
                 {!! $object->content !!}
             </div>
         </div>
+        <div class="col-md-4 filterbx hidden-xs">
+            <h2 class="group_title">
+                <span>Sản phẩm {{ $object->brand->name }}</span>
+            </h2>
+            @if(isset($product_s_brand) && !empty($product_s_brand))
+              @foreach($product_s_brand as $r)
+              <article class="pr excerpt">
+                  <div class="post-date-ribbon">
+                      <div class="corner"></div><u>Giá:</u> {{ _formatPrice($r['price']) }}
+                  </div>
+                  <header>
+                  <a href="{{ _getPostLink($r['slug']) }}" title="{{ $r['title'] or '' }}">
+                      <div class="featured-thumbnail">
+                          <img src="{{ $r['thumbnail'] or '' }}" class="attachment-ribbon-lite-featured size-ribbon-lite-featured wp-post-image" alt="{{ $r['title'] or '' }}" title="{{ $r['title'] or '' }}">
+                      </div>
+                  </a>
+                  <h2 class="title text-center">
+                      <a href="{{ _getPostLink($r['slug']) }}" title="{{ $r['title'] or '' }}" rel="bookmark">{{ $r['title'] or '' }}</a>
+                  </h2>
+                  </header><!--.header-->
+                  <div class="clearfix"></div>
+              </article>
+              @endforeach
+            @endif
+        </div>
     </div>
-    
     <h2 class="group_title">
         <span>Sản phẩm cùng loại</span>
     </h2>
@@ -139,14 +232,14 @@
                     <div class="item {{ $active }}">
                         <div class="col-xs-12 col-sm-6 col-md-2">
                         <a href="{{ _getProductLink($p->slug) }}">
-                            <img src="/uploads/small/{{ $p->thumbnail }}" class="img-responsive center-block">
+                            <img src="{{ $p->thumbnail }}" class="img-responsive center-block">
+                            <h4 class="text-center">{{ $p->title }}</h4>
                         </a>
-                        <h4 class="text-center">{{ $p->title }}</h4>
 
                         <div class="price-box" align="center">
                             <span class="regular-price">
                                 @if($p['old_price'] != 0)
-                                <span class="old-price">{{ _formatPrice($p->old_price) }}</span>
+                                <span class="old-price"><s>{{ _formatPrice($p->old_price) }}</s></span>
                                 @endif
                                 <span class="price">{{ _formatPrice($p->price) }}</span>
                             </span>
@@ -159,13 +252,13 @@
 
                 <div id="slider-control">
                 <a class="left carousel-control" href="#itemslider" data-slide="prev">
-                    <img src="https://s12.postimg.org/uj3ffq90d/arrow_left.png" alt="Left" class="img-responsive">
+                    <img src="/images/libraries/arrow_left.png" alt="Left" class="img-responsive">
                 </a>
                 <a class="right carousel-control" href="#itemslider" data-slide="next">
-                    <img src="https://s12.postimg.org/djuh0gxst/arrow_right.png" alt="Right" class="img-responsive">
+                    <img src="/images/libraries/arrow_right.png" alt="Right" class="img-responsive">
                 </a>
             </div>
         </div>
     </div>
-    
+
 @endsection
