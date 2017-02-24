@@ -4,11 +4,12 @@ namespace App\Models;
 
 use \Carbon\Carbon;
 use App\Models\AbstractModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Order extends AbstractModel
+class Order extends Model
 {
     protected $table = 'orders';
-    protected $editableFields = [
+    protected $fillable = [
         'qty',
         'amount',
         'transaction_id',

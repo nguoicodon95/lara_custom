@@ -111,7 +111,7 @@
                 </header><!--.header-->
                 <a href="{{ _getPostLink($row->slug) }}" title="{{ $row->title or '' }}" id="featured-thumbnail">
                     <div class="featured-thumbnail">
-                        <img width="150" height="120" src="{{ $row->thumbnail or '' }}" class="attachment-ribbon-lite-featured size-ribbon-lite-featured wp-post-image" alt="{{ $row->title or '' }}" title="{{ $row->title or '' }}" srcset="" sizes="(max-width: 150px) 100vw, 150px">
+                        <img width="150" height="120" src="{{ $row->thumbnail or '' }}" class="size-ribbon-lite-featured" alt="{{ $row->title or '' }}" title="{{ $row->title or '' }}" srcset="" sizes="(max-width: 150px) 100vw, 150px">
                     </div>
                 </a>
                 <div class="post-content">

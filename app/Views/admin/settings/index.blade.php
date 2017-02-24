@@ -191,6 +191,7 @@
 @endsection
 
 @section('content')
+@if($group_id != 4)
     <form action="{{ route('web.settings',$group_id) }}" novalidate method="POST" enctype="multipart/form-data" class="js-validate-form">
         {{ csrf_field() }}
         <div class="portlet light form-fit bordered">
@@ -205,6 +206,7 @@
                 <div class="form-horizontal form-bordered">
                     <div class="form-body">
                         <div class="panel-body">
+
                         @foreach($settings as $setting)
                             @if ($setting->type == "homepage")
                                 <div class="form-group">
@@ -228,6 +230,22 @@
                                 </label>
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" value="{{ $setting->option_value }}" name="{{ $setting->option_key }}"/>
+                                </div>
+                                <div class="col-md-1">
+                                    <i class="icon-trash"
+                                        data-id="{{ $setting->id }}"
+                                        data-display-key="{{ $setting->option_key }}"
+                                        data-display-name="{{ $setting->display_name }}"></i>
+                                </div>
+                            </div>
+                            @elseif ($setting->type == "password")
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    {{ $setting->display_name }}
+                                    <span class="help-block">Key: {{ $setting->option_key }}</span>
+                                </label>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control" name="{{ $setting->option_key }}"/>
                                 </div>
                                 <div class="col-md-1">
                                     <i class="icon-trash"
@@ -390,6 +408,7 @@
                                 <label>Type</label>
                                 <select name="type" class="form-control">
                                     <option value="text">Text Box</option>
+                                    <option value="password">Password</option>
                                     <option value="text_area">Text Area</option>
                                     <option value="editor">Editor</option>
                                     <option value="checkbox">Check Box</option>
@@ -443,5 +462,7 @@
             </div>
         </div><!-- /.modal-content -->
     </div>
-
+@else
+  Đây là bộ phận không thể tiếp cận, có thể ảnh hưởng đến việc chạy site
+@endif
 @endsection

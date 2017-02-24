@@ -12,6 +12,17 @@
 @endsection
 
 @section('js-init')
+  <script type="text/javascript">
+      // store the currently selected tab in the hash value
+      $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+          var id = $(e.target).attr("href").substr(1);
+          window.location.hash = id;
+      });
+
+      // on load of the page: switch to the currently selected tab
+      var hash = window.location.hash;
+          $('#o_tab a[href="' + hash + '"]').tab('show');
+  </script>
 @endsection
 
 @section('content')
@@ -46,14 +57,18 @@
                 </div>
                 <div class="portlet-body">
                     <div class="tabbable">
-                        <ul class="nav nav-tabs nav-tabs-lg">
+                        <ul class="nav nav-tabs nav-tabs-lg" id="o_tab">
                             <li class="active">
-                                <a href="#tab_1" data-toggle="tab">
-                                Details </a>
+                                <a href="#detail-order" data-toggle="tab">
+                                Thông tin đặt hàng </a>
+                            </li>
+                            <li>
+                                <a href="#update-order" data-toggle="tab">
+                                Cập nhật đơn đặt hàng </a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
+                            <div class="tab-pane active" id="detail-order">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="portlet yellow-crusta box">
@@ -183,11 +198,11 @@
                                                     <tbody>
                                                     @foreach($transaction->orders as $order)
                                                     <?php $p = $order->products; ?>
-                                                    <?php $row = $p->productContent[0]; ?>
+                                                    <?php $row = $p->productContent; ?>
                                                     <tr>
                                                         <td>
                                                             <a href="{{ _getProductLink($row->slug) }}" target="_blank">
-                                                            {{ $row->title }} 1 </a>
+                                                            {{ $row->title }} </a>
                                                         </td>
                                                         <td>
                                                             <span class="label label-sm label-success">
@@ -214,46 +229,6 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="well">
-                                            <!-- <div class="row static-info align-reverse">
-                                                <div class="col-md-8 name">
-                                                     Sub Total:
-                                                </div>
-                                                <div class="col-md-3 value">
-                                                     $1,124.50
-                                                </div>
-                                            </div>
-                                            <div class="row static-info align-reverse">
-                                                <div class="col-md-8 name">
-                                                     Shipping:
-                                                </div>
-                                                <div class="col-md-3 value">
-                                                     $40.50
-                                                </div>
-                                            </div>
-                                            <div class="row static-info align-reverse">
-                                                <div class="col-md-8 name">
-                                                     Grand Total:
-                                                </div>
-                                                <div class="col-md-3 value">
-                                                     $1,260.00
-                                                </div>
-                                            </div>
-                                            <div class="row static-info align-reverse">
-                                                <div class="col-md-8 name">
-                                                     Total Paid:
-                                                </div>
-                                                <div class="col-md-3 value">
-                                                     $1,260.00
-                                                </div>
-                                            </div>
-                                            <div class="row static-info align-reverse">
-                                                <div class="col-md-8 name">
-                                                     Total Refunded:
-                                                </div>
-                                                <div class="col-md-3 value">
-                                                     $0.00
-                                                </div>
-                                            </div> -->
                                             <div class="row static-info align-reverse">
                                                 <div class="col-md-8 name">
                                                      Total:
@@ -266,237 +241,49 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab_2">
-                                <div class="table-container">
-                                    <div class="table-actions-wrapper">
-                                        <span>
-                                        </span>
-                                        <select class="table-group-action-input form-control input-inline input-small input-sm">
-                                            <option value="">Select...</option>
-                                            <option value="pending">Pending</option>
-                                            <option value="paid">Paid</option>
-                                            <option value="canceled">Canceled</option>
-                                        </select>
-                                        <button class="btn btn-sm yellow table-group-action-submit"><i class="fa fa-check"></i> Submit</button>
-                                    </div>
-                                    <table class="table table-striped table-bordered table-hover" id="datatable_invoices">
-                                    <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="5%">
-                                            <input type="checkbox" class="group-checkable">
-                                        </th>
-                                        <th width="5%">
-                                             Invoice&nbsp;#
-                                        </th>
-                                        <th width="15%">
-                                             Bill To
-                                        </th>
-                                        <th width="15%">
-                                             Invoice&nbsp;Date
-                                        </th>
-                                        <th width="10%">
-                                             Amount
-                                        </th>
-                                        <th width="10%">
-                                             Status
-                                        </th>
-                                        <th width="10%">
-                                             Actions
-                                        </th>
-                                    </tr>
-                                    <tr role="row" class="filter">
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_no">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_bill_to">
-                                        </td>
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_invoice_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_from" placeholder="From"/>
-                                            </div>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_invoice_amount_to" placeholder="To"/>
-                                        </td>
-                                        <td>
-                                            <select name="order_invoice_status" class="form-control form-filter input-sm">
-                                                <option value="">Select...</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="paid">Paid</option>
-                                                <option value="canceled">Canceled</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
-                                            </div>
-                                            <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
-                                        </td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab_3">
-                                <div class="table-container">
-                                    <table class="table table-striped table-bordered table-hover" id="datatable_credit_memos">
-                                    <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="5%">
-                                             Credit&nbsp;Memo&nbsp;#
-                                        </th>
-                                        <th width="15%">
-                                             Bill To
-                                        </th>
-                                        <th width="15%">
-                                             Created&nbsp;Date
-                                        </th>
-                                        <th width="10%">
-                                             Status
-                                        </th>
-                                        <th width="10%">
-                                             Actions
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab_4">
-                                <div class="table-container">
-                                    <table class="table table-striped table-bordered table-hover" id="datatable_shipment">
-                                    <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="5%">
-                                             Shipment&nbsp;#
-                                        </th>
-                                        <th width="15%">
-                                             Ship&nbsp;To
-                                        </th>
-                                        <th width="15%">
-                                             Shipped&nbsp;Date
-                                        </th>
-                                        <th width="10%">
-                                             Quantity
-                                        </th>
-                                        <th width="10%">
-                                             Actions
-                                        </th>
-                                    </tr>
-                                    <tr role="row" class="filter">
-                                        <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_no">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_ship_to">
-                                        </td>
-                                        <td>
-                                            <div class="input-group date date-picker margin-bottom-5" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                            <div class="input-group date date-picker" data-date-format="dd/mm/yyyy">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_shipment_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_from" placeholder="From"/>
-                                            </div>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_shipment_quantity_to" placeholder="To"/>
-                                        </td>
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
-                                            </div>
-                                            <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
-                                        </td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tab_5">
-                                <div class="table-container">
-                                    <table class="table table-striped table-bordered table-hover" id="datatable_history">
-                                    <thead>
-                                    <tr role="row" class="heading">
-                                        <th width="25%">
-                                             Datetime
-                                        </th>
-                                        <th width="55%">
-                                             Description
-                                        </th>
-                                        <th width="10%">
-                                             Notification
-                                        </th>
-                                        <th width="10%">
-                                             Actions
-                                        </th>
-                                    </tr>
-                                    <tr role="row" class="filter">
-                                        <td>
-                                            <div class="input-group date datetime-picker margin-bottom-5" data-date-format="dd/mm/yyyy hh:ii">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_from" placeholder="From">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default date-set" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                            <div class="input-group date datetime-picker" data-date-format="dd/mm/yyyy hh:ii">
-                                                <input type="text" class="form-control form-filter input-sm" readonly name="order_history_date_to" placeholder="To">
-                                                <span class="input-group-btn">
-                                                <button class="btn btn-sm default date-set" type="button"><i class="fa fa-calendar"></i></button>
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control form-filter input-sm" name="order_history_desc" placeholder="To"/>
-                                        </td>
-                                        <td>
-                                            <select name="order_history_notification" class="form-control form-filter input-sm">
-                                                <option value="">Select...</option>
-                                                <option value="pending">Pending</option>
-                                                <option value="notified">Notified</option>
-                                                <option value="failed">Failed</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="margin-bottom-5">
-                                                <button class="btn btn-sm yellow filter-submit margin-bottom"><i class="fa fa-search"></i> Search</button>
-                                            </div>
-                                            <button class="btn btn-sm red filter-cancel"><i class="fa fa-times"></i> Reset</button>
-                                        </td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                    </table>
+                            <div class="tab-pane" id="update-order">
+                                <div class="col-md-12">
+                                    <form action="" method="post">
+                                        {{ csrf_field() }}
+                                        <table width="100%">
+                                            <tr>
+                                                <td width="20%">
+                                                    <label><b>Trạng thái đơn hàng</b></label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <select name="status" class="table-group-action-input form-control input-inline input-small input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="0" {{ $transaction->status == 0 ? 'selected' : ''  }}>Chưa giải quyết</option>
+                                                            <option value="1" {{ $transaction->status == 1 ? 'selected' : ''  }}>Đã giải quyết</option>
+                                                            <option value="2" {{ $transaction->status == 2 ? 'selected' : ''  }}>Giữ lại</option>
+                                                            <option value="3" {{ $transaction->status == 3 ? 'selected' : ''  }}>Hủy</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">
+                                                    <label><b>Ghi chú đơn hàng</b></label>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <textarea name="note" class="form-control" rows="5">{{ $transaction->note or '' }}</textarea>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan=2>
+                                                    <label class="pull-left">
+                                                        <input type="checkbox" name="sent_mail">Gửi email đến khách hàng
+                                                    </label>
+                                                    <button class="btn btn-sm green pull-right">
+                                                        <i class="fa fa-check"></i> Cập nhật
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -65,7 +65,7 @@ class ProductController extends BaseFrontController
         $product_s_brand = $object->searchBy($getByFieldswithBrand, ['id' => 'desc'], true, 8);
         $p_of_brand = [];
         foreach ($product_s_brand as $r) {
-            $r = $r->productContent[0];
+            $r = $r->productContent;
             $p_of_brand[] = [
               'title' => $r->title,
               'slug' => $r->slug,

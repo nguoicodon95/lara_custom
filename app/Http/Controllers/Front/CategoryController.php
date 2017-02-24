@@ -30,12 +30,12 @@ class CategoryController extends BaseFrontController
         $pr_ar = [];
         foreach($popular_pr as $row) {
             $pr_ar[] = [
-                'title' => $row->productContent[0]->title,
-                'slug' => $row->productContent[0]->slug,
-                'description' => $row->productContent[0]->description,
-                'thumbnail' => $row->productContent[0]->thumbnail,
-                'price' => $row->productContent[0]->price,
-                'old_price' => $row->productContent[0]->old_price,
+                'title' => $row->productContent->title,
+                'slug' => $row->productContent->slug,
+                'description' => $row->productContent->description,
+                'thumbnail' => $row->productContent->thumbnail,
+                'price' => $row->productContent->price,
+                'old_price' => $row->productContent->old_price,
             ];
         }
 

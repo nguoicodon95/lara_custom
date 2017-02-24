@@ -23,6 +23,7 @@ class GlobalActionsController extends BaseFrontController
             $data['content'] = nl2br($data['content']);
         }
         $result = $object->fastEdit(_stripTags($data), true);
+        $mail = $this->_sendFeedbackEmail('front.mails.contact', 'Thông báo từ website dieuhoadaikin.com', $data);
         $errorCode = ($result['error']) ? 500 : 200;
         $messageType = ($result['error']) ? 'error' : 'success';
         return $this->_responseAutoDetect($request, $result['message'], $result['error'], $errorCode, $messageType, true);

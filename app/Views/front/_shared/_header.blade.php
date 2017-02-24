@@ -50,16 +50,18 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<div id="menu_area">
-    <nav id="mainmenu">
-      <div class="container">
+<div class="cog_menu">
+    <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                {!! $main_menu or '' !!}
-                <button>MENU</button>
-                <ul class='hidden-links hidden'></ul>
+                <div id="menu_area">
+                    <nav id="mainmenu">
+                                {!! $main_menu or '' !!}
+                                <button>MENU</button>
+                                <ul class='hidden-links hidden'></ul>
+                    </nav>
+                </div>
             </div>
         </div>
-      </div>
-    </nav>
+    </div>
 </div>

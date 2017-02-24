@@ -103,7 +103,7 @@ class PageController extends BaseFrontController
             $getByFields['is_popular'] = ['compare' => '=', 'value' => 1];
             $product = Models\Product::getNoContentByCategory($_getProduct->id, $getByFields, [], ['products.*'], $limit);
             foreach($product as $p) {
-                $row = $p->productContent[0];
+                $row = $p->productContent;
                 $pushItem[$_getProduct->title][] = [
                     'id' => $row->product_id,
                     'product_content_id' => $row->id,

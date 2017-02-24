@@ -14,7 +14,14 @@
 
 @section('content')
     <div class="main-content">
-        {!! $object->content !!}
+        <h1 class="group_title"><span>{{ $object->title }}</span></h1>
     </div>
-    @include('front._modules._contact-us')
+    <div class="row">
+      <div class="col-md-6">
+        {!! $object->content !!}
+      </div>
+      <div class="col-md-6">
+        @include('front._modules._contact-us')
+      </div>
+    </div>
 @endsection

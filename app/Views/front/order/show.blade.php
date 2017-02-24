@@ -47,7 +47,7 @@
             </tr>
         @foreach($transaction->orders as $row)
             <?php $product = $row->products; ?>
-            <?php $item = $product->productContent[0]; ?>
+            <?php $item = $product->productContent; ?>
             <tr>
                 <td>
                     <img src="{{ asset($item->thumbnail) }}" alt="{{ $item->title }}" width="75">

@@ -12,6 +12,13 @@
         }
     }
 
+    @media screen and (max-width: 447px) {
+        #mainmenu li>ul {
+            top: 1%;
+            left: -112%;
+        }
+    }
+
     @media screen and (min-width: 320px) and (max-width: 698px) {
         #logo {
             width: 100%;
@@ -56,6 +63,18 @@
         #footer_contain .list_items {
             width: 100%;
             text-align: justify;
+        }
+        #featured-thumbnail {
+            margin-right: 10px !important;
+        }
+        #featured-thumbnail img.size-ribbon-lite-featured {
+            height: auto !important;
+        }
+        .ubislider.ecommerce.left {
+            height: 13pc;
+        }
+        .ubislider-image-container {
+            height: 13pc;
         }
     }
 

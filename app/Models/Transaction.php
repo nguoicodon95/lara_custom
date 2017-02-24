@@ -17,6 +17,7 @@ class Transaction extends AbstractModel
       'messages',
       'amount',
       'status',
+      'note',
       'viewed'
     ];
 

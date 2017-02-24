@@ -43,6 +43,40 @@ var FilterJs = function () {
       return rtn;
   }
 
+  var hs_filter = function () {
+      var $col_filter = $('.filterbx');
+      var w = $(window).width();
+      if (w < 977) {
+        swap_columns($col_filter);
+        $('#ft-button').removeClass('hidden');
+        $('#ft-button').show();
+
+        $('#ft-button').click(function () {
+            $col_filter.toggle();
+            $col_filter.removeClass('hidden-xs');
+        })
+      }
+
+      $(window).resize(function() {
+          swap_columns($col_filter);
+      });
+  }
+
+  function swap_columns(col_filter)
+  {
+      var w = $(window).width();
+      if (w < 977)
+      {
+          $('#ft-button').show();
+          $('#ft-button').removeClass('hidden');
+          col_filter.hide();
+      }
+      else
+      {
+          col_filter.show();
+      }
+  }
+
    var Elemchange = function (elm, q) {
         $(elm).on('change', function (event) {
             event.preventDefault();
@@ -74,6 +108,9 @@ var FilterJs = function () {
     return {
         Elemchange: function (elm, q) {
             Elemchange(elm, q)
+        },
+        hs_filter: function () {
+            hs_filter()
         }
     }
 }();

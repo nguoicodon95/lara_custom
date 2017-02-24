@@ -33,7 +33,6 @@ class CheckoutController extends BaseFrontController
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        // dd($request->all());
         $transaction = $obj->createItem([
             'name' => $request->name,
             'email' => $request->email,
@@ -42,8 +41,9 @@ class CheckoutController extends BaseFrontController
             'messages' => $request->note,
             'amount' => $request->amount ? $request->amount : $this->cart['cartSubTotal'],
         ]);
+        $pr = [];
         foreach ($this->cart['cartItems'] as $product) {
-            Models\Order::create([
+            $pr[] = Models\Order::create([
                 'transaction_id' => $transaction['object']->id,
                 'product_id' => $product->product_id,
                 'qty' => $product->quantity,
@@ -51,8 +51,13 @@ class CheckoutController extends BaseFrontController
             ]);
         }
 
+        $data = ['transaction' => $transaction, 'orders' => $pr];
+        $mail = $this->_sendFeedbackEmail('front.mails.order', 'Đơn đặt hàng từ website dieuhoadaikin.com', $data);
+        sleep(3);
         $this->_unsetCart();
         $request->session()->put('view_order', '1');
+
+
         return redirect()->route('show.order', $transaction['object']->id);
     }
 
@@ -61,12 +66,12 @@ class CheckoutController extends BaseFrontController
         $this->dis['transaction'] = Models\Transaction::find($id);
         if(!$this->dis['transaction']) return redirect('/');
 
-        // if ($request->session()->has('view_order')) {
-            // $request->session()->forget('view_order');
+        if ($request->session()->has('view_order')) {
+            $request->session()->forget('view_order');
             return view('front.order.show', $this->dis);
-        // } else {
-            // return redirect('/');
-        // }
+        } else {
+            return redirect('/');
+        }
 
     }
 }

@@ -24,7 +24,16 @@ abstract class BaseController extends Controller
         $this->adminCpAccess = \Config::get('app.adminCpAccess');
         view()->share('adminCpAccess', $this->adminCpAccess);
         $this->CMSSettings = Models\Setting::getAllSettings();
+
         view()->share('CMSSettings', $this->CMSSettings);
+
+        $email = $this->CMSSettings['email_address'];
+        $password = \Crypt::decrypt($this->CMSSettings['email_password']);
+        config([
+            'mail.username' => $email,
+            'mail.password' => $password,
+            'mail.from.address' => $this->CMSSettings['email']
+        ]);
 
         /*Get logged in user*/
         if (auth()->user()) {
@@ -112,15 +121,25 @@ abstract class BaseController extends Controller
         return false;
     }
 
-    protected function _sendFeedbackEmail($view, $subject, $data, $cc = [], $bcc = [])
+    protected function _sendFeedbackEmail($view, $subject, $data)
     {
         return _sendEmail($view, $subject, $data, [
             [
                 'name' => $this->_getSetting('site_title'),
-                'email' => $this->_getSetting('email_receives_feedback'),
+                'email' => $this->_getSetting('email'),
             ],
-        ], $cc, $bcc);
+        ]);
     }
+        // protected function _sendFeedbackEmail($view, $subject, $data, $from)
+        // {
+        //     return _sendEmail($view, $subject, $data, [
+        //         [
+        //             'name' => $this->_getSetting('site_title'),
+        //             'email' => $this->_getSetting('email_receives_feedback'),
+        //         ],
+        //     ], $from);
+        // }
+
 
     protected function _getHomepageLink()
     {

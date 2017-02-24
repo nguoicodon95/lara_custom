@@ -13,10 +13,12 @@
         FilterJs.Elemchange('input[name=price]', 'price')
         FilterJs.Elemchange('input[name=sortby]', 'sortby')
         FilterJs.Elemchange('input[name=brands]', 'brands')
+        FilterJs.hs_filter()
     </script>
 @endsection
 
 @section('content')
+    <div class="btn btn-default hidden" id="ft-button" style="margin-bottom: 5px">Tìm kiếm</div>
     <div class="products_grid p_block_category">
         <div class="col-md-3 filterbx hidden-xs">
             <form action="" method="get" id="form_filter">
@@ -49,7 +51,6 @@
                 @if(isset($rangePrice))
                 <div class="find sort-by">
                     <h2 class="group_title"><span>Tìm kiếm theo giá</span></h2>
-                    <a class="toggle">-</a>
                     <div class="asc-sort">
                         <input type="radio" name="price" id="default_pr" class="radio" value="default" {{ !isset($price_filter) || ($price_filter == 'default')  ? 'checked' : null }}/>
                         <label for="default_pr">Mặc định</label>
@@ -93,7 +94,7 @@
                             </span>
                         </div>
                         <div align="left" class="bgr">
-                            <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p->id) }}">Đặt hàng</a>
+                            <a class="addcart btn btn-danger btn-sm" href="{{ _getAddToCartLink($p->content_id) }}">Đặt hàng</a>
                             <a class="detail btn btn-info btn-sm" href="{{ _getProductLink($p->slug) }}">Xem chi tiết</a>
                         </div>
                     </div>

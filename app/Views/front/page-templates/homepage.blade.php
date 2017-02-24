@@ -32,12 +32,12 @@
         <div class="prbx">
         @if(isset($new_product) && !empty($new_product))
             @forelse($new_product as $p)
-                <?php $row = $p->productContent[0]; ?>
+                <?php $row = $p->productContent; ?>
                 <div class="col-md-3 grid">
                     <div class="item">
                         <div class="thumb">
-                            <a class="product-image" href="{{ _getProductLink($row->slug) }}" title="{{ $row->title }}">
-                                <img class="product-img" src="{{ $row->thumbnail }}" alt="{{ $row->title }}" />
+                            <a class="product-image" href="{{ _getProductLink($row->slug) }}" title="{{ $row->title or '' }}">
+                                <img class="product-img" src="{{ $row->thumbnail or '' }}" alt="{{ $row->title or '' }}" />
                             </a>
                         </div>
                         <h3>

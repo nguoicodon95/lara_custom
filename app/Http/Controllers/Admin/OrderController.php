@@ -163,8 +163,6 @@ class OrderController extends BaseAdminController
         $records["iTotalRecords"] = $iTotalRecords;
         $records["iTotalDisplayRecords"] = $iTotalRecords;
 
-        // dd($records);
-
         return response()->json($records);
     }
 
@@ -176,5 +174,43 @@ class OrderController extends BaseAdminController
         $trans = $object->getById($id);
         $this->dis['transaction'] = $trans;
         return $this->_viewAdmin('orders.show', $this->dis);
+    }
+
+    public function postDetail( Request $request, $trans_id, Transaction $object) {
+        $data = $request->except(['tab', 'update-order']);
+        $sent_mail = isset($data['sent_mail']) ? $data['sent_mail'] : '';
+        $result = $object->updateItemContent($trans_id, $data);
+
+        $base_wt = [
+            'phone' => $this->CMSSettings['phone'],
+            'email' => $this->CMSSettings['email'],
+            'address' => $this->CMSSettings['address'],
+            'fb_link' => $this->CMSSettings['fb_link'],
+        ];
+        $data = [
+            'transaction' => $result['object'],
+            'base_st' => $base_wt
+        ];
+        $view = 'front.mails.notify';
+        $subject = 'Thông báo từ website dieuhoadaikin.com';
+        if (!$result['error']) {
+            $records["customActionStatus"] = "success";
+            $records["customActionMessage"] = "Hành động đã được hoàn thành.";
+            \DB::commit();
+        } else {
+            \DB::rollBack();
+        }
+        if(isset($sent_mail) && !empty($sent_mail)) {
+            _sendEmail($view, $subject, $data, [
+                [
+                    'name' => $result['object']->name,
+                    'email' => $result['object']->email,
+                ],
+            ]);
+            $this->_setFlashMessage("Một email đã được gửi đến ".$result['object']->name , 'success');
+            $this->_showFlashMessages();
+        }
+
+        return redirect()->back();
     }
 }

@@ -41,22 +41,32 @@ if (! function_exists('_validateGoogleCaptcha')) {
     }
 }
 
+
 if (! function_exists('_sendEmail')) {
-    function _sendEmail($view, $subject, $data, $to = [], $cc = [], $bcc = [])
+    function _sendEmail($view, $subject, $data, $to = [])
     {
-        return \Mail::send($view, $data, function ($message) use ($subject, $to, $cc, $bcc) {
+        return \Mail::send($view, ['data' => $data], function ($message) use ($subject, $to) {
             foreach ($to as $key => $row) {
                 $message->to($row['email'], $row['name'])->subject($subject);
-            }
-            foreach ($cc as $key => $row) {
-                $message->cc($row['email'], $row['name'])->subject($subject);
-            }
-            foreach ($bcc as $key => $row) {
-                $message->bcc($row['email'], $row['name'])->subject($subject);
             }
         });
     }
 }
+// 
+// if (! function_exists('_sendEmail')) {
+//     function _sendEmail($view, $subject, $data, $to = [], $from = null)
+//     {
+//         return \Mail::send($view, ['data' => $data], function ($message) use ($subject, $to, $from) {
+//             foreach ($to as $key => $row) {
+//                 $message->to($row['email'], $row['name'])->subject($subject);
+//             }
+//             if(!empty($from)) {
+//                 $message->replyTo($from['address'], $from['name']);
+//             }
+//         });
+//     }
+// }
+
 
 if (! function_exists('_stripTags')) {
     function _stripTags($data, $allowTags = '<p><a><br><br/><b><strong>')
@@ -100,10 +110,10 @@ if (! function_exists('_resizeImage')) {
             $ex_small = explode('x', $small);
             $w_small = $ex_small[0];
             $h_small = $ex_small[1];
-            
+
             $image->resize($w_small, $h_small)
                             ->save(public_path('uploads/small/'.$name));
-            
+
             return ;
         }
     }
@@ -112,18 +122,18 @@ if (! function_exists('_resizeImage')) {
 /*UNIQUE IN ARRAY*/
 if (! function_exists('_unique_multidim_array')) {
     function _unique_multidim_array($array, $key) {
-        $temp_array = array(); 
-        $i = 0; 
-        $key_array = array(); 
-        
-        foreach($array as $val) { 
-            if (!in_array($val[$key], $key_array)) { 
-                $key_array[$i] = $val[$key]; 
-                $temp_array[$i] = $val; 
-            } 
-            $i++; 
-        } 
-        return $temp_array; 
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+
+        foreach($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
     }
 }
 
@@ -132,10 +142,10 @@ if (! function_exists('_unique_multidim_array')) {
 if (! function_exists('_breadcrumb')) {
     function _breadcrumb() {
         $breadcrumb_url = '';
-        
+
         $html = '<ul class="breadcrumb"><li class="active"><a href="/">Trang chủ</a></li>';
         switch (Request::segment(1)) {
-            case 'bai-viet': 
+            case 'bai-viet':
                 $breadcrumb_url .= '/bai-viet/';
                 for($i = 2; $i <= count(Request::segments()); $i++) {
                     $cus = \App\Models\Post::getBySlug(Request::segment($i));
@@ -191,7 +201,7 @@ if (! function_exists('_breadcrumb')) {
                     }
                 }
                 break;
-            default: 
+            default:
                 for($i = 1; $i <= count(Request::segments()); $i++) {
                     $cus = \App\Models\Page::getBySlug(Request::segment($i));
                     if(!$cus) return null;
@@ -212,4 +222,3 @@ if (! function_exists('_breadcrumb')) {
        return $html;
     }
 }
-

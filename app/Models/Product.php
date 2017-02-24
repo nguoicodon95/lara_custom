@@ -44,7 +44,7 @@ class Product extends AbstractModel implements Contracts\MultiLanguageInterface
 
     public function productContent()
     {
-        return $this->hasMany('App\Models\ProductContent', 'product_id');
+        return $this->hasOne('App\Models\ProductContent', 'product_id');
     }
 
     public function adminUser()

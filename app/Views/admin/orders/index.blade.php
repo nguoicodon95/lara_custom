@@ -67,10 +67,10 @@
                             <span></span>
                             <select class="table-group-action-input form-control input-inline input-small input-sm">
                                 <option value="">Select...</option>
-								<option value="0">Chưa giải quyết</option>
-								<option value="1">Đã giải quyết</option>
-								<option value="2">Giữ lại</option>
-								<option value="3">Hủy</option>
+                								<option value="0">Chưa giải quyết</option>
+                								<option value="1">Đã giải quyết</option>
+                								<option value="2">Giữ lại</option>
+                								<option value="3">Hủy</option>
                             </select>
                             <button class="btn btn-sm green table-group-action-submit" data-toggle="confirmation">
                                 <i class="fa fa-check"></i> Submit
@@ -94,7 +94,7 @@
                                 <th width="10%">Fast edit</th>
                                 <th width="7%">Actions</th>
                             </tr>
-                            
+
 								<tr role="row" class="filter">
 									<td></td>
 									<td><input type="text" class="form-control form-filter input-sm" name="order_id"></td>

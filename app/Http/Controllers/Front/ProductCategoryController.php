@@ -113,7 +113,8 @@ class ProductCategoryController extends BaseFrontController
             if($_getPrice == 'default') $ps_sort_filter = $ps;
             else {
                 $price_convert_array = explode('-', $_getPrice);
-                $ps_sort_filter = $ps->filter(function ($value, $key) use ($price_convert_array) {
+                $ps_sort_filter = (!empty($ps_sort_filter)) ? $ps_sort_filter : $ps;
+                $ps_sort_filter = $ps_sort_filter->filter(function ($value, $key) use ($price_convert_array) {
                     if($value->price >= (double) $price_convert_array[0] && $value->price <= (double) $price_convert_array[1] ) {
                         return true;
                     }
@@ -122,28 +123,29 @@ class ProductCategoryController extends BaseFrontController
             }
         }
 
+        /* Tìm theo nhà sản xuất */
+        if($f_brand = $request->brands) {
+            $f_brand = explode(',', $f_brand);
+            $this->dis['f_brand'] = (array)$f_brand;
+            $ps_sort_filter = (!empty($ps_sort_filter)) ? $ps_sort_filter : $ps;
+            $ps_sort_filter = $ps_sort_filter->whereInLoose('brand_id', $f_brand);
+        }
+
         /* Sắp xếp */
         /* Nếu có request get sortby thì sắp xếp theo request */
         if( $sortBy = $request->get('sortby') ) {
             $this->dis['sort_by'] = $sortBy;
             switch ($sortBy) {
                 case 'asc':
-                    $ps_sort_filter = $ps->sortBy('price');
+                    $ps_sort_filter = (!empty($ps_sort_filter)) ? $ps_sort_filter->sortBy('price') : $ps->sortBy('price');
                     break;
 
                 case 'desc':
-                    $ps_sort_filter = $ps->sortByDesc('price');
+                    $ps_sort_filter = (!empty($ps_sort_filter)) ? $ps_sort_filter->sortByDesc('price') : $ps->sortByDesc('price');
                     break;
             }
         } else {
-            $ps_sort_filter = $ps->sortByDesc('id');
-        }
-
-        /* Tìm theo nhà sản xuất */
-        if($f_brand = $request->brands) {
-            $f_brand = explode(',', $f_brand);
-            $this->dis['f_brand'] = (array)$f_brand;
-            $ps_sort_filter = $ps->whereInLoose('brand_id', $f_brand);
+            $ps_sort_filter = (!empty($ps_sort_filter)) ? $ps_sort_filter->sortByDesc('id') : $ps->sortByDesc('id');
         }
 
         /* Mặc định sắp xếp thep id giảm dần (Mới nhất) */
@@ -198,8 +200,8 @@ class ProductCategoryController extends BaseFrontController
             $lowLimit = $rangeLimits[$i];
             $highLimit = $rangeLimits[$i+1];
 
-            $ranges[$i]['min'] = $lowLimit;
-            $ranges[$i]['max'] = $highLimit;
+            $ranges[$i]['min'] = round($lowLimit, -3);
+            $ranges[$i]['max'] = round($highLimit, -3);
 
         }
         return $ranges;

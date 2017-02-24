@@ -92,7 +92,7 @@ class SettingController extends BaseAdminController
             $setting->option_value = $content;
             $setting->save();
         }
-
+        \Artisan::call('config:cache');
         $this->_setFlashMessage('Successfully Saved Settings', 'success');
 
         $this->_showFlashMessages();
@@ -109,7 +109,7 @@ class SettingController extends BaseAdminController
                 $pass_field = $request->input($row->field);
 
                 if (isset($pass_field) && !empty($pass_field)) {
-                    return bcrypt($request->input($row->field));
+                    return \Crypt::encrypt($request->input($row->field));
                 }
                 break;
 
